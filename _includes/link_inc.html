@@ -1,8 +1,7 @@
 {% assign pagetitle = "" %}
-
 {% if file_path contains "/" %}
   {% assign pagetitle = "" %}
 {% else %}
   {% assign pagetitle = "/" | append: site.title %}
 {% endif %}
-<li role="treeitem"><a data-exit="false" title="{{ site.url }}{{ pagetitle }}{{ include.url }}" href="{{ site.url }}{{ pagetitle }}{{ include.url }}">{{ include.title }}</a></li>
+<li role="treeitem" aria-level="{{ include.level }}" aria-setsize="{{ include.setsize }}" aria-posinset="{{ include.posinset }}"><a data-exit="false" title="{{ site.url }}{{ pagetitle }}{{ include.url }}" href="{{ site.url }}{{ pagetitle }}{{ include.url }}">{{ include.title }}</a></li>
