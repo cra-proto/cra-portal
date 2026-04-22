@@ -4,7 +4,7 @@ Project site for CRA portal tests.
 
 ## Important links
 
-- [Sign in to your CRA Account](https://proto-cra.github.io/cra-portal/index.html)
+- [Sign in to your CRA Account](https://cra-proto.github.io/cra-portal/index.html)
 - [Portal login demo](https://psi3b8.axshare.com/wel-01_eng.html)
 - [Portal GST login demo](https://psi3b8.axshare.com/wel-01_GST_eng.html)
 - [GST for small businesses COP github repository](https://github.com/cra-design/gst-hst-business/)
@@ -79,26 +79,26 @@ flowchart TD
     FE10@{ shape: rounded}
     FE11@{ shape: rounded}
     FE08R@{ shape: rounded}
-    click VR01A "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html"
-    click VR01B "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html"
-    click VR01C "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html"
-    click A "https://proto-cra.github.io/gst-hst-business/en/topics/gst-hst-businesses/file-return/how-file/how-file-cra-account.html"
-    click B "https://proto-cra.github.io/cra-portal/index.html"
-    click FR00 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html"
-    click AR01 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html"
-    click SP01 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html"
-    click VE01 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html"
-    click AR08 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html"
-    click AR08R "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html"
-    click AR09 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html"
-    click FR08 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html"
-    click FR08R "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html"
-    click FR09 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html"
-    click FE01 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html"
-    click FE08 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html"
-    click FE08R "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html"
-    click FE10 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html"
-    click FE11 "https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html"
+    click VR01A "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html"
+    click VR01B "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html"
+    click VR01C "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html"
+    click A "https://cra-proto.github.io/gst-hst-business/en/topics/gst-hst-businesses/file-return/how-file/how-file-cra-account.html"
+    click B "https://cra-proto.github.io/cra-portal/index.html"
+    click FR00 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html"
+    click AR01 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html"
+    click SP01 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html"
+    click VE01 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html"
+    click AR08 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html"
+    click AR08R "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html"
+    click AR09 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html"
+    click FR08 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html"
+    click FR08R "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html"
+    click FR09 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html"
+    click FE01 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html"
+    click FE08 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html"
+    click FE08R "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html"
+    click FE10 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html"
+    click FE11 "https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html"
 
 ```
 
@@ -106,61 +106,61 @@ flowchart TD
 
 adjust-return
 
-- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html](https://proto-cra/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html)
-- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html)
-- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html)
-- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html)
+- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html](https://cra-proto/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08_eng.html)
+- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-08r_eng.html)
+- [/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/adjust-return/b-rt-ar-09_eng.html)
 
 calculate-instalment-payments
 
-- [/cra-portal/crrnt/gst-hst/calculate-instalment-payments/b-rt-ipc-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/calculate-instalment-payments/b-rt-ipc-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/calculate-instalment-payments/b-rt-ipc-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/calculate-instalment-payments/b-rt-ipc-01_eng.html)
 
 file-election
 
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-08r_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-10_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-fe-11_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-election/b-rt-sp-01_eng.html)
 
 file-return
 
-- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-01_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html)
-- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-00_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-08r_eng.html)
+- [/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/file-return/b-rt-fr-09_eng.html)
 
 view-elections
 
-- [/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html)
+- [/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-elections/b-rt-ve-01_eng.html)
 
 view-expected-filed-returns
 
-- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-02_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-02_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-03_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-03_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-04_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-04_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-05_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-05_eng.html)
-- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-06_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-06_eng.html)
-- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html)
-   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02b_eng.html](https://proto-cra.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02b_eng.html)
+- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-02_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-02_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-03_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-03_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-04_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-04_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-05_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-05_eng.html)
+- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-02_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-06_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02-06_eng.html)
+- [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-01-03_eng.html)
+   - [/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02b_eng.html](https://cra-proto.github.io/cra-portal/crrnt/gst-hst/view-expected-filed-returns/b-rt-vr-02b_eng.html)
 
 Help files
 
-- [/cra-portal/help/about-enquiries-service.html](https://proto-cra.github.io/cra-portal/help/about-enquiries-service.html)
-- [/cra-portal/help/about-your-profile.html](https://proto-cra.github.io/cra-portal/help/about-your-profile.html)
-- [/cra-portal/help/adjust-a-return.html](https://proto-cra.github.io/cra-portal/help/adjust-a-return.html)
-- [/cra-portal/help/answers-common-questions-goods-services-tax-harmonized-sales-tax-accounts.html](https://proto-cra.github.io/cra-portal/help/answers-common-questions-goods-services-tax-harmonized-sales-tax-accounts.html)
-- [/cra-portal/help/electronic-rebate-forms.html](https://proto-cra.github.io/cra-portal/help/electronic-rebate-forms.html)
-- [/cra-portal/help/file-a-return.html](https://proto-cra.github.io/cra-portal/help/file-a-return.html)
-- [/cra-portal/help/file-election.html](https://proto-cra.github.io/cra-portal/help/file-election.html)
-- [/cra-portal/help/gst-hst-electronic-filing.html](https://proto-cra.github.io/cra-portal/help/gst-hst-electronic-filing.html)
-- [/cra-portal/help/help-business-account.html](https://proto-cra.github.io/cra-portal/help/help-business-account.html)
-- [/cra-portal/help/help-enquiries-service.html](https://proto-cra.github.io/cra-portal/help/help-enquiries-service.html)
-- [/cra-portal/help/payments-cra.html](https://proto-cra.github.io/cra-portal/help/payments-cra.html)
-- [/cra-portal/help/view-expected-filed-returns.html](https://proto-cra.github.io/cra-portal/help/view-expected-filed-returns.html)
+- [/cra-portal/help/about-enquiries-service.html](https://cra-proto.github.io/cra-portal/help/about-enquiries-service.html)
+- [/cra-portal/help/about-your-profile.html](https://cra-proto.github.io/cra-portal/help/about-your-profile.html)
+- [/cra-portal/help/adjust-a-return.html](https://cra-proto.github.io/cra-portal/help/adjust-a-return.html)
+- [/cra-portal/help/answers-common-questions-goods-services-tax-harmonized-sales-tax-accounts.html](https://cra-proto.github.io/cra-portal/help/answers-common-questions-goods-services-tax-harmonized-sales-tax-accounts.html)
+- [/cra-portal/help/electronic-rebate-forms.html](https://cra-proto.github.io/cra-portal/help/electronic-rebate-forms.html)
+- [/cra-portal/help/file-a-return.html](https://cra-proto.github.io/cra-portal/help/file-a-return.html)
+- [/cra-portal/help/file-election.html](https://cra-proto.github.io/cra-portal/help/file-election.html)
+- [/cra-portal/help/gst-hst-electronic-filing.html](https://cra-proto.github.io/cra-portal/help/gst-hst-electronic-filing.html)
+- [/cra-portal/help/help-business-account.html](https://cra-proto.github.io/cra-portal/help/help-business-account.html)
+- [/cra-portal/help/help-enquiries-service.html](https://cra-proto.github.io/cra-portal/help/help-enquiries-service.html)
+- [/cra-portal/help/payments-cra.html](https://cra-proto.github.io/cra-portal/help/payments-cra.html)
+- [/cra-portal/help/view-expected-filed-returns.html](https://cra-proto.github.io/cra-portal/help/view-expected-filed-returns.html)
 
