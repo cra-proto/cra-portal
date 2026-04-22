@@ -2,8 +2,8 @@
 # standard jekyll configuration
 content_editable: true
 baseurl: /cra-portal
-url: https://cra-proto.github.io
-repository: cra-proto/cra-portal
+url: https://cra-test-arc.canada.ca
+repository: cra-test-arc.canada.ca/cra-portal
 website: https://www.canada.ca/en.html
 
 # Remote theme, use the latest version
@@ -63,7 +63,7 @@ defaults:
       css: 
         - https://use.fontawesome.com/releases/v5.15.4/css/all.css
         - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.css
-        - https://cra-proto.github.io/core-prototype/source/css/testing-banner.css
+        - https://cra-test-arc.canada.ca/core-prototype/source/css/testing-banner.css
       script: 
         - https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/m%C3%A9li-m%C3%A9lo/2025-12-mille-iles.js
-        - https://cra-proto.github.io/core-prototype/source/scripts/external-link-detour.js
+        - https://cra-test-arc.canada.ca/core-prototype/source/scripts/external-link-detour.js
