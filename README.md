@@ -7,9 +7,9 @@ Project site for CRA portal tests.
 - [Sign in to your CRA Account](https://cra-test-arc.canada.ca/cra-portal/index.html)
 - [Portal login demo](https://psi3b8.axshare.com/wel-01_eng.html)
 - [Portal GST login demo](https://psi3b8.axshare.com/wel-01_GST_eng.html)
-- [GST for small businesses COP github repository](https://github.com/cra-design/gst-hst-business/)
-- [T1 COP github repository](https://github.com/cra-design/T1-cop/)
-- [github.dev](https://github.dev/cra-design/cra-portal/blob/main/)
+- [GST for small businesses COP github repository](https://github.com/cra-proto/gst-hst-business/)
+- [T1 COP github repository](https://github.com/cra-proto/T1-cop/)
+- [github.dev](https://github.dev/cra-proto/cra-portal/blob/main/)
 
 ## MYBA Portal GST Interaction path
 
