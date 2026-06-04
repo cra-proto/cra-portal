@@ -55,6 +55,8 @@ noFooterMain: true
 </ul>
 
 <hr>
+
+
 <!--
 <ul>
 {% assign current_path = "" %}
@@ -84,20 +86,9 @@ noFooterMain: true
 {% endfor %}
 </ul>
 -->
+
+
 <!--
- or path_arr.size == top_path_arr.size
-
-{% assign file_path = include.url | slice: 1, -1 %}
-
-
-            {% assign top_path = "" | append: fp %}
-
-            {% if top_path != current_path %}
-               * new 
-                {% assign current_path = top_path %}
-            {% endif %}
-
-
 <ul>
 {% assign current_path = "" %}{% assign current_path_size = "" %}{% for p in sitePages %}{% assign path_parts = p.url | split: "/" %}{% assign top_path = "" | append: path_parts[1] %}{% if top_path != current_path %}{% if forloop.index > 1 and current_path_size > 2 %}</ul>
 </li>{% endif %}
@@ -107,6 +98,8 @@ noFooterMain: true
 </li>{% endif %}{% endfor %}
 </ul>
 -->
+
+
 <!--
 Tree.html:
 --
@@ -143,35 +136,6 @@ Tree.html:
   {% include tree.html items=site.pages path="/" %}
 </div>
 -->
-<!--
-<ul>
-{% assign current_path = "" %}
-{% assign current_path_size = "" %}
-{% for p in sitePages %}
-
-    {% assign path_parts = p.url | split: "/" %}
-    {% assign top_path = "" | append: path_parts[1] %}
-
-    {% if top_path != current_path %}
-        {% if forloop.index > 1 and current_path_size > 2 %}
-            </ul>
-            </li>
-        {% endif %}
-        {% if path_parts.size > 2 %}
-            <li><strong>{{ top_path }}</strong><ul>
-        {% endif %}
-        {% assign current_path = top_path %}
-        {% assign current_path_size = path_parts.size %}
-    {% endif %}
-    <li><a href="{{ p.url }}">{{ p.title }}-[{{ p.url }}]</a></li>
-    {% if forloop.last %}
-        </ul>
-        </li>
-    {% endif %}
-
-{% endfor %}
-</ul>
--->
 
 
 <!--
@@ -203,29 +167,7 @@ Tree.html:
 {% endfor %}
 </ul>
 -->
-<!--
-or path_arr.size == top_path_arr.size
 
-{% assign file_path = include.url | slice: 1, -1 %}
-
-
-            {% assign top_path = "" | append: fp %}
-
-            {% if top_path != current_path %}
-               * new 
-                {% assign current_path = top_path %}
-            {% endif %}
-
-
-<ul>
-{% assign current_path = "" %}{% assign current_path_size = "" %}{% for p in sitePages %}{% assign path_parts = p.url | split: "/" %}{% assign top_path = "" | append: path_parts[1] %}{% if top_path != current_path %}{% if forloop.index > 1 and current_path_size > 2 %}</ul>
-</li>{% endif %}
-{% if path_parts.size > 2 %}<li><strong>{{ top_path }}</strong><ul>{% endif %}
-{% assign current_path = top_path %}{% assign current_path_size = path_parts.size %}{% endif %}<li><a href="{{ p.url }}">{{ p.title }}-[{{ p.url }}]</a></li>
-{% if forloop.last %}</ul>
-</li>{% endif %}{% endfor %}
-</ul>
--->
 
 <!--
    <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
