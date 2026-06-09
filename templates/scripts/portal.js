@@ -32,7 +32,7 @@ let anchorUri,
             matPanel.classList.add("mat-expanded");
             if (matPanelHead !== null) {
                 matPanelHead.classList.add("mat-expanded");
-                matPanelHead.ariaExpanded = true;
+                matPanelHead.setAttribute("aria-expanded", "true");
             }
             if (matContent !== null) {
                 matContent.style.height = "";
@@ -56,7 +56,7 @@ let anchorUri,
         matPanel.classList.remove("mat-expanded");
         if (matPanelHead !== null) {
             matPanelHead.classList.remove("mat-expanded");
-            matPanelHead.ariaExpanded = false;
+            matPanelHead.setAttribute("aria-expanded", "false");
         }
         if (matContent !== null) {
             matContent.style.height = "0px";
@@ -117,12 +117,12 @@ let anchorUri,
     reSizeAction = function () {
         let backdropEl = document.querySelector(".mat-drawer-backdrop"),
             altLangLnk = document.querySelector("[lang='fr']"),
+            sideNav = document.querySelector("mat-sidenav"),
             smallPageView = function (hideSideNav) {
                 let footEl;
                 const tabGroups = document.querySelectorAll("mat-tab-header"), 
                     sideMenuIcon = document.querySelector("quartz-icon-button"),
                     sideNavContain = document.querySelector("mat-sidenav-container"),
-                    sideNav = document.querySelector("mat-sidenav"),
                     sideNavContent = document.querySelector("mat-sidenav-content"),
                     ribbonTitle = document.querySelector(".quartz-ribbon-menu-title"),
                     ribbonSubTitle = document.querySelector(".quartz-ribbon-menu-subtitle"),
@@ -166,7 +166,7 @@ let anchorUri,
                     footEl.classList.add("column-count-one");
                 }
                 tabGroups.forEach(function (container) {
-                    const tabs = container.querySelectorAll('[role="tab"]');
+                    const tabs = container.querySelectorAll("[role='tab']");
 
                     const totalTabsWidth = Array.from(tabs).reduce(function (sum, tab) {
                         return sum + tab.getBoundingClientRect().width;
@@ -213,14 +213,14 @@ let anchorUri,
                     profileMenu = document.querySelector(".cdk-overlay-connected-position-bounding-box");
 
                 if (showMenu === true) {
-                    menuTrigger.ariaExpanded = "false";
+                    menuTrigger.setAttribute("aria-expanded", "false");
                     backdropTrigger.classList.add("quartz-invisible");
                     overlayBG.classList.add("quartz-invisible");
                     backdropTrigger.removeEventListener("click", hideprofileMenu, false);
                     profileMenu.classList.add("quartz-invisible");
                 } else {
                     //                          this.ariaControls = "mat-menu-panel-9";
-                    menuTrigger.ariaExpanded = "true";
+                    menuTrigger.setAttribute("aria-expanded", "true");
                     backdropTrigger.classList.remove("quartz-invisible");
                     overlayBG.classList.remove("quartz-invisible");
                     backdropTrigger.addEventListener("click", hideprofileMenu, false);
