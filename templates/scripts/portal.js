@@ -11,11 +11,12 @@ let anchorUri,
     accountBtn = document.querySelector(".quartz-primary-button"),
     sdMenuBtn = document.getElementsByTagName("quartz-icon-button"),
     sideMenuBtn = sdMenuBtn[0].getElementsByTagName("button"),
+    checkboxes = document.querySelectorAll("quartz-checkbox"),
     printBtns = document.querySelectorAll("button[value='print']"),
     linkBtns = document.querySelectorAll("button[value^='http']"),
     tabs = document.querySelectorAll("[role='tab']"),
     dialogs = document.querySelectorAll("button[popovertarget]"), 
-    stepContainer = document.querySelectorAll(".mat-vertical-content-container.mat-stepper-vertical-line"), 
+    stepContainer = document.querySelectorAll("div.mat-step"), 
     accordionActivate = function () {
         let matPanel = this.closest("mat-expansion-panel"),
             matIcon = matPanel.querySelector("mat-icon"),
@@ -96,7 +97,7 @@ let anchorUri,
             sideNavContain.classList.remove("mat-drawer-container-has-open");
             sideNav.classList.remove("mat-drawer-opened");
             backdropEl.classList.remove("mat-drawer-shown");
-            backdropEl.removeEventListener("click", hideSideNav, false);
+            backdropEl.removeEventListener("click", hideSideNav);
 
             sideNav.style.transform = "";
             sideNav.style.boxShadow = "none";
@@ -107,7 +108,7 @@ let anchorUri,
             sideNav.classList.add("mat-drawer-opened");
             if (globalThis.innerWidth < 960 && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.add("mat-drawer-shown");
-                backdropEl.addEventListener("click", hideSideNav, false);
+                backdropEl.addEventListener("click", hideSideNav);
             }
             sideNav.style.transform = "none";
             sideNav.style.boxShadow = "";
@@ -166,13 +167,11 @@ let anchorUri,
                     footEl.classList.add("column-count-one");
                 }
                 tabGroups.forEach(function (container) {
-                    const tabs = container.querySelectorAll("[role='tab']");
-
-                    const totalTabsWidth = Array.from(tabs).reduce(function (sum, tab) {
+                    const tabs = container.querySelectorAll("[role='tab']"),
+                        totalTabsWidth = Array.from(tabs).reduce(function (sum, tab) {
                         return sum + tab.getBoundingClientRect().width;
-                    }, 0);
-
-                    const tablistWidth = container.getBoundingClientRect().width;
+                    }, 0),
+                        tablistWidth = container.getBoundingClientRect().width;
 
                     if (totalTabsWidth > tablistWidth) {
                         container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
@@ -191,13 +190,13 @@ let anchorUri,
             smallPageView(false);
             if (sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.add("mat-drawer-shown");
-                backdropEl.addEventListener("click", hideSideNav, false);
+                backdropEl.addEventListener("click", hideSideNav);
             }
         } else {
             smallPageView(true);
             if (sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.remove("mat-drawer-shown");
-                backdropEl.removeEventListener("click", hideSideNav, false);
+                backdropEl.removeEventListener("click", hideSideNav);
             }
         }
     }, 
@@ -216,13 +215,13 @@ let anchorUri,
                     menuTrigger.setAttribute("aria-expanded", "false");
                     backdropTrigger.classList.add("quartz-invisible");
                     overlayBG.classList.add("quartz-invisible");
-                    backdropTrigger.removeEventListener("click", hideprofileMenu, false);
+                    backdropTrigger.removeEventListener("click", hideprofileMenu);
                     profileMenu.classList.add("quartz-invisible");
                 } else {
                     menuTrigger.setAttribute("aria-expanded", "true");
                     backdropTrigger.classList.remove("quartz-invisible");
                     overlayBG.classList.remove("quartz-invisible");
-                    backdropTrigger.addEventListener("click", hideprofileMenu, false);
+                    backdropTrigger.addEventListener("click", hideprofileMenu);
                     profileMenu.style.top = accountBtnPos.bottom + "px";
                     if (globalThis.innerWidth < 960) {
                         profileMenu.style.left = accountBtnPos.left - 118.5 + "px";
@@ -247,7 +246,6 @@ let anchorUri,
             overlayWrap = overlayElm.closest(".cdk-global-overlay-wrapper"),
             closeButton = overlayElm.querySelector("quartz-secondary-button"),
             closeIcon = overlayElm.querySelector("quartz-icon-button"),
-            
             htmlTag = document.getElementsByTagName("html")[0],
             appRootTag = document.getElementsByTagName("app-root")[0],
             backdropTrigger = document.querySelector(".cdk-overlay-container"),
@@ -264,8 +262,8 @@ let anchorUri,
                 overlayWrap.classList.add("quartz-invisible");
                 backdropTrigger.classList.add("quartz-invisible");
                 overlayBG.classList.add("quartz-invisible");
-                closeButton.removeEventListener("click", endDialog, false);
-                closeIcon.removeEventListener("click", endDialog, false);
+                closeButton.removeEventListener("click", endDialog);
+                closeIcon.removeEventListener("click", endDialog);
             };
 
         if (htmlTag.classList.contains("cdk-global-scrollblock") === false) {
@@ -280,13 +278,25 @@ let anchorUri,
             overlayWrap.classList.remove("quartz-invisible");
             backdropTrigger.classList.remove("quartz-invisible");
             overlayBG.classList.remove("quartz-invisible");
-            closeButton.addEventListener("click", endDialog, false);
-            closeIcon.addEventListener("click", endDialog, false);
+            closeButton.addEventListener("click", endDialog);
+            closeIcon.addEventListener("click", endDialog);
         }
     },
+    checkboxActivate = function (checkBoxElm) {
+        let checkLabel = checkBoxElm.querySelector("label.quartz-checkbox"),
+            checkState = checkBoxElm.querySelector("mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
+
+        if (checkLabel.classList.contains("quartz-checkbox-checked") === true) {
+            checkLabel.classList.remove("quartz-checkbox-checked");
+            checkState.innerHTML = "check_box_outline_blank";
+        } else {
+            checkLabel.classList.add("quartz-checkbox-checked");
+            checkState.innerHTML = "check_box";
+        }
+    }, 
     isSectionValid = function (currentStep) {
-        const currentForm = currentStep.querySelector("form");
         let isFormValid;
+        const currentForm = currentStep.querySelector("form");
 
         if (currentForm !== null) {
             isFormValid = currentForm.checkValidity();
@@ -331,48 +341,86 @@ let anchorUri,
             }
         }
     },    
-    stepperNext = function (currentStep, nextSection) {
-//        console.log("Next");
-    }, 
-    stepperBack = function (currentStep, priorSection) {
-//        console.log("Back");
+    changeStep = function (lastStep, newStep, direction) {
+        let lastSection = lastStep.querySelector("div.mat-vertical-content-container"),
+            lastStepLabel = lastStep.querySelector(".mat-step-label"), 
+            newSection = newStep.querySelector("div.mat-vertical-content-container"),
+            newStepLabel = newStep.querySelector(".mat-step-label");
+/*
+            lastStepIcon = lastStep.querySelector(".mat-step-icon"), 
+            newStepIcon = newStep.querySelector(".mat-step-icon"), 
+            lastStepIconContent = newStep.querySelector("mat-step-icon-content"), 
+            newStepIconContent = newStep.querySelector("mat-step-icon-content");
+
+        lastStepIcon.classList.remove("mat-step-icon-state-edit", "mat-step-icon-selected");
+        newStepIcon.classList.add("mat-step-icon-state-edit", "mat-step-icon-selected");
+*/
+        lastStepLabel.classList.remove("mat-step-label-selected");
+        lastSection.classList.remove("mat-vertical-content-container-active");
+        lastSection.setAttribute("inert", "");
+        newSection.removeAttribute("inert");
+        newSection.classList.add("mat-vertical-content-container-active");
+        newStepLabel.classList.add("mat-step-label-selected");
+        if (direction === 1) {
+/*
+            lastStepIcon.classList.add("mat-step-icon-state-done");
+            lastStepIcon.classList.remove("mat-step-icon-state-number");
+*/
+            lastStepLabel.classList.add("mat-step-label-active");
+            newStepLabel.classList.add("mat-step-label-active");
+        }
+        if (direction === -1) {
+/*
+            lastStepIcon.classList.remove("mat-step-icon-state-done");
+            lastStepIcon.classList.add("mat-step-icon-state-number");
+*/
+            lastStepLabel.classList.remove("mat-step-label-active");
+            newStepLabel.classList.remove("mat-step-label-active");
+        }
     };
 
 for (let navLinkElm of navLink) {
     if (navLinkElm.classList.contains("quartz-expand-sidenav-button") === true) {
-        navLinkElm.addEventListener("click", accordionActivate, false);
+        navLinkElm.addEventListener("click", accordionActivate);
     } else {
-        navLinkElm.addEventListener("click", selectSideElm, false);
+        navLinkElm.addEventListener("click", selectSideElm);
     }
 }
 
 for (let accordion of accordions) {
     expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
-    expandHideBtn[0].addEventListener("click", accordionActivate, false);
+    expandHideBtn[0].addEventListener("click", accordionActivate);
+}
+
+for (let checkbox of checkboxes) {
+    checkbox.addEventListener("click", function(event) {
+        checkboxActivate(checkbox);
+        event.preventDefault();
+    });
 }
 
 for (let tab of tabs) {
-    tab.addEventListener("click", tabActivate, false);
+    tab.addEventListener("click", tabActivate);
 }
 
 for (let LinkBtn of linkBtns) {
-    LinkBtn.addEventListener("click", gotoPage, false);
+    LinkBtn.addEventListener("click", gotoPage);
 }
 
 for (let printBtn of printBtns) {
-    printBtn.addEventListener("click", function() {print();}, false);
+    printBtn.addEventListener("click", function() {print();});
 }
 
 for (let dialog of dialogs) {
-    dialog.addEventListener("click", openDialog, false);
+    dialog.addEventListener("click", openDialog);
 }
 
-sideMenuBtn[0].addEventListener("click", showHideMenu, false);
+sideMenuBtn[0].addEventListener("click", showHideMenu);
 sideNav.classList.add("mat-drawer-opened");
 showHideMenu(true);
 
 if (accountBtn !== null) {
-    accountBtn.addEventListener("click", showLoginMenu, false);
+    accountBtn.addEventListener("click", showLoginMenu);
 }
 
 globalThis.onresize = reSizeAction;
@@ -393,34 +441,37 @@ if (anchorUri) {
 
 stepContainer.forEach(function (currentStep, index) {
     // Find nested "Next" buttons matching the exact class list
-    const nextButtons = currentStep.querySelectorAll("button.mdc-button.mat-mdc-button-base.quartz-button.quartz-primary-button.mat-mdc-button.mat-unthemed"), 
-        backButtons = currentStep.querySelectorAll("button.mdc-button.mat-mdc-button-base.quartz-button.quartz-link-button.mat-mdc-button.mat-unthemed");
+    const nextButtons = currentStep.querySelectorAll("div.mat-vertical-content-container button.mdc-button.mat-mdc-button-base.quartz-button.quartz-primary-button.mat-mdc-button.mat-unthemed"), 
+        backButtons = currentStep.querySelectorAll("div.mat-vertical-content-container button.mdc-button.mat-mdc-button-base.quartz-button.quartz-link-button.mat-mdc-button.mat-unthemed");
 
     nextButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            let nextSection;
+        button.addEventListener("click", function (event) {
+            let nextSection, 
+                btnText = this.querySelector("span.mdc-button__label"), 
+                formSubmitText = ["Submit"];
 
-            if (isSectionValid(currentStep) === true) {
+            if (isSectionValid(currentStep) === true && formSubmitText.includes(btnText.innerText) === false) {
                 nextSection = stepContainer[index + 1];
                 if (nextSection !== "undefined") {
-                    stepperNext(currentStep, nextSection);
+                    changeStep(currentStep, nextSection, 1);
                 }
             }
+            event.preventDefault();
         });
     });
 
     // Find nested "Back" buttons matching the exact class list
-
     backButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
+        button.addEventListener("click", function (event) {
            let priorSection;
 
             if (isSectionValid(currentStep) === true) {
                 priorSection = stepContainer[index - 1];
                 if (priorSection !== "undefined") {
-                    stepperBack(currentStep, priorSection);
+                    changeStep(currentStep, priorSection, -1);
                 }
             }
+            event.preventDefault();
         });
     });
 });
@@ -429,8 +480,11 @@ stepContainer.forEach(function (currentStep, index) {
 Accordion (done)
 Dialog (done)
 Sub Ribbon (done)
-Tabs (in progress)
-stepper (in progress)
+checkbox (done)
+
+stepper (in progress) - next/back button
+Tabs (in progress) - mobile view scroll tabs
+Table (in progress) - sort arrows
 
 multi column
 Grid
