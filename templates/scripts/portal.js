@@ -118,7 +118,7 @@ let anchorUri,
         let backdropEl = document.querySelector(".mat-drawer-backdrop"),
             altLangLnk = document.querySelector("[lang='fr']"),
             sideNav = document.querySelector("mat-sidenav"),
-            smallPageView = function (hideSideNav) {
+            smallPageView = function (hideSideNavFlag) {
                 let footEl;
                 const tabGroups = document.querySelectorAll("mat-tab-header"), 
                     sideMenuIcon = document.querySelector("quartz-icon-button"),
@@ -128,7 +128,7 @@ let anchorUri,
                     ribbonSubTitle = document.querySelector(".quartz-ribbon-menu-subtitle"),
                     footLink = document.querySelector(".link-wrap");
 
-                if (hideSideNav === true) {
+                if (hideSideNavFlag === true) {
                     // large screen UI adjustments
                     sideNavContain.classList.remove("mat-drawer-transition");
                     if (sideNavContent !== null) {
@@ -219,7 +219,6 @@ let anchorUri,
                     backdropTrigger.removeEventListener("click", hideprofileMenu, false);
                     profileMenu.classList.add("quartz-invisible");
                 } else {
-                    //                          this.ariaControls = "mat-menu-panel-9";
                     menuTrigger.setAttribute("aria-expanded", "true");
                     backdropTrigger.classList.remove("quartz-invisible");
                     overlayBG.classList.remove("quartz-invisible");
@@ -298,31 +297,14 @@ let anchorUri,
         }
         return true; // Return true if no form exists in this section
     }, 
-    stepperNext = function (currentStep, nextSection) {
-//        console.log("Next");
-    }, 
-    stepperBack = function (currentStep, priorSection) {
-//        console.log("Back");
-    };
-
-class tabActivate {
-    constructor() {
-        let tabContent, tabGroup = this.closest("quartz-tabs"), tabHeadArr = tabGroup.querySelectorAll("[role='tab']"), tabBodyArr = tabGroup.querySelectorAll("mat-tab-body");
+    tabActivate = function () {
+        let tabContent,
+            tabGroup = this.closest("quartz-tabs"),
+            tabHeadArr = tabGroup.querySelectorAll("[role='tab']"),
+            tabBodyArr = tabGroup.querySelectorAll("mat-tab-body");
 
         for (let i = 0; i < tabHeadArr.length; i++) {
-            if (tabHeadArr[i] !== this) {
-                tabHeadArr[i].classList.remove("mdc-tab--active", "mdc-tab-indicator--active");
-                tabHeadArr[i].ariaSelected = false;
-                tabHeadArr[i].tabindex = -1;
-                if (tabBodyArr[i]) {
-                    tabContent = tabBodyArr[i].querySelector(".mat-mdc-tab-body-content");
-                    tabBodyArr[i].ariaHidden = true;
-                    tabContent.style.transform = "translate3d(-100%, 0px, 0px)";
-                    tabContent.style.minHeight = "1px";
-                    tabBodyArr[i].classList.remove("mat-mdc-tab-body-active");
-                    tabContent.style.visibility = "hidden";
-                }
-            } else {
+            if (tabHeadArr[i] === this) {
                 this.classList.add("mdc-tab--active", "mdc-tab-indicator--active");
                 this.ariaSelected = true;
                 this.tabindex = 0;
@@ -334,10 +316,27 @@ class tabActivate {
                     tabBodyArr[i].classList.add("mat-mdc-tab-body-active");
                     tabContent.style.visibility = "";
                 }
+            } else {
+                tabHeadArr[i].classList.remove("mdc-tab--active", "mdc-tab-indicator--active");
+                tabHeadArr[i].ariaSelected = false;
+                tabHeadArr[i].tabindex = -1;
+                if (tabBodyArr[i]) {
+                    tabContent = tabBodyArr[i].querySelector(".mat-mdc-tab-body-content");
+                    tabBodyArr[i].ariaHidden = true;
+                    tabContent.style.transform = "translate3d(-100%, 0px, 0px)";
+                    tabContent.style.minHeight = "1px";
+                    tabBodyArr[i].classList.remove("mat-mdc-tab-body-active");
+                    tabContent.style.visibility = "hidden";
+                }
             }
         }
-    }
-}
+    },    
+    stepperNext = function (currentStep, nextSection) {
+//        console.log("Next");
+    }, 
+    stepperBack = function (currentStep, priorSection) {
+//        console.log("Back");
+    };
 
 for (let navLinkElm of navLink) {
     if (navLinkElm.classList.contains("quartz-expand-sidenav-button") === true) {
@@ -403,7 +402,7 @@ stepContainer.forEach(function (currentStep, index) {
 
             if (isSectionValid(currentStep) === true) {
                 nextSection = stepContainer[index + 1];
-                if (typeof nextSection !== "undefined") {
+                if (nextSection !== "undefined") {
                     stepperNext(currentStep, nextSection);
                 }
             }
@@ -418,7 +417,7 @@ stepContainer.forEach(function (currentStep, index) {
 
             if (isSectionValid(currentStep) === true) {
                 priorSection = stepContainer[index - 1];
-                if (typeof priorSection !== "undefined") {
+                if (priorSection !== "undefined") {
                     stepperBack(currentStep, priorSection);
                 }
             }
