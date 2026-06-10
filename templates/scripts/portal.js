@@ -394,7 +394,7 @@ for (let accordion of accordions) {
 
 for (let checkbox of checkboxes) {
     checkbox.addEventListener("click", function(event) {
-        checkboxActivate(checkbox);
+        checkboxActivate(this);
         event.preventDefault();
     });
 }
