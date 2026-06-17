@@ -361,8 +361,12 @@ let anchorEl,
             }
         }
     }, 
-    tabScrollButtons = function () {
-        
+    tabScrollButtons = function (tabScrollBtn) {
+        if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-before") === true) {
+
+        } else if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-after") === true) {
+            
+        }
     }, 
     changeStep = function (lastStep, newStep, direction) {
         let lastSection = lastStep.querySelector("div.mat-vertical-content-container"), 
@@ -447,7 +451,7 @@ for (let tabGroup of pageTabs) {
     tabBtns = tabGroup.querySelectorAll("mat-tab-header .mat-ripple.mat-mdc-tab-header-pagination");
     for (let tabBtn of tabBtns) {
         tabBtn.addEventListener("click", function (event) {
-            tabScrollButtons();
+            tabScrollButtons(this);
             event.preventDefault();
         });
     }
