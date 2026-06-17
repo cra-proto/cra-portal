@@ -122,6 +122,36 @@ let anchorEl,
     hideSideNav = function () {
         showHideMenu(false);
     }, 
+    enableTabStartBtn = function(container) {
+        let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
+
+        container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
+        tabStart.classList.remove("mat-mdc-tab-header-pagination-disabled");
+        tabStart.classList.add("mat-mdc-tab-header-pagination-enabled");
+        tabStart.removeAttribute("disabled");
+    }, 
+    disableTabStartBtn = function(container) {
+        let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
+
+        tabStart.classList.add("mat-mdc-tab-header-pagination-disabled");
+        tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled");
+        tabStart.setAttribute("disabled", "disabled");
+    }, 
+    enableTabEndBtn = function(container) {
+        let tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after");
+
+        container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
+        tabEnd.classList.add("mat-mdc-tab-header-pagination-enabled");
+        tabEnd.classList.remove("mat-mdc-tab-header-pagination-disabled");
+        tabEnd.removeAttribute("disabled");
+    }, 
+    disableTabEndBtn = function(container) {        
+        let tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after");
+
+        tabEnd.classList.remove("mat-mdc-tab-header-pagination-enabled");
+        tabEnd.classList.add("mat-mdc-tab-header-pagination-disabled");
+        tabEnd.setAttribute("disabled", "disabled");
+    }, 
     reSizeAction = function () {
         let backdropEl = document.querySelector(".mat-drawer-backdrop"), 
             altLangLnk = document.querySelector("[lang='fr']"), 
@@ -176,26 +206,17 @@ let anchorEl,
                 if (tabGroups !== null && tabGroups !== "") {
                     tabGroups.forEach(function (container) {
                         const currentTabs = container.querySelectorAll("[role='tab']"), 
-                            tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before"), 
-                            tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after"), 
                             totalTabsWidth = Array.from(currentTabs).reduce(function (sum, tab) {
                             return sum + tab.getBoundingClientRect().width;
                         }, 0);
 
                         if (totalTabsWidth > container.getBoundingClientRect().width) {
-                            container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
-                            tabStart.classList.add("mat-mdc-tab-header-pagination-disabled");
-                            tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled");
-                            tabEnd.classList.add("mat-mdc-tab-header-pagination-enabled");
-                            tabEnd.classList.remove("mat-mdc-tab-header-pagination-disabled");
-                            tabStart.setAttribute("disabled", "disabled");
-                            tabEnd.removeAttribute("disabled");
+                            disableTabStartBtn(container);
+                            enableTabEndBtn(container);
                         } else {
                             container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
-                            tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled", "mat-mdc-tab-header-pagination-disabled");
-                            tabEnd.classList.remove("mat-mdc-tab-header-pagination-enabled", "mat-mdc-tab-header-pagination-disabled");
-                            tabStart.setAttribute("disabled", "disabled");
-                            tabEnd.setAttribute("disabled", "disabled");
+                            disableTabStartBtn(container);
+                            disableTabEndBtn(container);
                         }
                     });
                 }
@@ -365,7 +386,7 @@ let anchorEl,
         if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-before") === true) {
 
         } else if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-after") === true) {
-            
+
         }
     }, 
     changeStep = function (lastStep, newStep, direction) {
@@ -428,13 +449,6 @@ for (let dialog of dialogs) {
     dialog.addEventListener("click", openDialog);
 }
 
-for (let checkbox of checkboxes) {
-    checkbox.addEventListener("click", function(event) {
-        checkboxActivate(this);
-        event.preventDefault();
-    });
-}
-
 for (let LinkBtn of linkBtns) {
     LinkBtn.addEventListener("click", gotoPage);
 }
@@ -443,19 +457,6 @@ for (let printBtn of printBtns) {
     printBtn.addEventListener("click", function() {print();});
 }
 
-for (let tabGroup of pageTabs) {
-    tabs = tabGroup.querySelectorAll("[role='tab']");
-    for (let tab of tabs) {
-        tab.addEventListener("click", tabActivate);
-    }
-    tabBtns = tabGroup.querySelectorAll("mat-tab-header .mat-ripple.mat-mdc-tab-header-pagination");
-    for (let tabBtn of tabBtns) {
-        tabBtn.addEventListener("click", function (event) {
-            tabScrollButtons(this);
-            event.preventDefault();
-        });
-    }
-}
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
 sideNav.classList.add("mat-drawer-opened");
@@ -479,6 +480,13 @@ if (anchorUri !== "") {
             selectSideElm.call(anchorEl);
         }
     }
+}
+
+for (let checkbox of checkboxes) {
+    checkbox.addEventListener("click", function(event) {
+        checkboxActivate(this);
+        event.preventDefault();
+    });
 }
 
 stepContainer.forEach(function (currentStep, index) {
@@ -525,6 +533,20 @@ stepContainer.forEach(function (currentStep, index) {
         });
     });
 });
+
+for (let tabGroup of pageTabs) {
+    tabs = tabGroup.querySelectorAll("[role='tab']");
+    for (let tab of tabs) {
+        tab.addEventListener("click", tabActivate);
+    }
+    tabBtns = tabGroup.querySelectorAll("mat-tab-header .mat-ripple.mat-mdc-tab-header-pagination");
+    for (let tabBtn of tabBtns) {
+        tabBtn.addEventListener("click", function (event) {
+            tabScrollButtons(this);
+            event.preventDefault();
+        });
+    }
+}
 /*
 
 Accordion (done)
