@@ -3,14 +3,16 @@
 let anchorEl, 
     anchorUri, 
     expandHideBtn, 
+    tabs, 
+    tabBtns, 
     accountBtn = document.querySelector(".quartz-primary-button"), 
     sideNav = document.querySelector("mat-sidenav"), 
     checkboxes = document.querySelectorAll("quartz-checkbox"), 
     dialogs = document.querySelectorAll("button[popovertarget]"), 
     linkBtns = document.querySelectorAll("button[value^='http']"), 
+    pageTabs = document.querySelectorAll("quartz-tabs"), 
     printBtns = document.querySelectorAll("button[value='print']"), 
     stepContainer = document.querySelectorAll("div.mat-step"), 
-    tabs = document.querySelectorAll("[role='tab']"), 
     contentSection = document.getElementsByTagName("mat-drawer-content"), 
     accordions = contentSection[0].getElementsByTagName("mat-expansion-panel"), 
     quartzSideNav = document.getElementsByTagName("quartz-sidenav"), 
@@ -171,19 +173,32 @@ let anchorEl,
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
                     footEl.classList.add("column-count-one");
                 }
-                tabGroups.forEach(function (container) {
-                    const tabs = container.querySelectorAll("[role='tab']"), 
-                        totalTabsWidth = Array.from(tabs).reduce(function (sum, tab) {
-                        return sum + tab.getBoundingClientRect().width;
-                    }, 0), 
-                        tablistWidth = container.getBoundingClientRect().width;
+                if (tabGroups !== null && tabGroups !== "") {
+                    tabGroups.forEach(function (container) {
+                        const currentTabs = container.querySelectorAll("[role='tab']"), 
+                            tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before"), 
+                            tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after"), 
+                            totalTabsWidth = Array.from(currentTabs).reduce(function (sum, tab) {
+                            return sum + tab.getBoundingClientRect().width;
+                        }, 0);
 
-                    if (totalTabsWidth > tablistWidth) {
-                        container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
-                    } else {
-                        container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
-                    }
-                });
+                        if (totalTabsWidth > container.getBoundingClientRect().width) {
+                            container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
+                            tabStart.classList.add("mat-mdc-tab-header-pagination-disabled");
+                            tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled");
+                            tabEnd.classList.add("mat-mdc-tab-header-pagination-enabled");
+                            tabEnd.classList.remove("mat-mdc-tab-header-pagination-disabled");
+                            tabStart.setAttribute("disabled", "disabled");
+                            tabEnd.removeAttribute("disabled");
+                        } else {
+                            container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
+                            tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled", "mat-mdc-tab-header-pagination-disabled");
+                            tabEnd.classList.remove("mat-mdc-tab-header-pagination-enabled", "mat-mdc-tab-header-pagination-disabled");
+                            tabStart.setAttribute("disabled", "disabled");
+                            tabEnd.setAttribute("disabled", "disabled");
+                        }
+                    });
+                }
             };
 
         if (globalThis.innerWidth < 768) {
@@ -346,6 +361,9 @@ let anchorEl,
             }
         }
     }, 
+    tabScrollButtons = function () {
+        
+    }, 
     changeStep = function (lastStep, newStep, direction) {
         let lastSection = lastStep.querySelector("div.mat-vertical-content-container"), 
             lastStepLabel = lastStep.querySelector(".mat-step-label"), 
@@ -394,10 +412,6 @@ for (let navLinkElm of navLink) {
     }
 }
 
-for (let tab of tabs) {
-    tab.addEventListener("click", tabActivate);
-}
-
 for (let accordion of accordions) {
     expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
     expandHideBtn[0].addEventListener("click", accordionActivate);
@@ -423,6 +437,20 @@ for (let LinkBtn of linkBtns) {
 
 for (let printBtn of printBtns) {
     printBtn.addEventListener("click", function() {print();});
+}
+
+for (let tabGroup of pageTabs) {
+    tabs = tabGroup.querySelectorAll("[role='tab']");
+    for (let tab of tabs) {
+        tab.addEventListener("click", tabActivate);
+    }
+    tabBtns = tabGroup.querySelectorAll("mat-tab-header .mat-ripple.mat-mdc-tab-header-pagination");
+    for (let tabBtn of tabBtns) {
+        tabBtn.addEventListener("click", function (event) {
+            tabScrollButtons();
+            event.preventDefault();
+        });
+    }
 }
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
@@ -479,7 +507,6 @@ stepContainer.forEach(function (currentStep, index) {
     });
 
     // Find nested "Back" buttons matching the exact class list
-
     backButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
            let priorSection;
@@ -515,10 +542,6 @@ Filter
 
 make elements into ajaxed components
 see if I can make exact working copy of quartz demo page 
-
-Stepper
-
-checkbox (all/partial checked indicator)
 
 button form="form_id" *formaction="url"* popovertarget="element_id" value=""
 .quartz-sidenav .mat-drawer-content {
