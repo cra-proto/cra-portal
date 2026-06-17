@@ -125,7 +125,6 @@ let anchorEl,
     enableTabStartBtn = function(container) {
         let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
 
-        container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
         tabStart.classList.remove("mat-mdc-tab-header-pagination-disabled");
         tabStart.classList.add("mat-mdc-tab-header-pagination-enabled");
         tabStart.removeAttribute("disabled");
@@ -140,7 +139,6 @@ let anchorEl,
     enableTabEndBtn = function(container) {
         let tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after");
 
-        container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
         tabEnd.classList.add("mat-mdc-tab-header-pagination-enabled");
         tabEnd.classList.remove("mat-mdc-tab-header-pagination-disabled");
         tabEnd.removeAttribute("disabled");
@@ -211,6 +209,7 @@ let anchorEl,
                         }, 0);
 
                         if (totalTabsWidth > container.getBoundingClientRect().width) {
+                            container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
                             disableTabStartBtn(container);
                             enableTabEndBtn(container);
                         } else {
@@ -456,7 +455,6 @@ for (let LinkBtn of linkBtns) {
 for (let printBtn of printBtns) {
     printBtn.addEventListener("click", function() {print();});
 }
-
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
 sideNav.classList.add("mat-drawer-opened");
