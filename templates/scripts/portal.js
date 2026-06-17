@@ -394,9 +394,20 @@ for (let navLinkElm of navLink) {
     }
 }
 
+for (let tab of tabs) {
+    tab.addEventListener("click", tabActivate);
+}
+
 for (let accordion of accordions) {
     expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
     expandHideBtn[0].addEventListener("click", accordionActivate);
+}
+
+for (let dialog of dialogs) {
+    dialog.style.removeProperty("width");
+    dialog.style.removeProperty("minWidth");
+    dialog.style.removeProperty("position");
+    dialog.addEventListener("click", openDialog);
 }
 
 for (let checkbox of checkboxes) {
@@ -406,23 +417,12 @@ for (let checkbox of checkboxes) {
     });
 }
 
-for (let tab of tabs) {
-    tab.addEventListener("click", tabActivate);
-}
-
 for (let LinkBtn of linkBtns) {
     LinkBtn.addEventListener("click", gotoPage);
 }
 
 for (let printBtn of printBtns) {
     printBtn.addEventListener("click", function() {print();});
-}
-
-for (let dialog of dialogs) {
-    dialog.style.removeProperty("width");
-    dialog.style.removeProperty("minWidth");
-    dialog.style.removeProperty("position");
-    dialog.addEventListener("click", openDialog);
 }
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
@@ -437,7 +437,7 @@ globalThis.onresize = reSizeAction;
 reSizeAction();
 
 anchorUri = document.location.hash;
-if (anchorUri) {
+if (anchorUri !== "") {
     anchorEl = document.querySelector("[href='" + anchorUri + "']");
     if (anchorEl) {
         anchorEl.closest("mat-expansion-panel");
@@ -470,7 +470,7 @@ stepContainer.forEach(function (currentStep, index) {
 
             if (isSectionValid(currentStep) === true && formSubmitText.includes(btnText.innerText) === false) {
                 nextSection = stepContainer[index + 1];
-                if (nextSection !== "undefined") {
+                if (typeof nextSection !== "undefined") {
                     changeStep(currentStep, nextSection, 1);
                 }
             }
@@ -479,13 +479,14 @@ stepContainer.forEach(function (currentStep, index) {
     });
 
     // Find nested "Back" buttons matching the exact class list
+
     backButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
            let priorSection;
 
             if (isSectionValid(currentStep) === true) {
                 priorSection = stepContainer[index - 1];
-                if (priorSection !== "undefined") {
+                if (typeof priorSection !== "undefined") {
                     changeStep(currentStep, priorSection, -1);
                 }
             }
