@@ -5,6 +5,8 @@ let anchorEl,
     expandHideBtn, 
     tabs, 
     tabBtns, 
+    tableElm, 
+    tableHeaders, 
     accountBtn = document.querySelector(".quartz-primary-button"), 
     sideNav = document.querySelector("mat-sidenav"), 
     checkboxes = document.querySelectorAll("quartz-checkbox"), 
@@ -12,6 +14,7 @@ let anchorEl,
     linkBtns = document.querySelectorAll("button[value^='http']"), 
     pageTabs = document.querySelectorAll("quartz-tabs"), 
     printBtns = document.querySelectorAll("button[value='print']"), 
+    radios = document.querySelectorAll("quartz-radio-button"), 
     stepContainer = document.querySelectorAll("div.mat-step"), 
     contentSection = document.getElementsByTagName("mat-drawer-content"), 
     accordions = contentSection[0].getElementsByTagName("mat-expansion-panel"), 
@@ -19,6 +22,7 @@ let anchorEl,
     navLink = quartzSideNav[0].getElementsByTagName("a"), 
     sdMenuBtn = document.getElementsByTagName("quartz-icon-button"), 
     sideMenuBtn = sdMenuBtn[0].getElementsByTagName("button"), 
+    tables = document.querySelectorAll("quartz-table"), 
     resetAccordion = function (el) {
         let matPanel = el.closest("mat-expansion-panel"), 
             expandMenuState = { Open: " chevron_right ", Close: " expand_more " }, 
@@ -336,6 +340,24 @@ let anchorEl,
             checkState.innerHTML = "check_box";
         }
     }, 
+    radioActivate = function (radioElm) {
+        let radioState, 
+            radioLabel = radioElm.querySelector("label.quartz-radio-button"), 
+            radioGroup = radioElm.closest("div.quartz-form-field-container"), 
+            radioGroupLabels = radioGroup.querySelectorAll("label.quartz-radio-button");
+             
+
+        for (let currentRadioLabel of radioGroupLabels) {
+            radioState = currentRadioLabel.querySelector("mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
+            if (currentRadioLabel === radioLabel && radioLabel.classList.contains("quartz-radio-button-checked") === false) {
+                currentRadioLabel.classList.add("quartz-radio-button-checked");
+                radioState.innerHTML = "radio_button_checked";
+            } else {
+                currentRadioLabel.classList.remove("quartz-radio-button-checked");
+                radioState.innerHTML = "radio_button_unchecked";
+            }
+        }
+    }, 
     isSectionValid = function (currentStep) {
         let isFormValid;
         const currentForm = currentStep.querySelector("form");
@@ -519,6 +541,13 @@ for (let checkbox of checkboxes) {
     });
 }
 
+for (let radio of radios) {
+    radio.addEventListener("click", function(event) {
+        radioActivate(this);
+        event.preventDefault();
+    });
+}
+
 stepContainer.forEach(function (currentStep, index) {
     // Find nested "Next" buttons matching the exact class list
     const nextButtons = currentStep.querySelectorAll("div.mat-vertical-content-container button.mdc-button.mat-mdc-button-base.quartz-button.quartz-primary-button.mat-mdc-button.mat-unthemed"), 
@@ -577,17 +606,109 @@ for (let tabGroup of pageTabs) {
         });
     }
 }
+
+// Select all tables on the page
+for (let table of tables) {
+    tableHeaders = table.querySelectorAll("th.mat-sort-header");
+    tableElm = document.querySelector("table");
+    
+    // Set up tracking variables specific to this table instance
+    tableElm.currentColumnIndex = -1;
+    tableElm.isAscending = true;
+
+    for (let tableHead of tableHeaders) {
+        tableHead.addEventListener("click", function () {
+            // Find the parent table of the clicked header
+            let currentTable = this.closest("table"), 
+                sortIndicator = this.querySelector(".mat-sort-header-container"), 
+                tbody = currentTable.querySelector("tbody"), 
+                // Get the index of the clicked column header
+                childrenArray = Array.from(this.parentNode.children), 
+                columnIndex = childrenArray.indexOf(this), 
+                // Extract all rows from the table body
+                rows = Array.from(tbody.querySelectorAll("tr")), 
+            
+                // Sort the rows array
+                sortedRows = rows.sort(function (rowA, rowB) {
+                    let valueA, valueB, 
+                        cellA = rowA.children[columnIndex].textContent.trim(), 
+                        cellB = rowB.children[columnIndex].textContent.trim();
+
+                    // Parse cellA as a number if it is numeric
+                    if (isNaN(cellA) === true) {
+                        valueA = cellA;
+                    } else {
+                        valueA = parseFloat(cellA);
+                    }
+
+                    // Parse cellB as a number if it is numeric
+                    if (isNaN(cellB) === true) {
+                        valueB = cellB;
+                    } else {
+                        valueB = parseFloat(cellB);
+                    }
+
+                    // Apply sorting logic based on current direction
+                    if (valueA < valueB) {
+                        if (currentTable.isAscending === true) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    }
+                    if (valueA > valueB) {
+                        if (currentTable.isAscending === true) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+                    return 0;
+                }), 
+                // Reset sort attributes on all headers within this table
+                allHeaders = currentTable.querySelectorAll("th.mat-sort-header");
+           
+            // Toggle direction if clicking the same column; default to asc for a new column
+            if (columnIndex === currentTable.currentColumnIndex) {
+                if (currentTable.isAscending === true) {
+                    currentTable.isAscending = false;
+                } else {
+                    currentTable.isAscending = true;
+                }
+            } else {
+                currentTable.isAscending = true;
+                currentTable.currentColumnIndex = columnIndex;
+            }
+
+            // Re-append rows to the tbody in the new sorted order
+            tbody.append.apply(tbody, sortedRows);
+
+            allHeaders.forEach(function (header) {
+                sortIndicator.classList.remove("mat-sort-header-sorted", "mat-sort-header-descending", "mat-sort-header-ascending");
+            });
+
+            // Apply direction attribute to the active header
+            if (currentTable.isAscending === true) {
+                sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-ascending");
+                sortIndicator.classList.remove("mat-sort-header-descending");
+            } else {
+                sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-descending");
+                sortIndicator.classList.remove("mat-sort-header-ascending");
+            }
+        });
+    }
+}
 /*
 
 Accordion (done)
 Checkbox (done)
 Dialog (done)
+Radio buttons (done)
 Stepper (done)
 Sub Ribbon (done)
+Table (in progress) - sort arrows
 Tabs (done)
 
-Table (in progress) - sort arrows
-radio buttons
 form validation
 
 multi column
