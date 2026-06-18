@@ -496,8 +496,10 @@
 </quartz-stepper>
 <!-- STEPPER END -->
 
-<!-- CHECKBOX END -->
 <form novalidate="" class="ng-invalid ng-touched ng-dirty"> 
+
+<!-- CHECKBOX END -->
+
     <quartz-form-field-group controlname="confirmCheckbox">
         <fieldset aria-invalid="true">
             <legend id="quartz-form-field-group-47-legend"><quartz-form-field-label style="display: block;"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Checkbox demo 1</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
@@ -512,9 +514,99 @@
             <quartz-field-error></quartz-field-error>
         </fieldset>
     </quartz-form-field-group>
-</form>
 
 <!-- CHECKBOX END -->
+
+
+<!-- RADIO BUTTON START -->
+
+<quartz-form-field-group controlname="blockRep">
+    <fieldset aria-invalid="true">
+        <legend id="quartz-form-field-group-4-legend"><quartz-form-field-label _nghost-ng-c1393879982="" style="display: block"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Radio button example</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
+        <div class="quartz-form-field-container">
+            <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="Y" class="ng-untouched ng-pristine ng-invalid">
+                <label class="quartz-radio-button" for="quartz-radio-button-3"><span class="quartz-radio-button-inner-container">
+                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-3" role="radio" name="blockRep" value="Y">
+                    <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">radio_button_unchecked</mat-icon></span><span class="quartz-radio-button-label"> Radio button #1 - value="Y" </span></label>
+            </quartz-radio-button>
+            <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="N" class="ng-untouched ng-pristine ng-invalid">
+                <label class="quartz-radio-button" for="quartz-radio-button-4"><span class="quartz-radio-button-inner-container">
+                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-4" role="radio" name="blockRep" value="N">
+                    <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">radio_button_unchecked</mat-icon></span><span class="quartz-radio-button-label"> Radio button #2 - value="N" </span></label>
+            </quartz-radio-button>
+            <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="R" class="ng-untouched ng-pristine ng-invalid">
+                <label class="quartz-radio-button" for="quartz-radio-button-5"><span class="quartz-radio-button-inner-container">
+                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-5" role="radio" name="blockRep" value="R">
+                    <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">radio_button_unchecked</mat-icon></span><span class="quartz-radio-button-label"> Radio button #3 - value="R" </span></label>
+            </quartz-radio-button>
+            <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="M" class="ng-untouched ng-pristine ng-invalid">
+                <label class="quartz-radio-button" for="quartz-radio-button-6"><span class="quartz-radio-button-inner-container">
+                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-6" role="radio" name="blockRep" value="M">
+                    <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">radio_button_unchecked</mat-icon></span><span class="quartz-radio-button-label"> Radio button #4 - value="M" (this option is to test an option which contains a large amount of text to be displayed in a small device, such as a mobile) </span></label>
+            </quartz-radio-button>
+        </div>
+        <quartz-field-error></quartz-field-error>
+    </fieldset>
+    </quartz-form-field-group>
+
+<!-- RADIO BUTTON END -->
+
+</form>
+
+<!-- TABLE 1 START -->
+
+<quartz-table matsort="" class="mat-sort">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <table mat-table="" class="mat-mdc-table mdc-data-table__table cdk-table quartz-table ng-animate-disabled" role="table">
+                <caption><span class="quartz-table-heading"> Table with amount field example </span></caption>
+                <thead role="rowgroup">
+                    <tr role="row" mat-header-row="" class="mat-mdc-header-row mdc-data-table__header-row cdk-header-row">
+                        <th role="columnheader" scope="col" mat-sort-header="" mat-header-cell="" class="mat-sort-header mat-mdc-header-cell mdc-data-table__header-cell cdk-header-cell cdk-column-line mat-column-line" aria-sort="none">
+                            <div class="mat-sort-header-container mat-focus-indicator mat-sort-header-descending" tabindex="0" role="button" aria-describedby="cdk-describedby-message-ng-1-3" cdk-describedby-host="ng-1">
+                                <div class="mat-sort-header-content"> Line </div>
+                                <div class="mat-sort-header-arrow"><svg viewBox="0 -960 960 960" focusable="false" aria-hidden="true"><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path></svg></div>
+                            </div>
+                        </th>
+                        <th role="columnheader" scope="col" mat-sort-header="" mat-header-cell="" class="mat-sort-header mat-mdc-header-cell mdc-data-table__header-cell cdk-header-cell cdk-column-description mat-column-description" aria-sort="none">
+                            <div class="mat-sort-header-container mat-focus-indicator mat-sort-header-descending" tabindex="0" role="button" aria-describedby="cdk-describedby-message-ng-1-3" cdk-describedby-host="ng-1">
+                                <div class="mat-sort-header-content"> Description </div>
+                                <div class="mat-sort-header-arrow"><svg viewBox="0 -960 960 960" focusable="false" aria-hidden="true"><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path></svg></div>
+                            </div>
+                        </th>
+                        <th role="columnheader" scope="col" mat-sort-header="" mat-header-cell="" class="mat-sort-header mat-mdc-header-cell mdc-data-table__header-cell cdk-header-cell cdk-column-amount mat-column-amount" aria-sort="none">
+                            <div class="mat-sort-header-container mat-focus-indicator mat-sort-header-descending" tabindex="0" role="button" aria-describedby="cdk-describedby-message-ng-1-3" cdk-describedby-host="ng-1">
+                                <div class="mat-sort-header-content"> $ Amount </div>
+                                <div class="mat-sort-header-arrow"><svg viewBox="0 -960 960 960" focusable="false" aria-hidden="true"><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path></svg></div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody role="rowgroup" class="mdc-data-table__content">
+                    <tr role="row" mat-row="" class="mat-mdc-row mdc-data-table__row cdk-row" data-isselected="false">
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-line mat-column-line"><strong>100</strong></td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-description mat-column-description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu vestibulum dui </td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-amount mat-column-amount"><quartz-form-field-group><quartz-form-field-label class="quartz-invisible"><span class="quartz-label-title"><label for="quartz-dollar-1" id="quartz-dollar-1-input-label"><span class="quartz-invisible"><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Line for 100</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></label></span></quartz-form-field-label><div class="quartz-form-field-container"><quartz-dollar class="formFieldWidth" style="display: block;"><div role="group" class="quartz-dollar-container quartz-dollar-allow-decimal ng-untouched ng-pristine ng-valid"><div class="quartz-invisible" id="quartz-dollar-1-dollar-desc"><span class="quartz-invisible">Enter dollars and cents, separated by a decimal point.</span><span class="quartz-invisible">Line for 100</span></div><span class="quartz-dollar-left-icon">$</span><div class="input-wrapper"><input formcontrolname="dollar" quartzmaxlengthannouncer="" class="quartz-dollar-input ng-untouched ng-pristine ng-valid" id="quartz-dollar-1" size="8" maxlength="14" aria-describedby="quartz-dollar-1-dollar-desc"></div></div><quartz-screen-reader-announcer></quartz-screen-reader-announcer></quartz-dollar></div><quartz-field-error></quartz-field-error></quartz-form-field-group></td>
+                    </tr>
+                    <tr role="row" mat-row="" class="mat-mdc-row mdc-data-table__row cdk-row" data-isselected="false">
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-line mat-column-line"><strong>101</strong></td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-description mat-column-description"> Etiam eget nunc scelerisque risus fringilla pretium. Suspendisse hendrerit, leo et gravida tristique </td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-amount mat-column-amount"><quartz-form-field-group><quartz-form-field-label class="quartz-invisible"><span class="quartz-label-title"><label for="quartz-dollar-2" id="quartz-dollar-2-input-label"><span class="quartz-invisible"><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Line for 101</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></label></span></quartz-form-field-label><div class="quartz-form-field-container"><quartz-dollar class="formFieldWidth" style="display: block;"><div role="group" class="quartz-dollar-container quartz-dollar-allow-decimal ng-untouched ng-pristine ng-valid"><div class="quartz-invisible" id="quartz-dollar-2-dollar-desc"><span class="quartz-invisible">Enter dollars and cents, separated by a decimal point.</span><span class="quartz-invisible">Line for 101</span></div><span class="quartz-dollar-left-icon">$</span><div class="input-wrapper"><input formcontrolname="dollar" quartzmaxlengthannouncer="" class="quartz-dollar-input ng-untouched ng-pristine ng-valid" id="quartz-dollar-2" size="8" maxlength="14" aria-describedby="quartz-dollar-2-dollar-desc"></div></div><quartz-screen-reader-announcer></quartz-screen-reader-announcer></quartz-dollar></div><quartz-field-error></quartz-field-error></quartz-form-field-group></td>
+                    </tr>
+                    <tr role="row" mat-row="" class="mat-mdc-row mdc-data-table__row cdk-row" data-isselected="false">
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-line mat-column-line"><strong>102</strong></td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-description mat-column-description"> Nullam tempus nulla in ipsum ornare suscipit. Aenean eget libero sed quam posuere ultrices </td>
+                        <td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-amount mat-column-amount"><quartz-form-field-group><quartz-form-field-label class="quartz-invisible"><span class="quartz-label-title"><label for="quartz-dollar-3" id="quartz-dollar-3-input-label"><span class="quartz-invisible"><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Line for 102</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></label></span></quartz-form-field-label><div class="quartz-form-field-container"><quartz-dollar class="formFieldWidth" style="display: block;"><div role="group" class="quartz-dollar-container quartz-dollar-allow-decimal ng-untouched ng-pristine ng-valid"><div class="quartz-invisible" id="quartz-dollar-3-dollar-desc"><span class="quartz-invisible">Enter dollars and cents, separated by a decimal point.</span><span class="quartz-invisible">Line for 102</span></div><span class="quartz-dollar-left-icon">$</span><div class="input-wrapper"><input formcontrolname="dollar" quartzmaxlengthannouncer="" class="quartz-dollar-input ng-untouched ng-pristine ng-valid" id="quartz-dollar-3" size="8" maxlength="14" aria-describedby="quartz-dollar-3-dollar-desc"></div></div><quartz-screen-reader-announcer></quartz-screen-reader-announcer></quartz-dollar></div><quartz-field-error></quartz-field-error></quartz-form-field-group></td>
+                    </tr>
+                </tbody>
+                <tfoot role="rowgroup" class="mat-mdc-table-sticky" style="display: none; bottom: 0px; z-index: 10;"></tfoot>
+            </table>
+            <div></div>
+        </div>
+    </div>
+</quartz-table>
+
+<!-- TABLE 1 END -->
 
                                             </mat-drawer-content>
 
