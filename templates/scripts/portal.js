@@ -204,6 +204,7 @@ let anchorEl,
                 if (tabGroups !== null && tabGroups !== "") {
                     tabGroups.forEach(function (container) {
                         const currentTabs = container.querySelectorAll("[role='tab']"), 
+                            tabList = container.querySelector(".mat-mdc-tab-list"), 
                             totalTabsWidth = Array.from(currentTabs).reduce(function (sum, tab) {
                             return sum + tab.getBoundingClientRect().width;
                         }, 0);
@@ -216,6 +217,7 @@ let anchorEl,
                             container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
                             disableTabStartBtn(container);
                             disableTabEndBtn(container);
+                            tabList.style.transform = "translateX(0px)";
                         }
                     });
                 }
@@ -582,9 +584,11 @@ Checkbox (done)
 Dialog (done)
 Stepper (done)
 Sub Ribbon (done)
+Tabs (done)
 
-Tabs (in progress) - mobile view scroll tabs
 Table (in progress) - sort arrows
+radio buttons
+form validation
 
 multi column
 Grid
