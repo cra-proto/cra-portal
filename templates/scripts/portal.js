@@ -382,10 +382,40 @@ let anchorEl,
         }
     }, 
     tabScrollButtons = function (tabScrollBtn) {
+        let matrixValues, currentAdjust, 
+            tabHeaderElm = tabScrollBtn.closest("mat-tab-header"), 
+            tabHeadWidth = tabHeaderElm.getBoundingClientRect().width - (tabScrollBtn.getBoundingClientRect().width * 2), 
+            tabList = tabHeaderElm.querySelector(".mat-mdc-tab-list"), 
+            translateX = 0,  // Default if no transform exists
+            tabHeadadjustVal = 136;
+
+        const btnStyle = window.getComputedStyle(tabList), 
+            matrix = btnStyle.transform || btnStyle.webkitTransform;
+
+        if (matrix && matrix !== "none") {
+            // Parses either "matrix(1, 0, 0, 1, -416, 0)" or 3D matrices
+            matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
+  
+            // The 5th value (index 4) represents the X-axis translation
+            translateX = parseFloat(matrixValues[4]);
+        }
+
         if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-before") === true) {
-
+            enableTabEndBtn(tabHeaderElm);
+            currentAdjust = tabHeadadjustVal + translateX;
+            if (currentAdjust > 0) {
+                currentAdjust = 0;
+                disableTabStartBtn(tabHeaderElm);
+            }
+            tabList.style.transform = "translateX(" + currentAdjust + "px)";
         } else if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-after") === true) {
-
+            enableTabStartBtn(tabHeaderElm);
+            currentAdjust = -tabHeadadjustVal + translateX;
+            if (Math.abs(currentAdjust) > tabHeadWidth) {
+                currentAdjust = -tabHeadWidth;
+                disableTabEndBtn(tabHeaderElm);
+            }
+            tabList.style.transform = "translateX(" + currentAdjust + "px)";
         }
     }, 
     changeStep = function (lastStep, newStep, direction) {
