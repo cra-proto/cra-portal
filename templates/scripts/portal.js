@@ -126,28 +126,28 @@ let anchorEl,
     hideSideNav = function () {
         showHideMenu(false);
     }, 
-    enableTabStartBtn = function(container) {
+    enableTabStartBtn = function (container) {
         let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
 
         tabStart.classList.remove("mat-mdc-tab-header-pagination-disabled");
         tabStart.classList.add("mat-mdc-tab-header-pagination-enabled");
         tabStart.removeAttribute("disabled");
     }, 
-    disableTabStartBtn = function(container) {
+    disableTabStartBtn = function (container) {
         let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
 
         tabStart.classList.add("mat-mdc-tab-header-pagination-disabled");
         tabStart.classList.remove("mat-mdc-tab-header-pagination-enabled");
         tabStart.setAttribute("disabled", "disabled");
     }, 
-    enableTabEndBtn = function(container) {
+    enableTabEndBtn = function (container) {
         let tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after");
 
         tabEnd.classList.add("mat-mdc-tab-header-pagination-enabled");
         tabEnd.classList.remove("mat-mdc-tab-header-pagination-disabled");
         tabEnd.removeAttribute("disabled");
     }, 
-    disableTabEndBtn = function(container) {        
+    disableTabEndBtn = function (container) {        
         let tabEnd = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-after");
 
         tabEnd.classList.remove("mat-mdc-tab-header-pagination-enabled");
@@ -287,9 +287,8 @@ let anchorEl,
     gotoPage = function () {
         globalThis.location.href = this.value;
     }, 
-    openDialog = function () {
-        let overlayElm = this.popoverTargetElement, 
-            overlayWrap = overlayElm.closest(".cdk-global-overlay-wrapper"), 
+    openDialog = function (overlayElm) {
+        let overlayWrap = overlayElm.closest(".cdk-global-overlay-wrapper"), 
             closeButton = overlayElm.querySelector("quartz-secondary-button"), 
             closeIcon = overlayElm.querySelector("quartz-icon-button"), 
             htmlTag = document.getElementsByTagName("html")[0], 
@@ -308,10 +307,22 @@ let anchorEl,
                 overlayWrap.classList.add("quartz-invisible");
                 backdropTrigger.classList.add("quartz-invisible");
                 overlayBG.classList.add("quartz-invisible");
-                closeButton.removeEventListener("click", endDialog);
-                closeIcon.removeEventListener("click", endDialog);
+                if (closeButton !== null && closeButton !== "") {
+                    closeButton.removeEventListener("click", endDialog);
+                }
+                if (closeIcon !== null && closeIcon !== "") {
+                    closeIcon.removeEventListener("click", endDialog);
+                }
+            }, 
+            closeOutsideClick = function (event) {
+                // If the target of the click is the backdrop itself, close the modal
+                if (event.target.closest("mat-dialog-container") === null) {                    
+                    endDialog();
+                    globalThis.removeEventListener("click", closeOutsideClick);
+                }
             };
 
+        globalThis.addEventListener("click", closeOutsideClick);
         if (htmlTag.classList.contains("cdk-global-scrollblock") === false) {
             htmlTag.classList.add("cdk-global-scrollblock");
             htmlTag.style.left = "0px;";
@@ -324,8 +335,12 @@ let anchorEl,
             overlayWrap.classList.remove("quartz-invisible");
             backdropTrigger.classList.remove("quartz-invisible");
             overlayBG.classList.remove("quartz-invisible");
-            closeButton.addEventListener("click", endDialog);
-            closeIcon.addEventListener("click", endDialog);
+            if (closeButton !== null && closeButton !== "") {
+                closeButton.addEventListener("click", endDialog);
+            }
+            if (closeIcon !== null && closeIcon !== "") {
+                closeIcon.addEventListener("click", endDialog);
+            }
         }
     }, 
     checkboxActivate = function (checkBoxElm) {
@@ -498,7 +513,10 @@ for (let dialog of dialogs) {
     dialog.style.removeProperty("width");
     dialog.style.removeProperty("minWidth");
     dialog.style.removeProperty("position");
-    dialog.addEventListener("click", openDialog);
+    dialog.addEventListener("click", function (event) {
+        event.stopPropagation();
+        openDialog(this.popoverTargetElement);
+    });
 }
 
 for (let LinkBtn of linkBtns) {
@@ -506,7 +524,7 @@ for (let LinkBtn of linkBtns) {
 }
 
 for (let printBtn of printBtns) {
-    printBtn.addEventListener("click", function() {print();});
+    printBtn.addEventListener("click", function () {print();});
 }
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
@@ -534,14 +552,14 @@ if (anchorUri !== "") {
 }
 
 for (let checkbox of checkboxes) {
-    checkbox.addEventListener("click", function(event) {
+    checkbox.addEventListener("click", function (event) {
         checkboxActivate(this);
         event.preventDefault();
     });
 }
 
 for (let radio of radios) {
-    radio.addEventListener("click", function(event) {
+    radio.addEventListener("click", function (event) {
         radioActivate(this);
         event.preventDefault();
     });
@@ -562,11 +580,9 @@ stepContainer.forEach(function (currentStep, index) {
 
     nextButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
-            let nextSection, 
-                btnText = this.querySelector("span.mdc-button__label"), 
-                formSubmitText = ["Submit"];
+            let nextSection;
 
-            if (isSectionValid(currentStep) === true && formSubmitText.includes(btnText.innerText) === false) {
+            if (isSectionValid(currentStep) === true) {
                 nextSection = stepContainer[index + 1];
                 if (typeof nextSection !== "undefined") {
                     changeStep(currentStep, nextSection, 1);
