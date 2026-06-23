@@ -345,7 +345,6 @@ let anchorEl,
             radioLabel = radioElm.querySelector("label.quartz-radio-button"), 
             radioGroup = radioElm.closest("div.quartz-form-field-container"), 
             radioGroupLabels = radioGroup.querySelectorAll("label.quartz-radio-button");
-             
 
         for (let currentRadioLabel of radioGroupLabels) {
             radioState = currentRadioLabel.querySelector("mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
@@ -413,7 +412,7 @@ let anchorEl,
             translateX = 0,  // Default if no transform exists
             tabHeadadjustVal = 136;
 
-        const btnStyle = window.getComputedStyle(tabList), 
+        const btnStyle = globalThis.getComputedStyle(tabList), 
             matrix = btnStyle.transform || btnStyle.webkitTransform;
 
         if (matrix && matrix !== "none") {
@@ -421,7 +420,7 @@ let anchorEl,
             matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
   
             // The 5th value (index 4) represents the X-axis translation
-            translateX = parseFloat(matrixValues[4]);
+            translateX = Number.parseFloat(matrixValues[4]);
         }
 
         if (tabScrollBtn.classList.contains("mat-mdc-tab-header-pagination-before") === true) {
@@ -580,7 +579,7 @@ stepContainer.forEach(function (currentStep, index) {
     // Find nested "Back" buttons matching the exact class list
     backButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
-           let priorSection;
+            let priorSection;
 
             if (isSectionValid(currentStep) === true) {
                 priorSection = stepContainer[index - 1];
@@ -638,14 +637,14 @@ for (let table of tables) {
                     if (isNaN(cellA) === true) {
                         valueA = cellA;
                     } else {
-                        valueA = parseFloat(cellA);
+                        valueA = Number.parseFloat(cellA);
                     }
 
                     // Parse cellB as a number if it is numeric
                     if (isNaN(cellB) === true) {
                         valueB = cellB;
                     } else {
-                        valueB = parseFloat(cellB);
+                        valueB = Number.parseFloat(cellB);
                     }
 
                     // Apply sorting logic based on current direction
