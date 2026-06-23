@@ -581,11 +581,9 @@ stepContainer.forEach(function (currentStep, index) {
         button.addEventListener("click", function (event) {
             let priorSection;
 
-            if (isSectionValid(currentStep) === true) {
-                priorSection = stepContainer[index - 1];
-                if (typeof priorSection !== "undefined") {
-                    changeStep(currentStep, priorSection, -1);
-                }
+            priorSection = stepContainer[index - 1];
+            if (typeof priorSection !== "undefined") {
+                changeStep(currentStep, priorSection, -1);
             }
             event.preventDefault();
         });
@@ -703,17 +701,24 @@ Accordion (done)
 Checkbox (done)
 Dialog (done)
 Radio buttons (done)
+SideNav (done)
 Stepper (done)
 Sub Ribbon (done)
-Table (in progress) - sort arrows
+Table (done) - sort arrows could use some polishing (table with selection)
 Tabs (done)
 
-form validation
+Form validation
+Date picker, date range picker
+Filter
+Paginator
+Task dialog?
+Snackbar
 
 multi column
 Grid
+Margin
 
-Filter
+Menu?
 -------
 
 -------
