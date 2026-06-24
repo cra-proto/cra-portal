@@ -432,7 +432,7 @@ let anchorEl,
 
         if (matrix && matrix !== "none") {
             // Parses either "matrix(1, 0, 0, 1, -416, 0)" or 3D matrices
-            matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
+            matrixValues = /matrix.*\((.+)\)/.exec(matrix)[1].split(", ");
   
             // The 5th value (index 4) represents the X-axis translation
             translateX = Number.parseFloat(matrixValues[4]);
@@ -510,12 +510,14 @@ for (let accordion of accordions) {
 }
 
 for (let dialog of dialogs) {
-    dialog.style.removeProperty("width");
-    dialog.style.removeProperty("minWidth");
-    dialog.style.removeProperty("position");
+    let ovelayElm = dialog.popoverTargetElement;
+
+    ovelayElm.style.removeProperty("width");
+    ovelayElm.style.removeProperty("minWidth");
+    ovelayElm.style.removeProperty("position");
     dialog.addEventListener("click", function (event) {
         event.stopPropagation();
-        openDialog(this.popoverTargetElement);
+        openDialog(ovelayElm);
     });
 }
 
@@ -584,7 +586,7 @@ stepContainer.forEach(function (currentStep, index) {
 
             if (isSectionValid(currentStep) === true) {
                 nextSection = stepContainer[index + 1];
-                if (typeof nextSection !== "undefined") {
+                if (nextSection !== undefined) {
                     changeStep(currentStep, nextSection, 1);
                 }
             }
@@ -598,7 +600,7 @@ stepContainer.forEach(function (currentStep, index) {
             let priorSection;
 
             priorSection = stepContainer[index - 1];
-            if (typeof priorSection !== "undefined") {
+            if (priorSection !== undefined) {
                 changeStep(currentStep, priorSection, -1);
             }
             event.preventDefault();
@@ -642,7 +644,7 @@ for (let table of tables) {
                 rows = Array.from(tbody.querySelectorAll("tr")), 
             
                 // Sort the rows array
-                sortedRows = rows.sort(function (rowA, rowB) {
+                sortedRows = rows.slice().sort(function (rowA, rowB) {
                     let valueA, valueB, 
                         cellA = rowA.children[columnIndex].textContent.trim(), 
                         cellB = rowB.children[columnIndex].textContent.trim();
