@@ -4279,12 +4279,12 @@ mat-progress-spinner {
     background-color: #fff;
     color: #333
 }
-
+/*
 .quartz-sidenav .mat-drawer-content {
     min-height: 100vh;
     overflow: unset
 }
-
+*/
 .quartz-sidenav .sidenav-subhead {
     font-size: 14px;
     font-family: Lato,sans-serif;
