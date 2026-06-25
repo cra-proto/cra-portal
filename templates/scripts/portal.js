@@ -3,6 +3,7 @@
 let anchorEl, 
     anchorUri, 
     expandHideBtn, 
+    expansionPanel, 
     tabs, 
     tabBtns, 
     tableElm, 
@@ -205,7 +206,7 @@ let anchorEl,
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
                     footEl.classList.add("column-count-one");
                 }
-                if (tabGroups !== null && tabGroups !== "") {
+                if (tabGroups !== null && tabGroups !== undefined && tabGroups !== "") {
                     tabGroups.forEach(function (container) {
                         const currentTabs = container.querySelectorAll("[role='tab']"), 
                             tabList = container.querySelector(".mat-mdc-tab-list"), 
@@ -221,7 +222,9 @@ let anchorEl,
                             container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
                             disableTabStartBtn(container);
                             disableTabEndBtn(container);
-                            tabList.style.transform = "translateX(0px)";
+                            if (tabList !== null && tabList !== undefined) {
+                                tabList.style.transform = "translateX(0px)";
+                            }
                         }
                     });
                 }
@@ -513,7 +516,7 @@ for (let dialog of dialogs) {
     let ovelayElm = dialog.popoverTargetElement;
 
     ovelayElm.style.removeProperty("width");
-    ovelayElm.style.removeProperty("minWidth");
+    ovelayElm.style.removeProperty("min-width");
     ovelayElm.style.removeProperty("position");
     dialog.addEventListener("click", function (event) {
         event.stopPropagation();
@@ -541,11 +544,11 @@ globalThis.onresize = reSizeAction;
 reSizeAction();
 
 anchorUri = document.location.hash;
-if (anchorUri !== "") {
+if (anchorUri !== null && anchorUri !== undefined && anchorUri !== "") {
     anchorEl = document.querySelector("[href='" + anchorUri + "']");
-    if (anchorEl) {
-        anchorEl.closest("mat-expansion-panel");
-        if (anchorEl.closest("mat-expansion-panel")) {
+    if (anchorEl !== null && anchorEl !== undefined) {
+        expansionPanel = anchorEl.closest("mat-expansion-panel");
+        if (expansionPanel !== null && expansionPanel !== undefined) {
             accordionActivate.call(anchorEl);
         } else {
             selectSideElm.call(anchorEl);

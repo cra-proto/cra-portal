@@ -1282,7 +1282,7 @@
         }
 
         html {
-            --mat-sort-arrow-color: #757575
+            --mat-sort-arrow-color: rgba(0, 0, 0, .87)
         }
 
         html {
