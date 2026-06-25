@@ -126,6 +126,7 @@ let anchorEl,
     }, 
     hideSideNav = function () {
         showHideMenu(false);
+        tabRefresh();
     }, 
     enableTabStartBtn = function (container) {
         let tabStart = container.querySelector(".mat-ripple.mat-mdc-tab-header-pagination.mat-mdc-tab-header-pagination-before");
@@ -155,14 +156,37 @@ let anchorEl,
         tabEnd.classList.add("mat-mdc-tab-header-pagination-disabled");
         tabEnd.setAttribute("disabled", "disabled");
     }, 
+    tabRefresh = function () {
+        let tabGroups = document.querySelectorAll("mat-tab-header");
+
+        if (tabGroups !== null && tabGroups !== undefined) {
+            tabGroups.forEach(function (container) {
+                let currentTabs = container.querySelectorAll("[role='tab']"), 
+                    tabList = container.querySelector(".mat-mdc-tab-list"), 
+                    totalTabsWidth = Array.from(currentTabs).reduce(function (sum, tab) {
+                        return sum + tab.getBoundingClientRect().width;
+                    }, 0);
+
+                if (totalTabsWidth > container.getBoundingClientRect().width) {
+                    container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
+                    disableTabStartBtn(container);
+                    enableTabEndBtn(container);
+                } else {
+                    container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
+                    disableTabStartBtn(container);
+                    disableTabEndBtn(container);
+                    tabList.style.transform = "translateX(0px)";
+                }
+            });
+        }
+    }, 
     reSizeAction = function () {
         let backdropEl = document.querySelector(".mat-drawer-backdrop"), 
             altLangLnk = document.querySelector("[lang='fr']"), 
             sideNav = document.querySelector("mat-sidenav"), 
             smallPageView = function (hideSideNavFlag) {
                 let footEl;
-                const tabGroups = document.querySelectorAll("mat-tab-header"), 
-                    sideMenuIcon = document.querySelector("quartz-icon-button"), 
+                const sideMenuIcon = document.querySelector("quartz-icon-button"), 
                     sideNavContain = document.querySelector("mat-sidenav-container"), 
                     sideNavContent = document.querySelector("mat-sidenav-content"), 
                     ribbonTitle = document.querySelector(".quartz-ribbon-menu-title"), 
@@ -206,28 +230,7 @@ let anchorEl,
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
                     footEl.classList.add("column-count-one");
                 }
-                if (tabGroups !== null && tabGroups !== undefined) {
-                    tabGroups.forEach(function (container) {
-                        const currentTabs = container.querySelectorAll("[role='tab']"), 
-                            tabList = container.querySelector(".mat-mdc-tab-list"), 
-                            totalTabsWidth = Array.from(currentTabs).reduce(function (sum, tab) {
-                            return sum + tab.getBoundingClientRect().width;
-                        }, 0);
-
-                        if (totalTabsWidth > container.getBoundingClientRect().width) {
-                            container.classList.add("mat-mdc-tab-header-pagination-controls-enabled");
-                            disableTabStartBtn(container);
-                            enableTabEndBtn(container);
-                        } else {
-                            container.classList.remove("mat-mdc-tab-header-pagination-controls-enabled");
-                            disableTabStartBtn(container);
-                            disableTabEndBtn(container);
-                            if (tabList !== null && tabList !== undefined) {
-                                tabList.style.transform = "translateX(0px)";
-                            }
-                        }
-                    });
-                }
+                tabRefresh();
             };
 
         if (globalThis.innerWidth < 768) {
