@@ -206,7 +206,7 @@ let anchorEl,
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
                     footEl.classList.add("column-count-one");
                 }
-                if (tabGroups !== null && tabGroups !== undefined && tabGroups !== "") {
+                if (tabGroups !== null && tabGroups !== undefined) {
                     tabGroups.forEach(function (container) {
                         const currentTabs = container.querySelectorAll("[role='tab']"), 
                             tabList = container.querySelector(".mat-mdc-tab-list"), 
