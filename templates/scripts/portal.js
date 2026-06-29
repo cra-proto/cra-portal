@@ -200,9 +200,11 @@ let accordions,
                     if (sideNavContent !== null) {
                         sideMenuIcon.classList.add("quartz-invisible");
                         sideNavContent.style.marginLeft = "280px";
-                        sideNav.classList.add("mat-drawer-side");
-                        sideNav.classList.remove("mat-drawer-over");
-                        sideNav.classList.add("mat-drawer-opened");
+                        if (sideNav !== null && sideNav !== undefined) {
+                            sideNav.classList.add("mat-drawer-side");
+                            sideNav.classList.remove("mat-drawer-over");
+                            sideNav.classList.add("mat-drawer-opened");
+                        }
                     }
                     ribbonTitle.classList.remove("quartz-invisible");
                     if (ribbonSubTitle !== null) {
@@ -219,8 +221,10 @@ let accordions,
                     if (sideNavContent !== null) {
                         sideMenuIcon.classList.remove("quartz-invisible");
                         sideNavContent.style.marginLeft = "";
-                        sideNav.classList.add("mat-drawer-over");
-                        sideNav.classList.remove("mat-drawer-side");
+                        if (sideNav !== null && sideNav !== undefined) {
+                            sideNav.classList.add("mat-drawer-over");
+                            sideNav.classList.remove("mat-drawer-side");
+                        }
                     }
                     ribbonTitle.classList.add("quartz-invisible");
                     if (ribbonSubTitle !== null) {
