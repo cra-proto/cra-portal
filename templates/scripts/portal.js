@@ -1,6 +1,7 @@
 "use strict";
 
-let anchorEl, 
+let accordions, 
+    anchorEl, 
     anchorUri, 
     expandHideBtn, 
     expansionPanel, 
@@ -19,7 +20,6 @@ let anchorEl,
     radios = document.querySelectorAll("quartz-radio-button"), 
     stepContainer = document.querySelectorAll("div.mat-step"), 
     contentSection = document.getElementsByTagName("mat-drawer-content"), 
-    accordions = contentSection[0].getElementsByTagName("mat-expansion-panel"), 
     quartzSideNav = document.getElementsByTagName("quartz-sidenav"), 
     navLink = quartzSideNav[0].getElementsByTagName("a"), 
     sdMenuBtn = document.getElementsByTagName("quartz-icon-button"), 
@@ -511,9 +511,12 @@ for (let navLinkElm of navLink) {
     }
 }
 
-for (let accordion of accordions) {
-    expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
-    expandHideBtn[0].addEventListener("click", accordionActivate);
+if (contentSection.length > 1) {
+    accordions = contentSection[0].getElementsByTagName("mat-expansion-panel"), 
+    for (let accordion of accordions) {
+        expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
+        expandHideBtn[0].addEventListener("click", accordionActivate);
+    }
 }
 
 for (let dialog of dialogs) {
