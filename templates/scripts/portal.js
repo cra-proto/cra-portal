@@ -726,8 +726,6 @@ for (let currentForm of allForms) {
 
     if (formSubmitBtn !== null && formSubmitBtn !== undefined) {
         formSubmitBtn.addEventListener("click", function (event) {
-            let isFormValid = true;
-
             // Convert the form elements collection into an array and loop through it
             Array.from(currentForm.elements).forEach(function (field) {
                 let errorGroupElm, labelElm, radioBtn, radioElm, 
