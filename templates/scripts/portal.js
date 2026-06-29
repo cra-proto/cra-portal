@@ -705,7 +705,7 @@ for (let table of tables) {
             // Re-append rows to the tbody in the new sorted order
             tbody.append.apply(tbody, sortedRows);
 
-            allHeaders.forEach(function (header) {
+            allHeaders.forEach(function () {
                 sortIndicator.classList.remove("mat-sort-header-sorted", "mat-sort-header-descending", "mat-sort-header-ascending");
             });
 
@@ -771,7 +771,6 @@ for (let currentForm of allForms) {
                     if (field.willValidate === true) {
                         // Check if the individual field fails its HTML constraints
                         if (field.validity.valid !== true) {
-                            isFormValid = false;
                             event.preventDefault();
                             handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn); 
                         }
