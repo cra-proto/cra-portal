@@ -512,7 +512,7 @@ for (let navLinkElm of navLink) {
 }
 
 if (contentSection.length > 1) {
-    accordions = contentSection[0].getElementsByTagName("mat-expansion-panel"), 
+    accordions = contentSection[0].getElementsByTagName("mat-expansion-panel");
     for (let accordion of accordions) {
         expandHideBtn = accordion.getElementsByTagName("mat-panel-title");
         expandHideBtn[0].addEventListener("click", accordionActivate);
