@@ -199,7 +199,7 @@
 
                             <div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div>
                             <mat-sidenav-content class="mat-drawer-content mat-sidenav-content" style="margin-left: 280px;">
-                                <div class="container">
+                                <div class="container margin-right-15px">
                                     <div class="settings-panel">
                                         <mat-drawer-container class="mat-drawer-container">
                                             <mat-drawer-content class="mat-drawer-content">
@@ -447,7 +447,7 @@
                                         <div class="quartz-form-field-container">
                                             <quartz-text-field formcontrolname="firstName" class="ng-untouched ng-pristine ng-invalid" style="display: block;">
                                                 <div role="group" class="quartz-text-field-container quartz-input-container ng-untouched ng-pristine ng-valid">
-                                                    <input formcontrolname="input" quartzmaxlengthannouncer="" class="quartz-text-field ng-untouched ng-pristine ng-valid" id="quartz-text-field-1" size="35" placeholder="" type="text" maxlength="50" tabindex="0">
+                                                    <input formcontrolname="input" quartzmaxlengthannouncer="" class="quartz-text-field ng-untouched ng-pristine ng-valid" id="quartz-text-field-1" size="35" placeholder="" type="text" maxlength="50" tabindex="0" required="required">
                                                 </div>
                                                 <div id="quartz-text-field-1-sr" class="character-notify"></div>
                                                 <div class="flex-box"></div>
@@ -462,7 +462,7 @@
                                         <div class="quartz-form-field-container margin-bottom-10px">
                                             <quartz-text-field formcontrolname="lastName" class="ng-untouched ng-pristine ng-invalid" style="display: block;">
                                                 <div role="group" class="quartz-text-field-container quartz-input-container ng-untouched ng-pristine ng-valid">
-                                                    <input formcontrolname="input" quartzmaxlengthannouncer="" class="quartz-text-field ng-untouched ng-pristine ng-valid" id="quartz-text-field-2" size="35" placeholder="" type="text" maxlength="50" tabindex="0">
+                                                    <input formcontrolname="input" quartzmaxlengthannouncer="" class="quartz-text-field ng-untouched ng-pristine ng-valid" id="quartz-text-field-2" size="35" placeholder="" type="text" maxlength="50" tabindex="0" required="required">
                                                 </div>
                                                 <div id="quartz-text-field-2-sr" class="character-notify"></div>
                                                 <div class="flex-box"></div>
@@ -521,7 +521,7 @@
             <div class="quartz-form-field-container">
                 <quartz-checkbox class="ng-untouched ng-pristine ng-invalid" style="display: block;">
                     <label class="quartz-checkbox" for="quartz-checkbox-40"><span class="quartz-checkbox-inner-container">
-                        <input type="checkbox" class="quartz-invisible" id="quartz-checkbox-40" role="checkbox">
+                        <input type="checkbox" class="quartz-invisible" id="quartz-checkbox-40" role="checkbox" required="required">
                         <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">check_box_outline_blank</mat-icon></span><span class="quartz-checkbox-label"> Checkbox Option 1 </span>
                     </label>
                 </quartz-checkbox>
@@ -537,11 +537,11 @@
 
 <quartz-form-field-group controlname="blockRep">
     <fieldset aria-invalid="true">
-        <legend id="quartz-form-field-group-4-legend"><quartz-form-field-label _nghost-ng-c1393879982="" style="display: block"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Radio button example</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
+        <legend id="quartz-form-field-group-4-legend"><quartz-form-field-label style="display: block"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Radio button example</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
         <div class="quartz-form-field-container">
             <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="Y" class="ng-untouched ng-pristine ng-invalid">
                 <label class="quartz-radio-button" for="quartz-radio-button-3"><span class="quartz-radio-button-inner-container">
-                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-3" role="radio" name="blockRep" value="Y">
+                    <input type="radio" class="quartz-invisible" id="quartz-radio-button-3" role="radio" name="blockRep" value="Y" required="required">
                     <mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">radio_button_unchecked</mat-icon></span><span class="quartz-radio-button-label"> Radio button #1 - value="Y" </span></label>
             </quartz-radio-button>
             <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="N" class="ng-untouched ng-pristine ng-invalid">
@@ -566,7 +566,64 @@
 
 <!-- RADIO BUTTON END -->
 
+<!-- SELECT START -->
+
+<quartz-form-field-group controlname="dropdown">
+    <quartz-form-field-label><span class="quartz-label-title"><label for="quartz-dropdown-2" id="quartz-dropdown-2-input-label"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Dropdown</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></label></span></quartz-form-field-label>
+    <div class="quartz-form-field-container">
+        <quartz-dropdown formcontrolname="dropdown" class="ng-pristine ng-invalid ng-untouched" style="display: block;">
+            <select class="quartz-dropdown quartz-dropdown-invalid" id="quartz-dropdown-2" aria-describedby="dropdown-error" required="required">
+                <option value="" class="placeholder">Select One</option>
+                <option value="Lorem "> Lorem </option>
+                <option value="Lorem ipsum "> Lorem ipsum </option>
+                <option value="Lorem ipsum dolor "> Lorem ipsum dolor </option>
+                <option value="Lorem ipsum dolor sit "> Lorem ipsum dolor sit </option>
+                <option value="Lorem ipsum dolor sit amet, "> Lorem ipsum dolor sit amet, </option>
+            </select>
+        </quartz-dropdown>
+    </div>
+    <quartz-field-error></quartz-field-error>
+</quartz-form-field-group>
+
+<!-- SELECT END -->
+
+
+<!-- INPUT FIELD END -->
+
+<quartz-form-field-group controlname="dollarAmount2">
+    <quartz-form-field-label>
+        <span class="quartz-label-title"><label for="quartz-dollar-3" id="quartz-dollar-3-input-label"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Amount</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; <span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span>&NoBreak;&NoBreak;</span></span></label></span>
+    </quartz-form-field-label>
+    <div class="quartz-form-field-container">
+        <quartz-dollar formcontrolname="dollarAmount2" class="ng-pristine ng-valid ng-touched" style="display: block;">
+            <div role="group" class="quartz-dollar-container ng-pristine ng-valid ng-touched quartz-dollar-allow-decimal">
+                <div class="quartz-invisible" id="quartz-dollar-3-dollar-desc"><span class="quartz-invisible">Enter dollars and cents, separated by a decimal point.</span></div><span class="quartz-dollar-left-icon">$</span><div class="input-wrapper">
+                    <input formcontrolname="dollar" quartzmaxlengthannouncer="" class="quartz-dollar-input ng-pristine ng-valid ng-touched" id="quartz-dollar-3" size="8" maxlength="14" aria-describedby="quartz-dollar-3-dollar-desc" required="required"><!--  type="number" -->
+                </div>
+            </div>
+            <quartz-screen-reader-announcer></quartz-screen-reader-announcer>
+        </quartz-dollar>
+    </div>
+    <quartz-field-error></quartz-field-error>
+</quartz-form-field-group>
+
+<!-- INPUT FIELD END -->
+
+
+<!-- SUBMIT BUTTON START -->
+
+<div class="margin-top-15px margin-bottom-15px">
+    <quartz-primary-button>
+        <button mat-button="" class="mdc-button mat-mdc-button-base quartz-button quartz-primary-button mat-mdc-button mat-unthemed hover" mat-ripple-loader-class-name="mat-mdc-button-ripple" type="submit" name="" value="" mat-ripple-loader-disabled=""><span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span><span class="mdc-button__label">Submit</span><span class="mat-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-ripple mat-mdc-button-ripple"></span>
+        </button>
+    </quartz-primary-button>
+</div>
+
+<!-- SUBMIT BUTTON START -->
+
 </form>
+
+<br>
 
 <!-- TABLE 1 START -->
 

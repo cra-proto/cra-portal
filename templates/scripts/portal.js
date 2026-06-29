@@ -9,6 +9,7 @@ let anchorEl,
     tableElm, 
     tableHeaders, 
     accountBtn = document.querySelector(".quartz-primary-button"), 
+    allForms = document.querySelectorAll("form"), 
     sideNav = document.querySelector("mat-sidenav"), 
     checkboxes = document.querySelectorAll("quartz-checkbox"), 
     dialogs = document.querySelectorAll("button[popovertarget]"), 
@@ -719,11 +720,75 @@ for (let table of tables) {
         });
     }
 }
+
+for (let currentForm of allForms) {
+    let formSubmitBtn = currentForm.querySelector("input[type='submit'], button[type='submit']");
+
+    if (formSubmitBtn !== null && formSubmitBtn !== undefined) {
+        formSubmitBtn.addEventListener("click", function (event) {
+            let isFormValid = true;
+
+            // Convert the form elements collection into an array and loop through it
+            Array.from(currentForm.elements).forEach(function (field) {
+                let errorGroupElm, labelElm, radioBtn, radioElm, 
+                    fieldGroup = field.closest("quartz-form-field-group"), 
+                    handleInvalidField = function handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn) {
+                        let errorFieldElm;
+
+                        field.classList.add("quartz-invalid");
+                        errorFieldElm = fieldGroup.querySelector("quartz-field-error");
+                        if (errorGroupElm !== null && errorGroupElm !== undefined) {
+                            errorGroupElm.classList.add("quartz-invalid");
+                        }
+                        if (labelElm !== null && labelElm !== undefined) {
+                            labelElm.classList.add("quartz-invalid");
+                        }
+                        if (radioBtn !== null && radioBtn !== undefined) {
+                            radioBtn.classList.add("quartz-invalid");
+                        }
+                        if (errorFieldElm !== null && errorFieldElm !== undefined) {
+                            errorFieldElm.innerHTML = `<span role="alert" aria-live="polite" class="quartz-field-error" id="dollar-error"><span class="errors-container"><span class="errors-wrap"><span class="icon-wrap"><mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">error</mat-icon></span><span>Error: ${field.validationMessage}</span></span></span></span>`;
+                        }
+                    };
+
+                // Clear previous styling/errors first
+                field.classList.remove("quartz-invalid");
+                if (fieldGroup !== null && fieldGroup !== undefined) {
+                    // Ignore buttons, fieldsets, or elements without validation needs
+                    errorGroupElm = fieldGroup.querySelector("div[role='group']");
+                    if (errorGroupElm !== null && errorGroupElm !== undefined) {
+                        errorGroupElm.classList.remove("quartz-invalid");
+                    }
+                    labelElm = fieldGroup.querySelector("label.quartz-checkbox");
+                    if (labelElm !== null && labelElm !== undefined) {
+                        labelElm.classList.remove("quartz-invalid");
+                    }
+                    radioElm = field.closest("quartz-radio-button");
+                    if (radioElm !== null && radioElm !== undefined) {
+                        radioBtn = radioElm.querySelector("mat-icon");
+                        if (radioBtn !== null && radioBtn !== undefined) {
+                            radioBtn.classList.remove("quartz-invalid");
+                        }
+                    }
+                    if (field.willValidate === true) {
+                        // Check if the individual field fails its HTML constraints
+                        if (field.validity.valid !== true) {
+                            isFormValid = false;
+                            event.preventDefault();
+                            handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn); 
+                        }
+                    }
+                }
+            });
+        });
+    }
+}
 /*
 
 Accordion (done)
 Checkbox (done)
 Dialog (done)
+form validation (done - needs review)
 Radio buttons (done)
 SideNav (done)
 Stepper (done)
