@@ -105,24 +105,28 @@ let accordions,
         if (showMenu !== true && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
             //Hide side navigation
             sideNavContain.classList.remove("mat-drawer-container-has-open");
-            sideNav.classList.remove("mat-drawer-opened");
+            if (sideNav !== null && sideNav !== undefined) {
+                sideNav.classList.remove("mat-drawer-opened");
+                sideNav.style.transform = "";
+                sideNav.style.boxShadow = "none";
+                sideNav.style.visibility = "hidden";
+            }
             backdropEl.classList.remove("mat-drawer-shown");
             backdropEl.removeEventListener("click", hideSideNav);
 
-            sideNav.style.transform = "";
-            sideNav.style.boxShadow = "none";
-            sideNav.style.visibility = "hidden";
         } else {
             //Show side navigation
             sideNavContain.classList.add("mat-drawer-container-has-open");
-            sideNav.classList.add("mat-drawer-opened");
+            if (sideNav !== null && sideNav !== undefined) {
+                sideNav.classList.add("mat-drawer-opened");
+                sideNav.style.transform = "none";
+                sideNav.style.boxShadow = "";
+                sideNav.style.visibility = "visible";
+            }
             if (globalThis.innerWidth < 960 && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.add("mat-drawer-shown");
                 backdropEl.addEventListener("click", hideSideNav);
             }
-            sideNav.style.transform = "none";
-            sideNav.style.boxShadow = "";
-            sideNav.style.visibility = "visible";
         }
     }, 
     hideSideNav = function () {
