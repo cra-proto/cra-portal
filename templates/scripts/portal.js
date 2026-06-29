@@ -241,13 +241,13 @@ let accordions,
         }
         if (globalThis.innerWidth < 960) {
             smallPageView(false);
-            if (sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
+            if (sideNav !== null && sideNav!== "" && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.add("mat-drawer-shown");
                 backdropEl.addEventListener("click", hideSideNav);
             }
         } else {
             smallPageView(true);
-            if (sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
+            if (sideNav !== null && sideNav!== "" && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.remove("mat-drawer-shown");
                 backdropEl.removeEventListener("click", hideSideNav);
             }
