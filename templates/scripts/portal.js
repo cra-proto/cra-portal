@@ -540,8 +540,10 @@ for (let printBtn of printBtns) {
 }
 
 sideMenuBtn[0].addEventListener("click", showHideMenu);
-sideNav.classList.add("mat-drawer-opened");
-showHideMenu(true);
+if (sideNav !== null && sideNav !== undefined) {
+    sideNav.classList.add("mat-drawer-opened");
+    showHideMenu(true);
+}
 
 if (accountBtn !== null) {
     accountBtn.addEventListener("click", showLoginMenu);
