@@ -75,8 +75,8 @@ let accordions,
             matPanelHead.setAttribute("aria-expanded", "true");
         }
         if (matContent !== null) {
-            matContent.style.height = "";
-            matContent.style.visibility = "";
+            matContent.style.removeProperty("height");
+            matContent.style.removeProperty("visibility");
         }
         if (matIcon.textContent === expandMenuState.Open) {
             matIcon.textContent = expandMenuState.Close;
@@ -107,7 +107,7 @@ let accordions,
             sideNavContain.classList.remove("mat-drawer-container-has-open");
             if (sideNav !== null && sideNav !== undefined) {
                 sideNav.classList.remove("mat-drawer-opened");
-                sideNav.style.transform = "";
+                sideNav.style.removeProperty("transform");
                 sideNav.style.boxShadow = "none";
                 sideNav.style.visibility = "hidden";
             }
@@ -120,7 +120,7 @@ let accordions,
             if (sideNav !== null && sideNav !== undefined) {
                 sideNav.classList.add("mat-drawer-opened");
                 sideNav.style.transform = "none";
-                sideNav.style.boxShadow = "";
+                sideNav.style.removeProperty("box-shadow");
                 sideNav.style.visibility = "visible";
             }
             if (globalThis.innerWidth < 960 && document.querySelector("mat-sidenav-content") !== null) {
@@ -224,7 +224,7 @@ let accordions,
                     sideNavContain.classList.add("mat-drawer-transition");
                     if (sideNavContent !== null) {
                         sideMenuIcon.classList.remove("quartz-invisible");
-                        sideNavContent.style.marginLeft = "";
+                        sideNavContent.style.removeProperty("margin-left");
                         if (sideNav !== null && sideNav !== undefined) {
                             sideNav.classList.add("mat-drawer-over");
                             sideNav.classList.remove("mat-drawer-side");
@@ -249,13 +249,13 @@ let accordions,
         }
         if (globalThis.innerWidth < 960) {
             smallPageView(false);
-            if (sideNav !== null && sideNav!== "" && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
+            if (sideNav !== null && sideNav !== undefined && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.add("mat-drawer-shown");
                 backdropEl.addEventListener("click", hideSideNav);
             }
         } else {
             smallPageView(true);
-            if (sideNav !== null && sideNav!== "" && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
+            if (sideNav !== null && sideNav !== undefined && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
                 backdropEl.classList.remove("mat-drawer-shown");
                 backdropEl.removeEventListener("click", hideSideNav);
             }
@@ -312,12 +312,12 @@ let accordions,
             overlayBG = document.querySelector(".cdk-overlay-dark-backdrop"), 
             endDialog = function () {
                 htmlTag.classList.remove("cdk-global-scrollblock");
-                htmlTag.style.left = "";
-                htmlTag.style.top = "";
+                htmlTag.style.removeProperty("left");
+                htmlTag.style.removeProperty("top");
                 appRootTag.ariaHidden = false;
-                overlayElm.style.width = "";
-                overlayElm.style.minWidth = "";
-                overlayElm.style.position = "";
+                overlayElm.style.removeProperty("width");
+                overlayElm.style.removeProperty("min-width");
+                overlayElm.style.removeProperty("position");
                 overlayElm.classList.add("quartz-invisible");
                 overlayWrap.classList.add("quartz-invisible");
                 backdropTrigger.classList.add("quartz-invisible");
@@ -360,14 +360,17 @@ let accordions,
     }, 
     checkboxActivate = function (checkBoxElm) {
         let checkLabel = checkBoxElm.querySelector("label.quartz-checkbox"), 
+            checkBox = checkBoxElm.querySelector("input[type='checkbox']"), 
             checkState = checkBoxElm.querySelector("mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
 
         if (checkLabel.classList.contains("quartz-checkbox-checked") === true) {
             checkLabel.classList.remove("quartz-checkbox-checked");
             checkState.innerHTML = "check_box_outline_blank";
+            checkBox.checked = false;
         } else {
             checkLabel.classList.add("quartz-checkbox-checked");
             checkState.innerHTML = "check_box";
+            checkBox.checked = true;
         }
     }, 
     radioActivate = function (radioElm) {
@@ -377,15 +380,83 @@ let accordions,
             radioGroupLabels = radioGroup.querySelectorAll("label.quartz-radio-button");
 
         for (let currentRadioLabel of radioGroupLabels) {
+            let radioBox = currentRadioLabel.querySelector("input[type='radio']");
+
             radioState = currentRadioLabel.querySelector("mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
             if (currentRadioLabel === radioLabel && radioLabel.classList.contains("quartz-radio-button-checked") === false) {
                 currentRadioLabel.classList.add("quartz-radio-button-checked");
                 radioState.innerHTML = "radio_button_checked";
+                radioBox.checked = true;
             } else {
                 currentRadioLabel.classList.remove("quartz-radio-button-checked");
                 radioState.innerHTML = "radio_button_unchecked";
+                radioBox.checked = false;
             }
         }
+    }, 
+    valiateField = function (field) {
+        let errorGroupElm, labelElm, radioBtn, radioElm, errorFieldElm, 
+            fieldGroup = field.closest("quartz-form-field-group"), 
+            handleInvalidField = function handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn, errorFieldElm) {
+                field.classList.add("quartz-invalid");
+                errorFieldElm = fieldGroup.querySelector("quartz-field-error");
+                if (errorGroupElm !== null && errorGroupElm !== undefined) {
+                    errorGroupElm.classList.add("quartz-invalid");
+                }
+                if (labelElm !== null && labelElm !== undefined) {
+                    labelElm.classList.add("quartz-invalid");
+                }
+                if (radioBtn !== null && radioBtn !== undefined) {
+                    radioBtn.classList.add("quartz-invalid");
+                }
+                if (errorFieldElm !== null && errorFieldElm !== undefined) {
+                    errorFieldElm.innerHTML = `<span role="alert" aria-live="polite" class="quartz-field-error" id="dollar-error"><span class="errors-container"><span class="errors-wrap"><span class="icon-wrap"><mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">error</mat-icon></span><span>Error: ${field.validationMessage}</span></span></span></span>`;
+                }
+            };
+
+        // Clear previous styling/errors first
+        field.classList.remove("quartz-invalid");
+        if (fieldGroup !== null && fieldGroup !== undefined) {
+            // Ignore buttons, fieldsets, or elements without validation needs
+            errorGroupElm = fieldGroup.querySelector("div[role='group']");
+            if (errorGroupElm !== null && errorGroupElm !== undefined) {
+                errorGroupElm.classList.remove("quartz-invalid");
+            }
+            errorFieldElm = fieldGroup.querySelector("quartz-field-error");
+            if (errorFieldElm !== null && errorFieldElm !== undefined) {
+                errorFieldElm.innerHTML = "";
+            }
+            labelElm = fieldGroup.querySelector("label.quartz-checkbox");
+            if (labelElm !== null && labelElm !== undefined) {
+                labelElm.classList.remove("quartz-invalid");
+            }
+            radioElm = field.closest("quartz-radio-button");
+            if (radioElm !== null && radioElm !== undefined) {
+                radioBtn = radioElm.querySelector("mat-icon");
+                if (radioBtn !== null && radioBtn !== undefined) {
+                    radioBtn.classList.remove("quartz-invalid");
+                }
+            }
+            if (field.willValidate === true) {
+                // Check if the individual field fails its HTML constraints
+                if (field.validity.valid !== true) {
+                    handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn, errorFieldElm); 
+                    return false;
+                }
+            }
+        }
+        return true;
+    }, 
+    formSubmit = function (currentForm) {
+        let isFormValid = true;
+
+        // Convert the form elements collection into an array and loop through it
+        Array.from(currentForm.elements).forEach(function (field) {
+            if (valiateField(field) === false) {
+                isFormValid = false;
+            };
+        });
+        return isFormValid;
     }, 
     isSectionValid = function (currentStep) {
         let isFormValid;
@@ -394,7 +465,7 @@ let accordions,
         if (currentForm !== null) {
             isFormValid = currentForm.checkValidity();
             if (isFormValid === false) {
-                currentForm.reportValidity();
+                formSubmit(currentForm);
             }
             return isFormValid;
         }
@@ -414,10 +485,10 @@ let accordions,
                 if (tabBodyArr[i]) {
                     tabContent = tabBodyArr[i].querySelector(".mat-mdc-tab-body-content");
                     tabContent.style.transform = "none";
-                    tabContent.style.minHeight = "";
+                    tabContent.style.removeProperty("min-height");
                     tabBodyArr[i].ariaHidden = false;
                     tabBodyArr[i].classList.add("mat-mdc-tab-body-active");
-                    tabContent.style.visibility = "";
+                    tabContent.style.removeProperty("visibility");
                 }
             } else {
                 tabHeadArr[i].classList.remove("mdc-tab--active", "mdc-tab-indicator--active");
@@ -739,57 +810,9 @@ for (let currentForm of allForms) {
 
     if (formSubmitBtn !== null && formSubmitBtn !== undefined) {
         formSubmitBtn.addEventListener("click", function (event) {
-            // Convert the form elements collection into an array and loop through it
-            Array.from(currentForm.elements).forEach(function (field) {
-                let errorGroupElm, labelElm, radioBtn, radioElm, 
-                    fieldGroup = field.closest("quartz-form-field-group"), 
-                    handleInvalidField = function handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn) {
-                        let errorFieldElm;
-
-                        field.classList.add("quartz-invalid");
-                        errorFieldElm = fieldGroup.querySelector("quartz-field-error");
-                        if (errorGroupElm !== null && errorGroupElm !== undefined) {
-                            errorGroupElm.classList.add("quartz-invalid");
-                        }
-                        if (labelElm !== null && labelElm !== undefined) {
-                            labelElm.classList.add("quartz-invalid");
-                        }
-                        if (radioBtn !== null && radioBtn !== undefined) {
-                            radioBtn.classList.add("quartz-invalid");
-                        }
-                        if (errorFieldElm !== null && errorFieldElm !== undefined) {
-                            errorFieldElm.innerHTML = `<span role="alert" aria-live="polite" class="quartz-field-error" id="dollar-error"><span class="errors-container"><span class="errors-wrap"><span class="icon-wrap"><mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">error</mat-icon></span><span>Error: ${field.validationMessage}</span></span></span></span>`;
-                        }
-                    };
-
-                // Clear previous styling/errors first
-                field.classList.remove("quartz-invalid");
-                if (fieldGroup !== null && fieldGroup !== undefined) {
-                    // Ignore buttons, fieldsets, or elements without validation needs
-                    errorGroupElm = fieldGroup.querySelector("div[role='group']");
-                    if (errorGroupElm !== null && errorGroupElm !== undefined) {
-                        errorGroupElm.classList.remove("quartz-invalid");
-                    }
-                    labelElm = fieldGroup.querySelector("label.quartz-checkbox");
-                    if (labelElm !== null && labelElm !== undefined) {
-                        labelElm.classList.remove("quartz-invalid");
-                    }
-                    radioElm = field.closest("quartz-radio-button");
-                    if (radioElm !== null && radioElm !== undefined) {
-                        radioBtn = radioElm.querySelector("mat-icon");
-                        if (radioBtn !== null && radioBtn !== undefined) {
-                            radioBtn.classList.remove("quartz-invalid");
-                        }
-                    }
-                    if (field.willValidate === true) {
-                        // Check if the individual field fails its HTML constraints
-                        if (field.validity.valid !== true) {
-                            event.preventDefault();
-                            handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn); 
-                        }
-                    }
-                }
-            });
+            if (formSubmit(currentForm) === false) {
+                event.preventDefault();
+            }
         });
     }
 }
@@ -798,7 +821,7 @@ for (let currentForm of allForms) {
 Accordion (done)
 Checkbox (done)
 Dialog (done)
-form validation (done - needs review)
+form validation (in progress)
 Radio buttons (done)
 SideNav (done)
 Stepper (done)
@@ -806,7 +829,6 @@ Sub Ribbon (done)
 Table (done) - sort arrows could use some polishing (table with selection)
 Tabs (done)
 
-Form validation
 Date picker, date range picker
 Filter
 Paginator
