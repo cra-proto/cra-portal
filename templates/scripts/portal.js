@@ -397,7 +397,7 @@ let accordions,
     valiateField = function (field) {
         let errorGroupElm, labelElm, radioBtn, radioElm, errorFieldElm, 
             fieldGroup = field.closest("quartz-form-field-group"), 
-            handleInvalidField = function handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn, errorFieldElm) {
+            handleInvalidField = function handleInvalidField(field, errorGroupElm, labelElm, radioBtn, errorFieldElm) {
                 field.classList.add("quartz-invalid");
                 if (errorGroupElm !== null && errorGroupElm !== undefined) {
                     errorGroupElm.classList.add("quartz-invalid");
@@ -439,7 +439,7 @@ let accordions,
             if (field.willValidate === true) {
                 // Check if the individual field fails its HTML constraints
                 if (field.validity.valid !== true) {
-                    handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn, errorFieldElm); 
+                    handleInvalidField(field, errorGroupElm, labelElm, radioBtn, errorFieldElm); 
                     return false;
                 }
             }
@@ -453,7 +453,7 @@ let accordions,
         Array.from(currentForm.elements).forEach(function (field) {
             if (valiateField(field) === false) {
                 isFormValid = false;
-            };
+            }
         });
         return isFormValid;
     }, 

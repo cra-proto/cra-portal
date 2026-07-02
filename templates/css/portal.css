@@ -7678,3 +7678,16 @@ small {
         max-height: 90% !important
     }
 }
+
+/* inline style invalid check + radio*/
+
+.quartz-checkbox.quartz-invalid mat-icon {
+    color: #d3080c !important
+}
+
+quartz-checkbox.quartz-invalid mat-icon {
+    color: #d3080c !important
+}
+.quartz-radio-button .quartz-radio-button-inner-container mat-icon.quartz-invalid {
+    color: #d3080c !important
+}
