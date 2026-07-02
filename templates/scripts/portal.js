@@ -5,6 +5,7 @@ let accordions,
     anchorUri, 
     expandHideBtn, 
     expansionPanel, 
+    initialTbody, 
     tabs, 
     tabBtns, 
     tableElm, 
@@ -714,12 +715,15 @@ for (let tabGroup of pageTabs) {
 
 // Select all tables on the page
 for (let table of tables) {
+    // Store original row order to restore during the "Unsorted" state
     tableHeaders = table.querySelectorAll("th.mat-sort-header");
     tableElm = document.querySelector("table");
+    initialTbody = tableElm.querySelector("tbody");
+    tableElm.originalRows = Array.from(initialTbody.querySelectorAll("tr"));
     
-    // Set up tracking variables specific to this table instance
+    // Track sort states: 0 = Unsorted, 1 = Ascending, 2 = Descending
+    tableElm.sortState = 0; 
     tableElm.currentColumnIndex = -1;
-    tableElm.isAscending = true;
 
     for (let tableHead of tableHeaders) {
         tableHead.addEventListener("click", function () {
@@ -732,8 +736,9 @@ for (let table of tables) {
                 columnIndex = childrenArray.indexOf(this), 
                 // Extract all rows from the table body
                 rows = Array.from(tbody.querySelectorAll("tr")), 
-            
-                // Sort the rows array
+                allHeaders = currentTable.querySelectorAll("th.mat-sort-header"), 
+
+                // Sort rows dynamically
                 sortedRows = rows.slice().sort(function (rowA, rowB) {
                     let valueA, valueB, 
                         cellA = rowA.children[columnIndex].textContent.trim(), 
@@ -755,48 +760,57 @@ for (let table of tables) {
 
                     // Apply sorting logic based on current direction
                     if (valueA < valueB) {
-                        if (currentTable.isAscending === true) {
+                        if (currentTable.sortState === 1) {
                             return -1;
                         } else {
                             return 1;
                         }
                     }
                     if (valueA > valueB) {
-                        if (currentTable.isAscending === true) {
+                        if (currentTable.sortState === 1) {
                             return 1;
                         } else {
                             return -1;
                         }
                     }
                     return 0;
-                }), 
-                // Reset sort attributes on all headers within this table
-                allHeaders = currentTable.querySelectorAll("th.mat-sort-header");
+                });
            
             // Toggle direction if clicking the same column; default to asc for a new column
             if (columnIndex === currentTable.currentColumnIndex) {
-                if (currentTable.isAscending === true) {
-                    currentTable.isAscending = false;
+                if (currentTable.sortState === 0) {
+                    currentTable.sortState = 1;
+                } else if (currentTable.sortState === 1) {
+                    currentTable.sortState = 2;
                 } else {
-                    currentTable.isAscending = true;
+                    currentTable.sortState = 0;
                 }
             } else {
-                currentTable.isAscending = true;
+                currentTable.sortState = 1;
                 currentTable.currentColumnIndex = columnIndex;
             }
 
             // Re-append rows to the tbody in the new sorted order
-            tbody.append.apply(tbody, sortedRows);
+            if (currentTable.sortState === 0) {
+                // Restore original rows order
+                tbody.append.apply(tbody, currentTable.originalRows);
+            } else {
+                tbody.append.apply(tbody, sortedRows);
+            }
 
-            allHeaders.forEach(function () {
-                sortIndicator.classList.remove("mat-sort-header-sorted", "mat-sort-header-descending", "mat-sort-header-ascending");
+            // Clear visual indicators across headers
+            allHeaders.forEach(function (header) {
+                let indicator = header.querySelector(".mat-sort-header-container");
+                if ((indicator !== null) === true) {
+                    indicator.classList.remove("mat-sort-header-sorted", "mat-sort-header-descending", "mat-sort-header-ascending");
+                }
             });
 
-            // Apply direction attribute to the active header
-            if (currentTable.isAscending === true) {
+            // Apply direction visual indicators attributes to the header based on active state
+            if (currentTable.sortState === 1) {
                 sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-ascending");
                 sortIndicator.classList.remove("mat-sort-header-descending");
-            } else {
+            } else if (currentTable.sortState === 2) {
                 sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-descending");
                 sortIndicator.classList.remove("mat-sort-header-ascending");
             }
