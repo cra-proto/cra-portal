@@ -387,7 +387,7 @@ let accordions,
                 currentRadioLabel.classList.add("quartz-radio-button-checked");
                 radioState.innerHTML = "radio_button_checked";
                 radioBox.checked = true;
-            } else {
+            } else if (currentRadioLabel !== radioLabel) {
                 currentRadioLabel.classList.remove("quartz-radio-button-checked");
                 radioState.innerHTML = "radio_button_unchecked";
                 radioBox.checked = false;
@@ -399,7 +399,6 @@ let accordions,
             fieldGroup = field.closest("quartz-form-field-group"), 
             handleInvalidField = function handleInvalidField(field, fieldGroup, errorGroupElm, labelElm, radioBtn, errorFieldElm) {
                 field.classList.add("quartz-invalid");
-                errorFieldElm = fieldGroup.querySelector("quartz-field-error");
                 if (errorGroupElm !== null && errorGroupElm !== undefined) {
                     errorGroupElm.classList.add("quartz-invalid");
                 }
