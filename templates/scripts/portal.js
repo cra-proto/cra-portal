@@ -6,6 +6,8 @@ let accordions,
     expandHideBtn, 
     expansionPanel, 
     initialTbody, 
+    navLink, 
+    sideMenuBtn, 
     tabs, 
     tabBtns, 
     tableElm, 
@@ -22,9 +24,7 @@ let accordions,
     stepContainer = document.querySelectorAll("div.mat-step"), 
     contentSection = document.getElementsByTagName("mat-drawer-content"), 
     quartzSideNav = document.getElementsByTagName("quartz-sidenav"), 
-    navLink = quartzSideNav[0].getElementsByTagName("a"), 
     sdMenuBtn = document.getElementsByTagName("quartz-icon-button"), 
-    sideMenuBtn = sdMenuBtn[0].getElementsByTagName("button"), 
     tables = document.querySelectorAll("quartz-table"), 
     resetAccordion = function (el) {
         let matPanel = el.closest("mat-expansion-panel"), 
@@ -105,7 +105,9 @@ let accordions,
 
         if (showMenu !== true && sideNav.classList.contains("mat-drawer-opened") === true && document.querySelector("mat-sidenav-content") !== null) {
             //Hide side navigation
-            sideNavContain.classList.remove("mat-drawer-container-has-open");
+            if (sideNavContain !== null && sideNavContain !== undefined) {
+                sideNavContain.classList.remove("mat-drawer-container-has-open");
+            }
             if (sideNav !== null && sideNav !== undefined) {
                 sideNav.classList.remove("mat-drawer-opened");
                 sideNav.style.removeProperty("transform");
@@ -117,7 +119,9 @@ let accordions,
 
         } else {
             //Show side navigation
-            sideNavContain.classList.add("mat-drawer-container-has-open");
+            if (sideNavContain !== null && sideNavContain !== undefined) {
+                sideNavContain.classList.add("mat-drawer-container-has-open");
+            }
             if (sideNav !== null && sideNav !== undefined) {
                 sideNav.classList.add("mat-drawer-opened");
                 sideNav.style.transform = "none";
@@ -201,7 +205,9 @@ let accordions,
 
                 if (hideSideNavFlag === true) {
                     // large screen UI adjustments
-                    sideNavContain.classList.remove("mat-drawer-transition");
+                    if (sideNav !== null && sideNav !== undefined) {
+                        sideNavContain.classList.remove("mat-drawer-transition");
+                    }
                     if (sideNavContent !== null) {
                         sideMenuIcon.classList.add("quartz-invisible");
                         sideNavContent.style.marginLeft = "280px";
@@ -211,18 +217,26 @@ let accordions,
                             sideNav.classList.add("mat-drawer-opened");
                         }
                     }
-                    ribbonTitle.classList.remove("quartz-invisible");
+                    if (ribbonTitle !== null && ribbonTitle !== undefined) {
+                        ribbonTitle.classList.remove("quartz-invisible");
+                    }
                     if (ribbonSubTitle !== null) {
                         ribbonSubTitle.classList.remove("quartz-invisible");
                     }
-                    footLink.classList.add("footer-down");
-                    footLink.classList.remove("footer-mobile-down");
+                    if (footLink !== null && footLink !== undefined) {
+                        footLink.classList.add("footer-down");
+                        footLink.classList.remove("footer-mobile-down");
+                    }
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
-                    footEl.classList.remove("column-count-one");
+                    if (footEl !== null && footEl !== undefined) {
+                        footEl.classList.remove("column-count-one");
+                    }
                     showHideMenu(true);
                 } else {
                     // small screen UI adjustments
-                    sideNavContain.classList.add("mat-drawer-transition");
+                    if (sideNav !== null && sideNav !== undefined) {
+                        sideNavContain.classList.add("mat-drawer-transition");
+                    }
                     if (sideNavContent !== null) {
                         sideMenuIcon.classList.remove("quartz-invisible");
                         sideNavContent.style.removeProperty("margin-left");
@@ -231,22 +245,30 @@ let accordions,
                             sideNav.classList.remove("mat-drawer-side");
                         }
                     }
-                    ribbonTitle.classList.add("quartz-invisible");
+                    if (ribbonTitle !== null && ribbonTitle !== undefined) {
+                        ribbonTitle.classList.add("quartz-invisible");
+                    }
                     if (ribbonSubTitle !== null) {
                         ribbonSubTitle.classList.add("quartz-invisible");
                     }
-                    footLink.classList.add("footer-mobile-down");
-                    footLink.classList.remove("footer-down");
+                    if (footLink !== null && footLink !== undefined) {
+                        footLink.classList.add("footer-mobile-down");
+                        footLink.classList.remove("footer-down");
+                    }
                     footEl = document.querySelector(".footer-down, .footer-mobile.down");
-                    footEl.classList.add("column-count-one");
+                    if (footEl !== null && footEl !== undefined) {
+                        footEl.classList.add("column-count-one");
+                    }
                 }
                 tabRefresh();
             };
 
-        if (globalThis.innerWidth < 768) {
-            altLangLnk.textContent = "fr";
-        } else {
-            altLangLnk.textContent = "Français";
+        if (altLangLnk !== null && altLangLnk !== undefined) {
+            if (globalThis.innerWidth < 768) {
+                altLangLnk.textContent = "fr";
+            } else {
+                altLangLnk.textContent = "Français";
+            }
         }
         if (globalThis.innerWidth < 960) {
             smallPageView(false);
@@ -592,11 +614,14 @@ let accordions,
         }
     };
 
-for (let navLinkElm of navLink) {
-    if (navLinkElm.classList.contains("quartz-expand-sidenav-button") === true) {
-        navLinkElm.addEventListener("click", accordionActivate);
-    } else {
-        navLinkElm.addEventListener("click", selectSideElm);
+if (quartzSideNav.length >= 1) {
+    navLink = quartzSideNav[0].getElementsByTagName("a");
+    for (let navLinkElm of navLink) {
+        if (navLinkElm.classList.contains("quartz-expand-sidenav-button") === true) {
+            navLinkElm.addEventListener("click", accordionActivate);
+        } else {
+            navLinkElm.addEventListener("click", selectSideElm);
+        }
     }
 }
 
@@ -628,10 +653,13 @@ for (let printBtn of printBtns) {
     printBtn.addEventListener("click", function () {print();});
 }
 
-sideMenuBtn[0].addEventListener("click", showHideMenu);
-if (sideNav !== null && sideNav !== undefined) {
-    sideNav.classList.add("mat-drawer-opened");
-    showHideMenu(true);
+if (sdMenuBtn.length >= 1) {
+    sideMenuBtn = sdMenuBtn[0].getElementsByTagName("button");
+    sideMenuBtn[0].addEventListener("click", showHideMenu);
+    if (sideNav !== null && sideNav !== undefined) {
+        sideNav.classList.add("mat-drawer-opened");
+        showHideMenu(true);
+    }
 }
 
 if (accountBtn !== null) {
