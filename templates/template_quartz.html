@@ -19,12 +19,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cra-test-arc.canada.ca/cra-portal/templates/css/styles.css" media="all">
     <link rel="stylesheet" href="https://cra-test-arc.canada.ca/cra-portal/templates/css/portal.css">
+    <!-- START of Github only testing banner CSS -->
+    <link rel="stylesheet" href="resources/css/testing-banner.css">
+    <!-- END of Github only testing banner CSS -->
     <noscript>
         <link rel="stylesheet" href="https://cra-test-arc.canada.ca/cra-portal/templates/css/styles.css">
     </noscript>
 </head>
 
 <body class="mat-typography" style="--theme-color: #26374A;">
+    <!-- START of GitHub only template section -->
+    <data id="devoptions" data-loc-storage="gitCRATemplateDevOptions" value="true"></data>
+    <data id="exitpage" data-exit-by-url="false" data-mod-link-file="https://proto-cra.github.io/core-prototype/source/data/exclude-redirect-links.json" value="https://proto-cra.github.io/core-prototype/source/exit-intent-e.html"></data>
+    <data id="relextlnk" data-origin="https://www.canada.ca" value="false"></data>
+    <data id="notedlinks" value="[{&quot;sourcelink&quot;: &quot;http://www.canada.ca/&quot;, &quot;sourcetitle&quot;: &quot;Canada Revenue Agency&quot;}]"></data>
+    <data id="pageKeywords" value=""></data>
+    <!-- START Test site banner -->
+    <section id="test-banner">
+        <div id="test-banner-content" class="container test-banner-content">
+            <h2>This site is for CRA testing purposes only</h2>
+            <p id="personalInfoText" class="mrgn-bttm-0">Do not enter any personal information on this site</p>
+        </div>
+    </section>
+    <!-- END Test site banner -->
+    <!-- END of GitHub only template section --> 
     <app-root ng-version="17.3.2">
         <div class="quartz-demo default-theme"><quartz-header>
                 <nav class="quartz-skip-links">
@@ -800,5 +818,10 @@
     </div>
 </div>
 <script src="https://cra-test-arc.canada.ca/cra-portal/templates/scripts/portal.js"></script>
+<!-- START of GitHub only scripts -->
+        <script defer="defer" src="https://cra-test-arc.canada.ca/core-prototype/source/scripts/external-link-detour-portal.js"></script>
+        <script defer="defer" src="https://cra-test-arc.canada.ca/core-prototype/source/scripts/git-dev-options-portal-e.js"></script>
+        <script defer="defer" src="https://cra-test-arc.canada.ca/core-prototype/source/scripts/tinymce/tinymce.min.js"></script>
+<!-- END of GitHub only scripts -->
 </body>
 </html>
