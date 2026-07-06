@@ -382,8 +382,7 @@ let accordions,
         }
     }, 
     checkboxActivate = function (checkBoxElm) {
-        let isFieldValid, 
-            checkLabel = checkBoxElm.querySelector("label.quartz-checkbox"), 
+        let checkLabel = checkBoxElm.querySelector("label.quartz-checkbox"), 
             checkBox = checkBoxElm.querySelector("input[type='checkbox']"), 
             checkState = checkBoxElm.querySelector("mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color");
 
@@ -396,10 +395,10 @@ let accordions,
             checkState.innerHTML = "check_box";
             checkBox.checked = true;
         }
-        isFieldValid = valiateField(checkBox);
+        valiateField(checkBox);
     }, 
     radioActivate = function (radioElm) {
-        let radioState, isFieldValid, 
+        let radioState, 
             radioLabel = radioElm.querySelector("label.quartz-radio-button"), 
             radioGroup = radioElm.closest("div.quartz-form-field-container"), 
             radioGroupLabels = radioGroup.querySelectorAll("label.quartz-radio-button");
@@ -417,7 +416,7 @@ let accordions,
                 radioState.innerHTML = "radio_button_unchecked";
                 radioBox.checked = false;
             }
-            isFieldValid = valiateField(radioBox);
+            valiateField(radioBox);
         }
     }, 
     handleInvalidField = function handleInvalidField(field, errorGroupElm, labelElm, radioBtn, errorFieldElm) {
@@ -457,7 +456,7 @@ let accordions,
             }
             radioElm = field.closest("quartz-radio-button");
             if (radioElm !== null && radioElm !== undefined) {
-                radioGroup = radioElm.closest("div.quartz-form-field-container"), 
+                radioGroup = radioElm.closest("div.quartz-form-field-container");
                 radioFields = radioGroup.querySelectorAll("input[type='radio']");
                 for (let radioField of radioFields) {
                     let currentRadioElm = radioField.closest("quartz-radio-button");
@@ -867,20 +866,14 @@ for (let currentForm of allForms) {
     }
     Array.from(currentForm.elements).forEach(function (field) {
         if (field.willValidate === true) {
-            field.addEventListener("blur", function (event) {
-                let isFieldValid;
-
-                isFieldValid = valiateField(this);
+            field.addEventListener("blur", function () {
+                valiateField(this);
             });
-            field.addEventListener("input", function (event) {
-                let isFieldValid;
-
-                isFieldValid = valiateField(this);
+            field.addEventListener("input", function () {
+                valiateField(this);
             });
-            field.addEventListener("change", function (event) {
-                let isFieldValid;
-
-                isFieldValid = valiateField(this);
+            field.addEventListener("change", function () {
+                valiateField(this);
             });
         }
     });
