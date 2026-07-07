@@ -30,7 +30,7 @@
 
 <body class="mat-typography" style="--theme-color: #26374A;">
     <!-- START of GitHub only template section -->
-    <data id="devoptions" data-loc-storage="gitCRATemplateDevOptions" value="true"></data>
+    <data id="devoptions" data-loc-storage="gitCRATemplateDevOptions" value="false"></data>
     <data id="exitpage" data-exit-by-url="false" data-mod-link-file="https://cra-test-arc.canada.ca/cra-portal/templates/data/exclude-redirect.json" value="https://cra-test-arc.canada.ca/cra-portal/exit.html"></data>
     <data id="relextlnk" data-origin="https://www.canada.ca" value="false"></data>
     <data id="notedlinks" value="[{&quot;sourcelink&quot;: &quot;http://www.canada.ca/&quot;, &quot;sourcetitle&quot;: &quot;Canada Revenue Agency&quot;}]"></data>
@@ -43,7 +43,7 @@
         </div>
     </section>
     <!-- END Test site banner -->
-    <!-- END of GitHub only template section --> 
+    <!-- END of GitHub only template section -->
     <app-root ng-version="17.3.2">
         <div class="quartz-demo default-theme"><quartz-header>
                 <nav class="quartz-skip-links">
@@ -215,15 +215,16 @@
                                 </div>
                             </mat-sidenav>
 
-
                             <div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div>
                             <mat-sidenav-content class="mat-drawer-content mat-sidenav-content" style="margin-left: 280px;">
                                 <div class="container margin-right-15px">
                                     <div class="settings-panel">
                                         <mat-drawer-container class="mat-drawer-container">
-                                            <mat-drawer-content class="mat-drawer-content">
-                                                <router-outlet></router-outlet>
-                                                <app-header-demo class="ng-star-inserted">
+
+
+    <mat-drawer-content class="mat-drawer-content">
+        <router-outlet></router-outlet>
+        <app-header-demo class="ng-star-inserted">
 <!--
 <quartz-sub-ribbon>
     <div class="quartz-sub-ribbon hidden-print"><mat-toolbar class="mat-toolbar mat-toolbar-single-row">
@@ -273,9 +274,8 @@
 
                                                 </app-header-demo>
 
-
-
 <!--  PANEL START -->
+
                                                 <app-panel-demo class="ng-star-inserted">
                                                     <quartz-panel class="ng-star-inserted">
                                                         <mat-card appearance="outlined" class="mat-mdc-card mdc-card elevated quartz-panel mat-mdc-card-outlined mdc-card--outlined">
@@ -289,8 +289,11 @@
                                                         </mat-card>
                                                     </quartz-panel>
                                                 </app-panel-demo>
+
 <!-- PANEL END -->
+
 <br>
+
 <!-- ACCORDION START -->
 
 <quartz-accordion>
@@ -305,24 +308,28 @@
 </quartz-accordion>
 
 <!-- ACCORDION END-->
+
 <br>
+
 <!-- TABS START -->
-<quartz-tabs class="quartz-tabs"><mat-tab-group class="mat-mdc-tab-group mat-primary mat-mdc-tab-group-stretch-tabs ng-star-inserted" style="--mat-tab-animation-duration: 500ms;"><mat-tab-header class="mat-mdc-tab-header"><button aria-hidden="true" type="button" tabindex="-1" class="mat-ripple mat-mdc-tab-header-pagination mat-mdc-tab-header-pagination-before mat-mdc-tab-header-pagination-disabled" disabled="">
+
+<quartz-tabs class="quartz-tabs">
+    <mat-tab-group class="mat-mdc-tab-group mat-primary mat-mdc-tab-group-stretch-tabs ng-star-inserted" style="--mat-tab-animation-duration: 500ms;"><mat-tab-header class="mat-mdc-tab-header"><button aria-hidden="true" type="button" tabindex="-1" class="mat-ripple mat-mdc-tab-header-pagination mat-mdc-tab-header-pagination-before mat-mdc-tab-header-pagination-disabled" disabled="">
                 <div class="mat-mdc-tab-header-pagination-chevron"></div>
             </button>
             <div class="mat-mdc-tab-label-container">
                 <div role="tablist" class="mat-mdc-tab-list" style="transform: translateX(0px);">
                     <div class="mat-mdc-tab-labels">
 
-                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted mdc-tab--active mdc-tab-indicator--active" id="mat-tab-label-4-0" tabindex="0" aria-posinset="1" aria-setsize="3" aria-controls="mat-tab-content-4-0" aria-selected="true" aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted mdc-tab--active mdc-tab-indicator--active" id="mat-tab-label-0-0" tabindex="0" aria-posinset="1" aria-setsize="3" aria-controls="mat-tab-content-0-0" aria-selected="true" aria-disabled="false"><span class="mdc-tab__ripple"></span>
                             <div class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label"><quartz-tab-label class="ng-star-inserted"><span class="ng-star-inserted"> Tab 1</span></quartz-tab-label></span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
                         </div>
 
-                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-4-1" tabindex="-1" aria-posinset="2" aria-setsize="3" aria-controls="mat-tab-content-4-1" aria-selected="false" aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-0-1" tabindex="-1" aria-posinset="2" aria-setsize="3" aria-controls="mat-tab-content-0-1" aria-selected="false" aria-disabled="false"><span class="mdc-tab__ripple"></span>
                             <div class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label"><quartz-tab-label class="ng-star-inserted"><span class="ng-star-inserted"> Tab 2</span></quartz-tab-label></span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
                         </div>
 
-                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-4-2" tabindex="-1" aria-posinset="3" aria-setsize="3" aria-controls="mat-tab-content-4-2" aria-selected="false" aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                        <div role="tab" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-0-2" tabindex="-1" aria-posinset="3" aria-setsize="3" aria-controls="mat-tab-content-0-2" aria-selected="false" aria-disabled="false"><span class="mdc-tab__ripple"></span>
                             <div class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label"><quartz-tab-label class="ng-star-inserted"><span class="ng-star-inserted"> Tab 3</span></quartz-tab-label></span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
                         </div>
                         
@@ -354,17 +361,25 @@
             </mat-tab-body>
 
         </div>
-    </mat-tab-group></quartz-tabs>
+    </mat-tab-group>
+</quartz-tabs>
 
 <!-- TABS END -->
+
 <br>
+
 <!-- BUTTON FOR OVERLAY START -->
+
 <quartz-primary-button class="ng-star-inserted">
     <button class="quartz-button quartz-primary-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base" popovertarget="cdk-overlay-1"><span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span><span class="mdc-button__label">Show dialog</span><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-ripple mat-mdc-button-ripple"></span></button>
 </quartz-primary-button>
+
 <!-- BUTTON FOR OVERLAY END -->
+
 <br>
+
 <!-- Grid Test Start -->
+
 <!--
 <mat-grid-list cols="4" rowHeight="100px">
     @for (tile of tiles; track tile) {
@@ -427,9 +442,11 @@
             <div class="mat-grid-tile-content">Four</div>
         </mat-grid-tile></div>
 </mat-grid-list>
+
 <!-- Grid Test End -->
 
 <!-- STEPPER START -->
+
 <quartz-stepper>
     <div class="quartz-stepper">
         <mat-vertical-stepper class="mat-stepper-vertical mat-stepper-animations-enabled" style="--mat-stepper-animation-duration: 225ms;">
@@ -508,7 +525,7 @@
                                     <form novalidate="" class="ng-untouched ng-pristine ng-invalid"><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu vestibulum dui. Etiam eget nunc scelerisque risus fringilla pretium. Suspendisse  </p>
                                         <quartz-form-field-group controlname="confirmCheckbox">
                                             <fieldset aria-invalid="true" class="margin-bottom-10px">
-                                                <legend id="quartz-form-field-group-3-legend"><quartz-form-field-label style="display: block;"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Lorem </strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
+                                                <legend id="quartz-form-field-group-1-legend"><quartz-form-field-label style="display: block;"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Lorem </strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
                                                 <div class="quartz-form-field-container">
                                                     <quartz-checkbox formcontrolname="confirmCheckbox" class="ng-untouched ng-pristine ng-invalid" style="display: block;"><label class="quartz-checkbox" for="quartz-checkbox-1"><span class="quartz-checkbox-inner-container"><input type="checkbox" class="quartz-invisible" id="quartz-checkbox-1" role="checkbox"><mat-icon role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">check_box_outline_blank</mat-icon></span><span class="quartz-checkbox-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  </span></label></quartz-checkbox>
                                                 </div>
@@ -528,6 +545,7 @@
         </mat-vertical-stepper>
     </div>
 </quartz-stepper>
+
 <!-- STEPPER END -->
 
 <form novalidate="" class="ng-invalid ng-touched ng-dirty"> 
@@ -536,7 +554,7 @@
 
     <quartz-form-field-group controlname="confirmCheckbox">
         <fieldset aria-invalid="true">
-            <legend id="quartz-form-field-group-47-legend"><quartz-form-field-label style="display: block;"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Checkbox demo 1</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
+            <legend id="quartz-form-field-group-2-legend"><quartz-form-field-label style="display: block;"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Checkbox demo 1</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
             <div class="quartz-form-field-container">
                 <quartz-checkbox class="ng-untouched ng-pristine ng-invalid" style="display: block;">
                     <label class="quartz-checkbox" for="quartz-checkbox-40"><span class="quartz-checkbox-inner-container">
@@ -556,7 +574,7 @@
 
 <quartz-form-field-group controlname="blockRep">
     <fieldset aria-invalid="true">
-        <legend id="quartz-form-field-group-4-legend"><quartz-form-field-label style="display: block"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Radio button example</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
+        <legend id="quartz-form-field-group-3-legend"><quartz-form-field-label style="display: block"><span class="quartz-label-title"><span><span><span aria-hidden="true" class="requiredAsterisk">*</span><strong>Radio button example</strong></span>&NoBreak;<span style="white-space: nowrap;">&NoBreak; &NoBreak;<strong class="quartz-invisible">(Required)&NoBreak;</strong>&NoBreak;</span></span></span></quartz-form-field-label></legend>
         <div class="quartz-form-field-container">
             <quartz-radio-button formcontrolname="blockRep" name="blockRep" value="Y" class="ng-untouched ng-pristine ng-invalid">
                 <label class="quartz-radio-button" for="quartz-radio-button-3"><span class="quartz-radio-button-inner-container">
@@ -581,7 +599,7 @@
         </div>
         <quartz-field-error></quartz-field-error>
     </fieldset>
-    </quartz-form-field-group>
+</quartz-form-field-group>
 
 <!-- RADIO BUTTON END -->
 
@@ -606,7 +624,6 @@
 
 <!-- SELECT END -->
 
-
 <!-- INPUT FIELD END -->
 
 <quartz-form-field-group controlname="dollarAmount2">
@@ -627,7 +644,6 @@
 </quartz-form-field-group>
 
 <!-- INPUT FIELD END -->
-
 
 <!-- SUBMIT BUTTON START -->
 

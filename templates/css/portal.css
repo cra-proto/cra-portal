@@ -7691,3 +7691,100 @@ quartz-checkbox.quartz-invalid mat-icon {
 .quartz-radio-button .quartz-radio-button-inner-container mat-icon.quartz-invalid {
     color: #d3080c !important
 }
+
+/* WET CSS */
+
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+
+.btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
+    float: left;
+}
+
+.btn-group-vertical>.btn, .btn-group>.btn {
+    position: relative;
+    float: left;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 10px 14px;
+    font-size: 16px;
+    line-height: 1.4375;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-toolbar {
+    margin-left: -5px;
+}
+
+.btn-toolbar:after, .btn-toolbar:before {
+    display: table;
+    content: " ";
+}
+.btn-toolbar:after {
+    clear: both;
+}
+.btn-toolbar:after, .btn-toolbar:before {
+    display: table;
+    content: " ";
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+    margin-left: -5px;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-default {
+    color: #335075;
+    background-color: #eaebed !important;
+    border-color: rgb(220.2692307692, 221.9230769231, 225.2307692308);
+}
