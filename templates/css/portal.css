@@ -7790,18 +7790,18 @@ quartz-checkbox.quartz-invalid mat-icon {
     border: 1px solid #335075
 }
 
-.test-content-banner {
+.test-banner-content {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
 
-.test-content-banner h2 {
+.test-banner-content h2 {
     line-height: 1.23;
 }
 
-.test-content-banner p {
+.test-banner-content p {
     margin: 0 0 11.5px;
     line-height: 1.4375;
 }
