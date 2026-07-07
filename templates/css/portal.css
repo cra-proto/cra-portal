@@ -7803,6 +7803,7 @@ quartz-checkbox.quartz-invalid mat-icon {
 
 .test-content-banner p {
     margin: 0 0 11.5px;
+    line-height: 1.4375;
 }
 
 .test-banner-content .mrgn-bttm-0 {
