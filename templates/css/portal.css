@@ -7789,3 +7789,33 @@ quartz-checkbox.quartz-invalid mat-icon {
 /*    border-color: rgb(220.2692307692, 221.9230769231, 225.2307692308); */
     border: 1px solid #335075
 }
+
+.test-content-banner {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.test-content-banner h2 {
+    line-height: 1.23;
+}
+
+.test-content-banner p {
+    margin: 0 0 11.5px;
+}
+
+.test-banner-content .mrgn-bttm-0 {
+    margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+    .test-banner-content {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) {
+    .test-banner-content {
+        width: 750px;
+    }
+}
