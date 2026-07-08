@@ -7831,3 +7831,15 @@ quartz-checkbox.quartz-invalid mat-icon {
 .back-button:hover .title-link {
     text-decoration: underline !important;
 }
+
+/* Custom class to shrink the icon and force bottom alignment */
+.small-icon-bottom {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+
+  /* Flexbox alignment rules */
+  display: inline-flex !important;
+  align-items: flex-end !important;
+  vertical-align: bottom !important;  
+}
