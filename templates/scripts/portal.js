@@ -855,15 +855,23 @@ for (let table of tables) {
 }
 
 for (let currentForm of allForms) {
-    let formSubmitBtn = currentForm.querySelector("input[type='submit'], button[type='submit']");
+    let nestedSubmitBtns = Array.from(currentForm.querySelectorAll("input[type='submit'], button[type='submit']")), 
+       externalSubmitBtns = Array.from(document.querySelectorAll(`input[type="submit"][form="${currentForm.id}"]`)), 
+       combinedSubmitBtns = nestedSubmitBtns.concat(externalSubmitBtns), 
+       formSubmitBtns = combinedSubmitBtns.filter(function(item, index) {
+           return combinedSubmitBtns.indexOf(item) === index;
+       });
 
-    if (formSubmitBtn !== null && formSubmitBtn !== undefined) {
-        formSubmitBtn.addEventListener("click", function (event) {
-            if (formSubmit(currentForm) === false) {
-                event.preventDefault();
-            }
+    if (formSubmitBtns !== null && formSubmitBtns !== undefined) {
+        formSubmitBtns.forEach(function(formSubmitBtn) {
+            formSubmitBtn.addEventListener("click", function (event) {
+                if (formSubmit(currentForm) === false) {
+                    event.preventDefault();
+                }
+            });
         });
     }
+
     Array.from(currentForm.elements).forEach(function (field) {
         if (field.willValidate === true) {
             field.addEventListener("blur", function () {
