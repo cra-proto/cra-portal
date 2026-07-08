@@ -7820,3 +7820,14 @@ quartz-checkbox.quartz-invalid mat-icon {
         width: 750px;
     }
 }
+
+/* my custom css */
+/* Remove underline from the parent link and icon */
+.back-button:hover {
+    text-decoration: none !important;
+}
+
+/* Force the underline onto the text span only */
+.back-button:hover .title-link {
+    text-decoration: underline !important;
+}
