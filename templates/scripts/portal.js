@@ -473,10 +473,7 @@ let accordions,
                 handleInvalidField(field, errorGroupElm, labelElm, radioBtn, errorFieldElm);
             }
         }
-        if (field.validity.valid === false) {
-            return false;
-        }
-        return true;
+        return field.validity.valid;
     }, 
     formSubmit = function (currentForm) {
         let isFormValid = true;

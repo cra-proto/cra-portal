@@ -6943,6 +6943,7 @@ mat-cell, mat-header-cell, mat-footer-cell {
   display: flex;
   align-items: center;
   overflow: hidden;
+  overflow-wrap: break-word;
   word-wrap: break-word;
   min-height: inherit;
 }
@@ -7751,10 +7752,6 @@ quartz-checkbox.quartz-invalid mat-icon {
 }
 .btn-toolbar:after {
     clear: both;
-}
-.btn-toolbar:after, .btn-toolbar:before {
-    display: table;
-    content: " ";
 }
 
 .list-inline {
