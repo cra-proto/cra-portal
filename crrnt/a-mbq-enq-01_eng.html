@@ -19,25 +19,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/cra-portal/templates/css/styles.css" media="all">
     <link rel="stylesheet" href="/cra-portal/templates/css/portal.css">
-
     <!-- START of Github only testing banner CSS -->
-    <link rel="stylesheet" href="/cra-portal/templates/css/testing-banner.css">
+    <link rel="stylesheet" href="https://cra-test-arc.canada.ca/core-prototype/source/css/testing-banner.css">
     <!-- END of Github only testing banner CSS -->
-
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <noscript>
         <link rel="stylesheet" href="/cra-portal/templates/css/styles.css">
     </noscript>
 </head>
 
 <body class="mat-typography" style="--theme-color: #26374A;">
-<!-- START Test site banner -->
-<section id="test-banner">
-    <div id="test-banner-content" class="container test-banner-content">
-        <h2>This site is for CRA testing purposes only</h2>
-        <p id="personalInfoText" class="mrgn-bttm-0">Do not enter any personal information on this site</p>
-    </div>
-</section>
-<!-- END Test site banner -->
+    <!-- START of GitHub only template section -->
+    <data id="devoptions" data-loc-storage="gitCRATemplateDevOptions" value="false"></data>
+    <data id="exitpage" data-exit-by-url="false" data-mod-link-file="https://cra-test-arc.canada.ca/cra-portal/templates/data/exclude-redirect.json" value="https://cra-test-arc.canada.ca/cra-portal/exit.html"></data>
+    <data id="relextlnk" data-origin="https://www.canada.ca" value="false"></data>
+    <data id="notedlinks" value="[{&quot;sourcelink&quot;: &quot;http://www.canada.ca/&quot;, &quot;sourcetitle&quot;: &quot;Canada Revenue Agency&quot;}]"></data>
+    <data id="pageKeywords" value=""></data>
+    <!-- START Test site banner -->
+    <section id="test-banner">
+        <div id="test-banner-content" class="container test-banner-content">
+            <h2>This site is for CRA testing purposes only</h2>
+            <p id="personalInfoText" class="mrgn-bttm-0">Do not enter any personal information on this site</p>
+        </div>
+    </section>
+    <!-- END Test site banner -->
+    <!-- END of GitHub only template section -->
     <app-root ng-version="17.3.2">
         <div class="quartz-demo default-theme"><quartz-header>
                 <nav class="quartz-skip-links">
@@ -129,6 +136,7 @@
                                 <div class="container" style="margin-left: 50px !important; margin-right: 50px;">
                                     <div class="settings-panel">
                                         <mat-drawer-container class="mat-drawer-container">
+<div id="editable-page-wrapper">
 
 
 
@@ -148,8 +156,6 @@
 
 
 
-
-                                                <router-outlet></router-outlet>
                                                 <app-header-demo class="ng-star-inserted">
 <!--
 <quartz-sub-ribbon>
@@ -222,7 +228,7 @@
   <p>For other questions you can <a href="https://3gv9z4.axshare.com/a-mba-enq-02_eng.html">submit a written enquiry</a>.</p>
 
 
-
+</div>
                                             </mat-drawer-content>
 
 
@@ -341,7 +347,12 @@
 
     </div>
 </div>
+<!-- START of GitHub only scripts -->
+<script defer="defer" src="/core-prototype/source/scripts/external-link-detour-portal.js"></script>
+<script defer="defer" src="/core-prototype/source/scripts/git-dev-options-portal-e.js"></script>
+<script defer="defer" src="/core-prototype/resources/tools/tinymce/tinymce.min.js"></script>
+<!-- END of GitHub only scripts -->
+<script src="/cra-portal/templates/scripts/portal.js" defer="defer"></script>
 <script src="/cra-portal/templates/scripts/portal.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </body>
 </html>
