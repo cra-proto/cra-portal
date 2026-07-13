@@ -7818,6 +7818,40 @@ quartz-checkbox.quartz-invalid mat-icon {
     }
 }
 
+/* panel css aditions */
+.panelflex {
+    display: flex;
+}
+
+.action-width-40 {
+    width: 40%;
+}
+
+.title-width-60 {
+    width: 60%;
+}
+
+.mat-mdc-card.quartz-panel .mat-mdc-card-title {
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    align-items: center;
+}
+.mat-mdc-card-title, .mat-mdc-card-subtitle {
+    display: block;
+    margin: 0;
+}
+.mat-mdc-card-title {
+    font-family: var(--mat-card-title-text-font, var(--mat-sys-title-large-font));
+    line-height: var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));
+    font-size: var(--mat-card-title-text-size, var(--mat-sys-title-large-size));
+    letter-spacing: var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));
+    font-weight: var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight));
+}
+.flex-container-row {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
 /* my custom css */
 /* Remove underline from the parent link and icon */
 .back-button:hover {
