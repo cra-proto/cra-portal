@@ -7784,7 +7784,7 @@ quartz-checkbox.quartz-invalid mat-icon {
     color: #335075;
     background-color: #eaebed !important;
 /*    border-color: rgb(220.2692307692, 221.9230769231, 225.2307692308); */
-    border: 1px solid #335075
+    border: 1px solid #335075 !important
 }
 
 .test-banner-content {
