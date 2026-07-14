@@ -7874,3 +7874,10 @@ quartz-checkbox.quartz-invalid mat-icon {
   align-items: flex-end !important;
   vertical-align: bottom !important;  
 }
+
+/* override glyphicon link styling */ 
+a:hover, a:focus, a:active {
+    color: inherit !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
