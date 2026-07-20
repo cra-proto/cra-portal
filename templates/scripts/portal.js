@@ -750,8 +750,8 @@ for (let tabGroup of pageTabs) {
 // Select all tables on the page
 for (let table of tables) {
     // Store original row order to restore during the "Unsorted" state
-    tableHeaders = table.querySelectorAll("th.mat-sort-header");
-    tableElm = document.querySelector("table");
+    tableElm = table.querySelector("table");
+    tableHeaders = tableElm.querySelectorAll("th.mat-sort-header");
     initialTbody = tableElm.querySelector("tbody");
     tableElm.originalRows = Array.from(initialTbody.querySelectorAll("tr"));
     
@@ -778,15 +778,15 @@ for (let table of tables) {
                         cellB = rowB.children[columnIndex].textContent.trim();
 
                     // Parse cellA as a number if it is numeric
-                    if (isNaN(cellA) === true) {
-                        valueA = cellA;
+                    if (isNaN(cellA) === true || cellA === "") {
+                        valueA = cellA.toLowerCase();
                     } else {
                         valueA = Number.parseFloat(cellA);
                     }
 
                     // Parse cellB as a number if it is numeric
-                    if (isNaN(cellB) === true) {
-                        valueB = cellB;
+                    if (isNaN(cellB) === true || cellB === "") {
+                        valueB = cellB.toLowerCase();
                     } else {
                         valueB = Number.parseFloat(cellB);
                     }
@@ -840,12 +840,14 @@ for (let table of tables) {
             });
 
             // Apply direction visual indicators attributes to the header based on active state
-            if (currentTable.sortState === 1) {
-                sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-ascending");
-                sortIndicator.classList.remove("mat-sort-header-descending");
-            } else if (currentTable.sortState === 2) {
-                sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-descending");
-                sortIndicator.classList.remove("mat-sort-header-ascending");
+            if (sortIndicator !== null) {
+                if (currentTable.sortState === 1) {
+                    sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-ascending");
+                      sortIndicator.classList.remove("mat-sort-header-descending");
+                } else if (currentTable.sortState === 2) {
+                    sortIndicator.classList.add("mat-sort-header-sorted", "mat-sort-header-descending");
+                      sortIndicator.classList.remove("mat-sort-header-ascending");
+                }
             }
         });
     }
