@@ -14,39 +14,38 @@ noFooterMain: true
 ---
 
 {% comment %} 
-  1. Filter out pages without a title or marked false
+  1. Filter out pages marked sitemap: false, but retain pages without titles
 {% endcomment %}
 {% assign valid_pages = "" | split: "," %}
 {% for p in site.pages %}
-  {% if p.title and p.sitemap != false %}
+  {% if p.sitemap != false %}
     {% assign valid_pages = valid_pages | push: p %}
   {% endif %}
 {% endfor %}
 
 {% comment %} 
-  2. Sort strictly by file path structure to ensure folder alignment
+  2. Sort strictly by URL as requested
 {% endcomment %}
-{% assign sorted_pages = valid_pages | sort: "path" %}
+{% assign sorted_pages = valid_pages | sort: "url" %}
 
 <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
-  {% comment %} 
-    Track our active folder path array to know when folders open or close
-  {% endcomment %}
+  {% comment %} Track active folders via an array {% endcomment %}
   {% assign current_folders = "" | split: "," %}
 
   {% for p in sorted_pages %}
-    {% comment %} Get path parts without the filename {% endcomment %}
-    {% assign path_parts = p.path | split: "/" %}
-    {% assign parts_size = path_parts.size %}
-    {% assign target_folder_depth = parts_size | minus: 1 %}
+    {% comment %} Deduce the folder structure directly from the URL path {% endcomment %}
+    {% assign url_parts = p.url | split: "/" %}
+    {% assign parts_size = url_parts.size %}
     
-    {% comment %} Build an array of just the folders for this page {% endcomment %}
+    {% comment %} Determine filename and folder depth from the URL sequence {% endcomment %}
+    {% assign filename = url_parts | last %}
+    {% assign target_folder_depth = parts_size | minus: 2 %}
+    
+    {% comment %} Build an array of raw folder names for this specific page {% endcomment %}
     {% assign this_page_folders = "" | split: "," %}
     {% if target_folder_depth > 0 %}
-      {% for i in (0..target_folder_depth) %}
-        {% if i < target_folder_depth %}
-          {% assign this_page_folders = this_page_folders | push: path_parts[i] %}
-        {% endif %}
+      {% for i in (1..target_folder_depth) %}
+        {% assign this_page_folders = this_page_folders | push: url_parts[i] %}
       {% endfor %}
     {% endif %}
 
@@ -75,7 +74,7 @@ noFooterMain: true
           </ul></details></li>
         {% endfor %}
         
-        {% comment %} Trim closed folders from our tracker array {% endcomment %}
+        {% comment %} Trim closed folders from tracker {% endcomment %}
         {% assign new_size = current_folders.size | minus: close_count %}
         {% assign temp_folders = "" | split: "," %}
         {% for i in (0..new_size) %}
@@ -102,25 +101,33 @@ noFooterMain: true
 
           <li role="treeitem" aria-level="{{ aria_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
             <details>
-              {% comment %} Clean folder name: capitalizing it and swapping hyphens for spaces {% endcomment %}
-              <summary>{{ folder_name | replace: "-", " " | replace: "_", " " | capitalize }}</summary>
+              {% comment %} Display raw folder name without casing modifications or string cleaning {% endcomment %}
+              <summary>{{ folder_name }}</summary>
               <ul role="group" {% if aria_level == 1 %}class="lst-none"{% endif %}>
         {% endif %}
       {% endfor %}
     {% endif %}
 
     {% comment %} 
-      Step C: Render the actual page as a standard treeitem link node
+      Step C: Determine node display label (Title vs Filename)
+    {% endcomment %}
+    {% assign display_label = p.title %}
+    {% if display_label == nil or display_label == "" %}
+      {% assign display_label = filename %}
+    {% endif %}
+
+    {% comment %} 
+      Step D: Render the page leaf link node
     {% endcomment %}
     {% assign leaf_level = current_folders.size | plus: 1 %}
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
-      <a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>
+      <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
     </li>
 
   {% endfor %}
 
   {% comment %} 
-    Step D: Safely clean up and close any trailing structural HTML containers
+    Step E: Close trailing structural elements cleanly at completion
   {% endcomment %}
   {% assign remaining_closes = current_folders.size %}
   {% if remaining_closes > 0 %}
