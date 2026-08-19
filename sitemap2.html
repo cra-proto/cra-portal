@@ -22,18 +22,20 @@ noFooterMain: true
 </div>
 <nav>
 <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
-  {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -}
+  {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
   {%- assign valid_pages = "" | split: "," -}
   {%- for p in site.pages -}
     {%- if p.sitemap != false -}
       {%- assign valid_pages = valid_pages | push: p -}
     {%- endif -}
   {%- endfor -}
-  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -}
+
+  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
   {%- assign sorted_pages = valid_pages | sort: "url" -}
   {%- assign open_folders = "" | split: "," -}
+
   {%- for p in sorted_pages -}
-    {%- comment %} Deduce current folder structures from the URL path {% endcomment -}
+    {%- comment %} Deduce current folder structures from the URL path {% endcomment -%}
     {%- assign url_parts = p.url | split: "/" -}
     {%- assign parts_size = url_parts.size -}
     {%- assign filename = url_parts | last -}
@@ -44,7 +46,8 @@ noFooterMain: true
         {%- assign this_page_folders = this_page_folders | push: url_parts[i] -}
       {%- endfor -}
     {%- endif -}
-    {%- comment %} Step A: Determine how many folder levels we have departed from {% endcomment -}
+
+    {%- comment %} Step A: Determine how many folder levels we have departed from {% endcomment -%}
     {%- assign keep_open_count = 0 -}
     {%- assign max_possible_match = open_folders.size -}
     {%- if this_page_folders.size < max_possible_match -}
@@ -61,7 +64,8 @@ noFooterMain: true
         {%- endif -}
       {%- endif -}
     {%- endfor -}
-    {%- comment %} Step B: Unwind and close ONLY the specific sub-folders that changed {% endcomment -}
+
+    {%- comment %} Step B: Unwind and close ONLY the specific sub-folders that changed {% endcomment -%}
     {%- assign current_open_num = open_folders.size -}
     {%- if current_open_num > keep_open_count -}
       {%- assign close_needed = current_open_num | minus: keep_open_count -}
@@ -76,7 +80,8 @@ noFooterMain: true
       {%- endfor -}
       {%- assign open_folders = temp_folders -}
     {%- endif -}
-    {%- comment %} Step C: Open new sub-folders if we are diving deeper down a path {% endcomment -}
+
+    {%- comment %} Step C: Open new sub-folders if we are diving deeper down a path {% endcomment -%}
     {%- assign start_index = open_folders.size -}
     {%- assign end_index = this_page_folders.size -}
     {%- if start_index < end_index -}
@@ -100,24 +105,27 @@ noFooterMain: true
             <li role="treeitem" aria-level="{{ aria_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
               <details>
                 <summary>{{ folder_summary_chain }}</summary>
-                <ul role="group" {% if aria_level == 1 %}class="lst-none"{% endif %}>
+                <ul role="group" class="lst-none">
             {%- assign folder_summary_chain = "" -}
           {%- endif -}
         {%- endif -}
       {%- endfor -}
     {%- endif -}
-    {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -}
+
+    {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -%}
     {%- assign display_label = p.title -}
     {%- if display_label == nil or display_label == "" -}
       {%- assign display_label = filename -}
     {%- endif -}
+
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = open_folders.size | plus: 1 -%}
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
       <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
     </li>
   {%- endfor -}
-  {%- comment %} Step F: Complete layout cycle by unwinding remaining tags {% endcomment -}
+
+  {%- comment %} Step F: Complete layout cycle by unwinding remaining tags {% endcomment -%}
   {%- assign remaining_closes = open_folders.size -}
   {%- if remaining_closes > 0 -}
     {%- for i in (1..remaining_closes) -%}
