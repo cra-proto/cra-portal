@@ -1,0 +1,30 @@
+---
+testBanner: false
+title: "Sitemap"
+dateModified: 2026-08-19
+dateIssued: 2025-08-19
+nositesearch: true
+nomenu: true
+breadcrumbs: false
+feedback: false
+share: false
+noFooterContextual: true
+noFooterCorporate: true
+noFooterMain: true
+---
+
+{% comment %} Filter and clean valid pages globally {% endcomment %}
+{% assign valid_pages = "" | split: "," %}
+{% for p in site.pages %}
+  {% if p.title and p.sitemap != false %}
+    {% assign valid_pages = valid_pages | push: p %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Sort all pages strictly by file path structure {% endcomment %}
+{% assign sorted_pages = valid_pages | sort: "path" %}
+
+<ul class="list-unstyled" role="tree" aria-labelledby="tree1">
+  {% comment %} Kick off the recursive template from the root directory {% endcomment %}
+  {% include sitemap-node.html current_dir="/" level=1 %}
+</ul>
