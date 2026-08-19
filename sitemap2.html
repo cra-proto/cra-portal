@@ -13,8 +13,9 @@ noFooterCorporate: true
 noFooterMain: true
 ---
 
-<h2>Repository Jekyll pages</h2>
-{% comment %} Filter and clean valid pages globally {% endcomment %}
+{% comment %} 
+  1. Gather and clean your collection of valid pages
+{% endcomment %}
 {% assign valid_pages = "" | split: "," %}
 {% for p in site.pages %}
   {% if p.title and p.sitemap != false %}
@@ -22,10 +23,85 @@ noFooterMain: true
   {% endif %}
 {% endfor %}
 
-{% comment %} Sort all pages strictly by file path structure {% endcomment %}
+{% comment %} 
+  2. Sort strictly by file path structure
+{% endcomment %}
 {% assign sorted_pages = valid_pages | sort: "path" %}
 
 <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
-  {% comment %} Kick off the recursive template from the root directory {% endcomment %}
-  {% include sitemap-node.html current_dir="/" level=1 %}
+  {% assign current_depth = 0 %}
+  
+  {% for p in sorted_pages %}
+    {% comment %} Clean up slash artifacts and determine folder depth {% endcomment %}
+    {% assign clean_path = p.path | replace: "index.html", "" | replace: "index.md", "" %}
+    {% assign path_parts = clean_path | split: "/" %}
+    {% assign target_depth = path_parts.size %}
+    
+    {% comment %} If it's a root level file, set minimum depth to 1 {% endcomment %}
+    {% if target_depth == 0 %}{% assign target_depth = 1 %}{% endif %}
+
+    {% comment %} 
+      Close nesting tags if moving back up a directory level
+    {% endcomment %}
+    {% if current_depth > target_depth %}
+      {% assign depth_diff = current_depth | minus: target_depth %}
+      {% for i in (1..depth_diff) %}
+        </ul></details></li>
+      {% endfor %}
+      {% assign current_depth = target_depth %}
+    {% endif %}
+
+    {% comment %} 
+      Open nesting tags if moving deeper into subfolders
+    {% endcomment %}
+    {% if current_depth < target_depth and current_depth > 0 %}
+      <ul role="group">
+      {% assign current_depth = target_depth %}
+    {% endif %}
+
+    {% comment %} Track initial depth context {% endcomment %}
+    {% if current_depth == 0 %}{% assign current_depth = target_depth %}{% endif %}
+
+    {% comment %} Check ahead to determine if this file is a parent directory folder {% endcomment %}
+    {% assign is_parent = false %}
+    {% assign next_index = forloop.index %}
+    {% assign next_page = sorted_pages[next_index] %}
+    {% if next_page %}
+      {% assign current_dir = p.path | replace: p.name, "" %}
+      {% if next_page.path contains current_dir and current_dir != "" and current_dir != "/" %}
+        {% assign is_parent = true %}
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Render individual list nodes matching your ARIA design {% endcomment %}
+    <li role="treeitem" 
+        aria-level="{{ current_depth }}" 
+        aria-setsize="1" 
+        aria-posinset="1" 
+        aria-expanded="{% if is_parent %}false{% else %}none{% endif %}" 
+        aria-selected="false">
+      
+      {% if is_parent %}
+        <details>
+          <summary>{{ p.title | escape }}</summary>
+          {% comment %} Leaves space open for the next iteration to fill deeper content {% endcomment %}
+      {% else %}
+        <a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>
+      {% endif %}
+
+    {% comment %} Clear list node formatting if there are no trailing structural paths {% endcomment %}
+    {% if is_parent == false %}
+      </li>
+    {% endif %}
+
+  {% endfor %}
+
+  {% comment %} 
+    Safely wind down and close any hanging unclosed tags at the end of the script
+  {% endcomment %}
+  {% if current_depth > 1 %}
+    {% for i in (2..current_depth) %}
+      </ul></details></li>
+    {% endfor %}
+  {% endif %}
 </ul>
