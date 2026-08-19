@@ -14,7 +14,7 @@ noFooterMain: true
 ---
 
 {% comment %} 
-  1. Gather and clean your collection of valid pages
+  1. Filter out pages without a title or marked false
 {% endcomment %}
 {% assign valid_pages = "" | split: "," %}
 {% for p in site.pages %}
@@ -24,83 +24,107 @@ noFooterMain: true
 {% endfor %}
 
 {% comment %} 
-  2. Sort strictly by file path structure
+  2. Sort strictly by file path structure to ensure folder alignment
 {% endcomment %}
 {% assign sorted_pages = valid_pages | sort: "path" %}
 
 <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
-  {% assign current_depth = 0 %}
-  
+  {% comment %} 
+    Track our active folder path array to know when folders open or close
+  {% endcomment %}
+  {% assign current_folders = "" | split: "," %}
+
   {% for p in sorted_pages %}
-    {% comment %} Clean up slash artifacts and determine folder depth {% endcomment %}
-    {% assign clean_path = p.path | replace: "index.html", "" | replace: "index.md", "" %}
-    {% assign path_parts = clean_path | split: "/" %}
-    {% assign target_depth = path_parts.size %}
+    {% comment %} Get path parts without the filename {% endcomment %}
+    {% assign path_parts = p.path | split: "/" %}
+    {% assign parts_size = path_parts.size %}
+    {% assign target_folder_depth = parts_size | minus: 1 %}
     
-    {% comment %} If it's a root level file, set minimum depth to 1 {% endcomment %}
-    {% if target_depth == 0 %}{% assign target_depth = 1 %}{% endif %}
-
-    {% comment %} 
-      Close nesting tags if moving back up a directory level
-    {% endcomment %}
-    {% if current_depth > target_depth %}
-      {% assign depth_diff = current_depth | minus: target_depth %}
-      {% for i in (1..depth_diff) %}
-        </ul></details></li>
+    {% comment %} Build an array of just the folders for this page {% endcomment %}
+    {% assign this_page_folders = "" | split: "," %}
+    {% if target_folder_depth > 0 %}
+      {% for i in (0..target_folder_depth) %}
+        {% if i < target_folder_depth %}
+          {% assign this_page_folders = this_page_folders | push: path_parts[i] %}
+        {% endif %}
       {% endfor %}
-      {% assign current_depth = target_depth %}
     {% endif %}
 
     {% comment %} 
-      Open nesting tags if moving deeper into subfolders
+      Step A: Close folders we have completely left
     {% endcomment %}
-    {% if current_depth < target_depth and current_depth > 0 %}
-      <ul role="group">
-      {% assign current_depth = target_depth %}
-    {% endif %}
-
-    {% comment %} Track initial depth context {% endcomment %}
-    {% if current_depth == 0 %}{% assign current_depth = target_depth %}{% endif %}
-
-    {% comment %} Check ahead to determine if this file is a parent directory folder {% endcomment %}
-    {% assign is_parent = false %}
-    {% assign next_index = forloop.index %}
-    {% assign next_page = sorted_pages[next_index] %}
-    {% if next_page %}
-      {% assign current_dir = p.path | replace: p.name, "" %}
-      {% if next_page.path contains current_dir and current_dir != "" and current_dir != "/" %}
-        {% assign is_parent = true %}
-      {% endif %}
-    {% endif %}
-
-    {% comment %} Render individual list nodes matching your ARIA design {% endcomment %}
-    <li role="treeitem" 
-        aria-level="{{ current_depth }}" 
-        aria-setsize="1" 
-        aria-posinset="1" 
-        aria-expanded="{% if is_parent %}false{% else %}none{% endif %}" 
-        aria-selected="false">
+    {% assign max_check = current_folders.size %}
+    {% if max_check > 0 %}
+      {% assign close_count = 0 %}
+      {% for i in (0..max_check) %}
+        {% if i < max_check %}
+          {% assign index = max_check | minus: 1 | minus: i %}
+          {% assign old_f = current_folders[index] %}
+          {% assign new_f = this_page_folders[index] %}
+          
+          {% if old_f != new_f or index >= this_page_folders.size %}
+            {% assign close_count = close_count | plus: 1 %}
+          {% else %}
+            {% break %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
       
-      {% if is_parent %}
-        <details>
-          <summary>{{ p.title | escape }}</summary>
-          {% comment %} Leaves space open for the next iteration to fill deeper content {% endcomment %}
-      {% else %}
-        <a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>
+      {% if close_count > 0 %}
+        {% for c in (1..close_count) %}
+          </ul></details></li>
+        {% endfor %}
+        
+        {% comment %} Trim closed folders from our tracker array {% endcomment %}
+        {% assign new_size = current_folders.size | minus: close_count %}
+        {% assign temp_folders = "" | split: "," %}
+        {% for i in (0..new_size) %}
+          {% if i < new_size %}
+            {% assign temp_folders = temp_folders | push: current_folders[i] %}
+          {% endif %}
+        {% endfor %}
+        {% assign current_folders = temp_folders %}
       {% endif %}
-
-    {% comment %} Clear list node formatting if there are no trailing structural paths {% endcomment %}
-    {% if is_parent == false %}
-      </li>
     {% endif %}
+
+    {% comment %} 
+      Step B: Open folders we have just entered
+    {% endcomment %}
+    {% assign start_index = current_folders.size %}
+    {% assign end_index = this_page_folders.size %}
+    
+    {% if start_index < end_index %}
+      {% for i in (start_index..end_index) %}
+        {% if i < end_index %}
+          {% assign folder_name = this_page_folders[i] %}
+          {% assign current_folders = current_folders | push: folder_name %}
+          {% assign aria_level = current_folders.size %}
+
+          <li role="treeitem" aria-level="{{ aria_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
+            <details>
+              {% comment %} Clean folder name: capitalizing it and swapping hyphens for spaces {% endcomment %}
+              <summary>{{ folder_name | replace: "-", " " | replace: "_", " " | capitalize }}</summary>
+              <ul role="group" {% if aria_level == 1 %}class="lst-none"{% endif %}>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% comment %} 
+      Step C: Render the actual page as a standard treeitem link node
+    {% endcomment %}
+    {% assign leaf_level = current_folders.size | plus: 1 %}
+    <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
+      <a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>
+    </li>
 
   {% endfor %}
 
   {% comment %} 
-    Safely wind down and close any hanging unclosed tags at the end of the script
+    Step D: Safely clean up and close any trailing structural HTML containers
   {% endcomment %}
-  {% if current_depth > 1 %}
-    {% for i in (2..current_depth) %}
+  {% assign remaining_closes = current_folders.size %}
+  {% if remaining_closes > 0 %}
+    {% for i in (1..remaining_closes) %}
       </ul></details></li>
     {% endfor %}
   {% endif %}
