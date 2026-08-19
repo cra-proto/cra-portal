@@ -20,105 +20,109 @@ noFooterMain: true
         </ul>
     </div>
 </div>
-{% comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment %}
-{% assign valid_pages = "" | split: "," %}
-{% for p in site.pages %}
-{% if p.sitemap != false %}
-{% assign valid_pages = valid_pages | push: p %}
-{% endif %}
-{% endfor %}
-{% comment %}  2. Sort strictly by URL {% endcomment %}
-{% assign sorted_pages = valid_pages | sort: "url" %}
 <nav>
-    <ul class="list-unstyled" role="tree" aria-labelledby="tree1">
-{% comment %} Track active structural folders and the physical depth of open <details> elements {% endcomment %}
-{% assign current_folders = "" | split: "," %}
-{% assign open_details_count = 0 %}
-{% for p in sorted_pages %}
-{% comment %} Deduce current folder structures from the URL {% endcomment %}
-{% assign url_parts = p.url | split: "/" %}
-{% assign parts_size = url_parts.size %}
-{% assign filename = url_parts | last %}
-{% assign target_folder_depth = parts_size | minus: 2 %}
-{% assign this_page_folders = "" | split: "," %}
-{% if target_folder_depth > 0 %}
-{% for i in (1..target_folder_depth) %}
-{% assign this_page_folders = this_page_folders | push: url_parts[i] %}
-{% endfor %}
-{% endif %}
-{% comment %} Step A: Close folders we have completely left. Because directories can be merged, we determine if a mismatch occurs at any level of our tracked folder hierarchy. {% endcomment %}
-{% assign max_check = current_folders.size %}
-{% if max_check > 0 %}
-{% assign mismatch_detected = false %}
-{% for i in (0..max_check) %}
-{% if i < max_check %}
-{% assign old_f = current_folders[i] %}
-{% assign new_f = this_page_folders[i] %}
-{% if old_f != new_f or i >= this_page_folders.size %}
-{% assign mismatch_detected = true %}
-{% break %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% if mismatch_detected %}
-{% comment %} Close all open sub-elements before opening a new structural branch {% endcomment %}
-{% if open_details_count > 0 %}
-{% for c in (1..open_details_count) %}
-    </ul></details></li>
-{% endfor %}
-{% assign open_details_count = 0 %}
-{% endif %}
-{% assign current_folders = "" | split: "," %}
-{% endif %}
-{% endif %}
-{% comment %} Step B: Open folders with dynamic parent directory chaining. Only runs if we aren't already inside the tracked folder structure. {% endcomment %}
-{% assign start_index = current_folders.size %}
-{% assign end_index = this_page_folders.size %}
-{% if start_index < end_index %}
-{% assign folder_summary_chain = "" %}
-{% for i in (start_index..end_index) %}
-{% if i < end_index %}
-{% assign folder_name = this_page_folders[i] %}
-{% assign current_folders = current_folders | push: folder_name %}
-{% if folder_summary_chain == "" %}
-{% assign folder_summary_chain = folder_name %}
-{% else %}
-{% assign folder_summary_chain = folder_summary_chain | append: "/" | append: folder_name %}
-{% endif %}
-{% comment %} Lookahead: If there are deeper subfolders on this path, keep chaining the names instead of rendering an incomplete summary tag. {% endcomment %}
-{% assign next_index = i | plus: 1 %}
-{% assign skip_summary = false %}
-{% if next_index < end_index %}
-{% assign skip_summary = true %}
-{% endif %}
-{% if skip_summary == false %}
-{% assign aria_level = open_details_count | plus: 1 %}
-        <li role="treeitem" aria-level="{{ aria_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
-            <details>
+<ul class="list-unstyled" role="tree" aria-labelledby="tree1">
+  {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -}
+  {%- assign valid_pages = "" | split: "," -}
+  {%- for p in site.pages -}
+    {%- if p.sitemap != false -}
+      {%- assign valid_pages = valid_pages | push: p -}
+    {%- endif -}
+  {%- endfor -}
+  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -}
+  {%- assign sorted_pages = valid_pages | sort: "url" -}
+  {%- assign open_folders = "" | split: "," -}
+  {%- for p in sorted_pages -}
+    {%- comment %} Deduce current folder structures from the URL path {% endcomment -}
+    {%- assign url_parts = p.url | split: "/" -}
+    {%- assign parts_size = url_parts.size -}
+    {%- assign filename = url_parts | last -}
+    {%- assign target_folder_depth = parts_size | minus: 2 -}
+    {%- assign this_page_folders = "" | split: "," -}
+    {%- if target_folder_depth > 0 -}
+      {%- for i in (1..target_folder_depth) -}
+        {%- assign this_page_folders = this_page_folders | push: url_parts[i] -}
+      {%- endfor -}
+    {%- endif -}
+    {%- comment %} Step A: Determine how many folder levels we have departed from {% endcomment -}
+    {%- assign keep_open_count = 0 -}
+    {%- assign max_possible_match = open_folders.size -}
+    {%- if this_page_folders.size < max_possible_match -}
+      {%- assign max_possible_match = this_page_folders.size -}
+    {%- endif -}
+    {%- for i in (0..max_possible_match) -}
+      {%- if i < max_possible_match -}
+        {%- assign old_f = open_folders[i] -}
+        {%- assign new_f = this_page_folders[i] -}
+        {%- if old_f == new_f -}
+          {%- assign keep_open_count = keep_open_count | plus: 1 -}
+        {%- else -}
+          {%- break -}
+        {%- endif -}
+      {%- endif -}
+    {%- endfor -}
+    {%- comment %} Step B: Unwind and close ONLY the specific sub-folders that changed {% endcomment -}
+    {%- assign current_open_num = open_folders.size -}
+    {%- if current_open_num > keep_open_count -}
+      {%- assign close_needed = current_open_num | minus: keep_open_count -}
+      {%- for c in (1..close_needed) -%}
+        </ul></details></li>
+      {%- endfor -}
+      {%- assign temp_folders = "" | split: "," -}
+      {%- for i in (0..keep_open_count) -}
+        {%- if i < keep_open_count -}
+          {%- assign temp_folders = temp_folders | push: open_folders[i] -}
+        {%- endif -}
+      {%- endfor -}
+      {%- assign open_folders = temp_folders -}
+    {%- endif -}
+    {%- comment %} Step C: Open new sub-folders if we are diving deeper down a path {% endcomment -}
+    {%- assign start_index = open_folders.size -}
+    {%- assign end_index = this_page_folders.size -}
+    {%- if start_index < end_index -}
+      {%- assign folder_summary_chain = "" -}
+      {%- for i in (start_index..end_index) -}
+        {%- if i < end_index -}
+          {%- assign folder_name = this_page_folders[i] -}
+          {%- assign open_folders = open_folders | push: folder_name -}
+          {%- if folder_summary_chain == "" -}
+            {%- assign folder_summary_chain = folder_name -}
+          {%- else -}
+            {%- assign folder_summary_chain = folder_summary_chain | append: "/" | append: folder_name -}
+          {%- endif -}
+          {%- assign next_index = i | plus: 1 -}
+          {%- assign skip_summary = false -}
+          {%- if next_index < end_index -}
+            {%- assign skip_summary = true -}
+          {%- endif -}
+          {%- if skip_summary == false -}
+            {%- assign aria_level = open_folders.size -%}
+            <li role="treeitem" aria-level="{{ aria_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
+              <details>
                 <summary>{{ folder_summary_chain }}</summary>
                 <ul role="group" {% if aria_level == 1 %}class="lst-none"{% endif %}>
-{% assign open_details_count = open_details_count | plus: 1 %}
-{% assign folder_summary_chain = "" %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% comment %} Step C: Determine node display label (Title vs Filename) {% endcomment %}
-{% assign display_label = p.title %}
-{% if display_label == nil or display_label == "" %}
-{% assign display_label = filename %}
-{% endif %}
-{% comment %} Step D: Render the page link node {% endcomment %}
-{% assign leaf_level = open_details_count | plus: 1 %}
-        <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
-            <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
-        </li>
-{% endfor %}
-{% comment %} Step E: Safely close any remaining trailing markup blocks at the end of the loop {% endcomment %}
-{% if open_details_count > 0 %}
-{% for i in (1..open_details_count) %}
-        </ul></details></li>
-{% endfor %}
-{% endif %}
-    </ul>
+            {%- assign folder_summary_chain = "" -}
+          {%- endif -}
+        {%- endif -}
+      {%- endfor -}
+    {%- endif -}
+    {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -}
+    {%- assign display_label = p.title -}
+    {%- if display_label == nil or display_label == "" -}
+      {%- assign display_label = filename -}
+    {%- endif -}
+    {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
+    {%- assign leaf_level = open_folders.size | plus: 1 -%}
+    <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
+      <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
+    </li>
+  {%- endfor -}
+  {%- comment %} Step F: Complete layout cycle by unwinding remaining tags {% endcomment -}
+  {%- assign remaining_closes = open_folders.size -}
+  {%- if remaining_closes > 0 -}
+    {%- for i in (1..remaining_closes) -%}
+      </ul></details></li>
+    {%- endfor -}
+  {%- endif -%}
+</ul>
 </nav>
