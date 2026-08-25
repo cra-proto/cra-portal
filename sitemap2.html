@@ -37,7 +37,7 @@ css: "/cra-portal/source/css/custom.css"
   {%- endfor -%}
 
   {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
-  {%- assign sorted_pages = valid_pages | sort: "title" -%}
+  {%- assign sorted_pages = valid_pages | sort: "url" -%}
   {%- assign open_folders = "" | split: "," -%}
   {%- assign physical_html_depth = 0 -%}
 
@@ -111,10 +111,7 @@ css: "/cra-portal/source/css/custom.css"
     {%- endif -%}
 
     {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -%}
-    {%- assign display_label = p.title -%}
-    {%- if display_label == nil or display_label == "" -%}
-      {%- assign display_label = filename -%}
-    {%- endif -%}
+    {%- assign display_label = filename -%}
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
