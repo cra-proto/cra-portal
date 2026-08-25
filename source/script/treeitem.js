@@ -131,6 +131,7 @@ Treeitem.prototype.handleKeydown = function (event) {
     switch (event.keyCode) {
       case this.keyCode.RETURN:
       case this.keyCode.SPACE:
+/*
         var treeitem = event.currentTarget;
         var label = treeitem.getAttribute('aria-label');
         if (!label) {
@@ -138,7 +139,7 @@ Treeitem.prototype.handleKeydown = function (event) {
           label = child ? child.innerText : treeitem.innerText;
         }
         document.getElementById('last_action').value = label.trim();
-
+*/
         if (!this.isExpandable) this.tree.setFocusToItem(this);
         this.tree.setSelectedToItem(this);
         flag = true;
