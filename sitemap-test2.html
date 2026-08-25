@@ -1,0 +1,146 @@
+---
+testBanner: false
+title: "Sitemap"
+dateModified: 2026-08-19
+dateIssued: 2025-08-19
+nositesearch: true
+nomenu: true
+breadcrumbs: false
+feedback: false
+share: false
+noFooterContextual: true
+noFooterCorporate: true
+noFooterMain: true
+css: "/cra-portal/source/css/custom.css"
+---
+
+<div class="mrgn-tp-md brdr-bttm">
+    <div class="row">
+        <ul class="toc lst-spcd col-md-12">
+            <li class="col-md-4 col-sm-6"><a class="btn btn-primary" data-exit="false" href="https://github.com/{{ site.github.repository_name }}/gst-hst-business/tree/main">GitHub repository</a></li>
+        </ul>
+    </div>
+</div>
+<br>
+<button type="button" class="btn btn-default wb-toggle" data-toggle="{&quot;selector&quot;: &quot;details&quot;, &quot;type&quot;: &quot;on&quot;}">Expand All</button>
+<button type="button" class="btn btn-default wb-toggle" data-toggle="{&quot;selector&quot;: &quot;details&quot;, &quot;type&quot;: &quot;off&quot;}">Collapse All</button>
+<br>
+<br>
+<nav>
+<ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
+  {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
+  {%- assign valid_pages = "" | split: "," -%}
+  {%- for p in site.pages -%}
+    {%- if p.sitemap != false -%}
+      {%- assign valid_pages = valid_pages | push: p -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
+  {%- assign sorted_pages = valid_pages | sort: "url" -%}
+  {%- assign open_folders = "" | split: "," -%}
+  {%- assign physical_html_depth = 0 -%}
+
+  {%- for p in sorted_pages -%}
+    {%- comment %} Deduce current folder structures from the URL path {% endcomment -%}
+    {%- assign url_parts = p.url | split: "/" -%}
+    {%- assign parts_size = url_parts.size -%}
+    {%- assign filename = url_parts | last -%}
+    {%- assign target_folder_depth = parts_size | minus: 2 -%}
+    {%- assign this_page_folders = "" | split: "," -%}
+    {%- if target_folder_depth > 0 -%}
+      {%- for i in (1..target_folder_depth) -%}
+        {%- assign this_page_folders = this_page_folders | push: url_parts[i] -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- comment %} Step A: Determine how many folder levels we have departed from {% endcomment -%}
+    {%- assign keep_open_count = 0 -%}
+    {%- assign max_possible_match = open_folders.size -%}
+    {%- if this_page_folders.size < max_possible_match -%}
+      {%- assign max_possible_match = this_page_folders.size -%}
+    {%- endif -%}
+    {%- for i in (0..max_possible_match) -%}
+      {%- if i < max_possible_match -%}
+        {%- assign old_f = open_folders[i] -%}
+        {%- assign new_f = this_page_folders[i] -%}
+        {%- if old_f == new_f -%}
+          {%- assign keep_open_count = keep_open_count | plus: 1 -%}
+        {%- else -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment %} Step B: Unwind and close EVERY level we left {% endcomment -%}
+    {%- assign current_open_num = open_folders.size -%}
+    {%- if current_open_num > keep_open_count -%}
+      {%- assign levels_to_close = current_open_num | minus: keep_open_count -%}
+      {%- for c in (1..levels_to_close) -%}
+        {%- if physical_html_depth > 0 -%}
+          </ul></details></li>
+          {%- assign physical_html_depth = physical_html_depth | minus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      
+      {%- assign temp_folders = "" | split: "," -%}
+      {%- for i in (0..keep_open_count) -%}
+        {%- if i < keep_open_count -%}
+          {%- assign temp_folders = temp_folders | push: open_folders[i] -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign open_folders = temp_folders -%}
+    {%- endif -%}
+
+    {%- comment %} Step C: Open new sub-folders with unified HTML structural counting {% endcomment -%}
+    {%- assign start_index = open_folders.size -%}
+    {%- assign end_index = this_page_folders.size -%}
+    {%- if start_index < end_index -%}
+      {%- assign folder_summary_chain = "" -%}
+      {%- for i in (start_index..end_index) -%}
+        {%- if i < end_index -%}
+          {%- assign folder_name = this_page_folders[i] -%}
+          {%- assign open_folders = open_folders | push: folder_name -%}
+          {%- if folder_summary_chain == "" -%}
+            {%- assign folder_summary_chain = folder_name -%}
+          {%- else -%}
+            {%- assign folder_summary_chain = folder_summary_chain | append: "/" | append: folder_name -%}
+          {%- endif -%}
+          {%- assign next_index = i | plus: 1 -%}
+          {%- assign skip_summary = false -%}
+          {%- if next_index < end_index -%}
+            {%- assign skip_summary = true -%}
+          {%- endif -%}
+          {%- if skip_summary == false -%}
+            {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
+            <li role="treeitem" aria-level="{{ physical_html_depth }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
+              <details>
+                <summary>{{ folder_summary_chain }}</summary>
+                <ul role="group">
+            {%- assign folder_summary_chain = "" -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -%}
+    {%- assign display_label = p.title -%}
+    {%- if display_label == nil or display_label == "" -%}
+      {%- assign display_label = filename -%}
+    {%- endif -%}
+
+    {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
+    {%- assign leaf_level = physical_html_depth | plus: 1 -%}
+    <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
+      <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
+    </li>
+  {%- endfor -%}
+
+  {%- comment %} Step F: Complete layout cycle by unwinding remaining tags accurately {% endcomment -%}
+  {%- if physical_html_depth > 0 -%}
+    {%- for i in (1..physical_html_depth) -%}
+      </ul></details></li>
+    {%- endfor -%}
+  {%- endif -%}
+</ul>
+</nav>
