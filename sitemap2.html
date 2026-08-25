@@ -37,7 +37,7 @@ css: "/cra-portal/source/css/custom.css"
   {%- endfor -%}
 
   {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
-  {%- assign sorted_pages = valid_pages | sort: "url" -%}
+  {%- assign sorted_pages = valid_pages | sort: "title" -%}
   {%- assign open_folders = "" | split: "," -%}
   {%- assign physical_html_depth = 0 -%}
 
