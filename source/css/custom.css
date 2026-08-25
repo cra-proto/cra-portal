@@ -78,7 +78,7 @@
 
 /* Reset padding and borders for summary elements inside details */
 details summary {
-    padding: 0;
+    padding: 0 0 0 2em;
     border: none;
 }
 
@@ -100,5 +100,9 @@ summary {
 
 /* Remove the left padding from the details element */
 details {
+    padding-left: 0;
+}
+
+.list-unstyled {
     padding-left: 0;
 }
