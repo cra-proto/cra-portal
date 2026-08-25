@@ -1,6 +1,8 @@
 .tree {
   --spacing: 1.5rem;
   --radius: 10px;
+  --listitemcolor: #eaebed;  
+  --expandcolor: #295376;  
 }
 
 .tree li {
@@ -9,19 +11,20 @@
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
 
-ul[role="tree"] {
+.tree ul {
   margin-left: calc(var(--radius) - var(--spacing));
   padding-left: 0;
 }
 
 ul[role="tree"] li {
-  line-height: 1.4em !important;
-  margin-bottom: 0.5em;
-  border-left: 2px solid #eaebed;
+  line-height: 1em !important;
+  margin-top: 0.52em;
+  margin-bottom: 0.52em;
+  border-left: 2px solid var(--listitemcolor);
 }
 
 ul[role="tree"] li a {
-  padding-left: .3em !important;
+  padding-left: .35em !important;
 }
 
 ul[role="tree"] li:last-child {
@@ -36,7 +39,7 @@ ul[role="tree"] li::before {
   left: -2px;
   width: calc(var(--spacing) + 2px);
   height: calc(var(--spacing) + 1px);
-  border: 2px solid #eaebed;
+  border: 2px solid var(--listitemcolor);
   border-width: 0 0 2px 2px;
 }
 
@@ -62,12 +65,12 @@ ul[role="tree"] li::before {
   width: calc(2 * var(--radius));
   height: calc(2 * var(--radius));
   border-radius: 50%;
-  background: #eaebed;
+  background: var(--listitemcolor);
 }
 
 [role="treeitem"] span::before {
   z-index: 1;
-  background: #295376 url('/cra-portal/source/media/expand-collapse.svg') 0 0;
+  background: var(--expandcolor) url('/cra-portal/source/media/expand-collapse.svg') 0 0;
 }
 
 /* CSS to overwrite default WET CSS */ 
@@ -89,7 +92,7 @@ ul[role="tree"] li::before {
 [role="treeitem"].hover, [role="treeitem"] span:hover {
   background-color: #eaebed;
 }
-/*
+
 [role="treeitem"][aria-expanded="false"] + [role="group"] {
   display: none;
 }
@@ -105,4 +108,3 @@ ul[role="tree"] li::before {
 [role="treeitem"][aria-expanded="true"] > ul {
   display: block;
 }
-*/
