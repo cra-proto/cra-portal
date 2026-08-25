@@ -35,12 +35,12 @@ script:
 <ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
   {%- assign valid_pages = "" | split: "," -%}
-  {% assign localPages = site.pages | where_exp: "p", "p.url | slice: 0, 1 == '/'" %}
-  {% assign englishPages = site.pages | where_exp: "p", "p.url contains '/en/'" | sort: "url" %}
-  {% assign frenchPages = site.pages | where_exp: "p", "p.url contains '/fr/'" | sort: "url" %}
-  {%- for p in localPages -%}
+  {%- for p in site.pages -%}
     {%- if p.sitemap != false -%}
-      {%- assign valid_pages = valid_pages | push: p -%}
+      {%- assign first_char = p.url | slice: 0, 1 -%}
+      {%- if first_char == '/' -%}
+        {%- assign valid_pages = valid_pages | push: p -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
 
