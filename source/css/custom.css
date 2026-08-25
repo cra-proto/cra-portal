@@ -91,6 +91,7 @@ details summary {
 /* Remove border from open details elements */
 details[open] {
     border: none;
+    padding-bottom: .3em !important;
 }
 
 /* Remove border and reset the open list-style-type */
