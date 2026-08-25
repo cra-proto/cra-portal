@@ -111,7 +111,10 @@ css: "/cra-portal/source/css/custom.css"
     {%- endif -%}
 
     {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -%}
-    {%- assign display_label = filename -%}
+    {%- comment %} assign display_label = p.title {% endcomment -%}
+    {%- comment %} if display_label == nil or display_label == "" {% endcomment -%}
+      {%- assign display_label = filename -%}
+    {%- comment %} endif {% endcomment -%}
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
