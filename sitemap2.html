@@ -60,8 +60,9 @@ css: "/cra-portal/source/css/custom.css"
     {%- if this_page_folders.size < max_possible_match -%}
       {%- assign max_possible_match = this_page_folders.size -%}
     {%- endif -%}
-    {%- for i in (0..max_possible_match) -%}
-      {%- if i < max_possible_match -%}
+    {%- if max_possible_match > 0 -%}
+      {%- assign loop_end = max_possible_match | minus: 1 -%}
+      {%- for i in (0..loop_end) -%}
         {%- assign old_f = open_folders[i] -%}
         {%- assign new_f = this_page_folders[i] -%}
         {%- if old_f == new_f -%}
@@ -69,8 +70,8 @@ css: "/cra-portal/source/css/custom.css"
         {%- else -%}
           {%- break -%}
         {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
 
     {%- comment %} Step B: Unwind and close EVERY level we left {% endcomment -%}
     {%- assign current_open_num = open_folders.size -%}
@@ -84,11 +85,12 @@ css: "/cra-portal/source/css/custom.css"
       {%- endfor -%}
       
       {%- assign temp_folders = "" | split: "," -%}
-      {%- for i in (0..keep_open_count) -%}
-        {%- if i < keep_open_count -%}
+      {%- if keep_open_count > 0 -%}
+        {%- assign loop_end = keep_open_count | minus: 1 -%}
+        {%- for i in (0..loop_end) -%}
           {%- assign temp_folders = temp_folders | push: open_folders[i] -%}
-        {%- endif -%}
-      {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
       {%- assign open_folders = temp_folders -%}
     {%- endif -%}
 
@@ -96,31 +98,15 @@ css: "/cra-portal/source/css/custom.css"
     {%- assign start_index = open_folders.size -%}
     {%- assign end_index = this_page_folders.size -%}
     {%- if start_index < end_index -%}
-      {%- assign folder_summary_chain = "" -%}
-      {%- for i in (start_index..end_index) -%}
-        {%- if i < end_index -%}
-          {%- assign folder_name = this_page_folders[i] -%}
-          {%- assign open_folders = open_folders | push: folder_name -%}
-          {%- if folder_summary_chain == "" -%}
-            {%- assign folder_summary_chain = folder_name -%}
-          {%- else -%}
-            {%- assign folder_summary_chain = folder_summary_chain | append: "/" | append: folder_name -%}
-          {%- endif -%}
-          {%- assign next_index = i | plus: 1 -%}
-          {%- assign skip_summary = false -%}
-          {%- if next_index < end_index -%}
-            {%- assign skip_summary = true -%}
-          {%- endif -%}
-          {%- if skip_summary == false -%}
-            {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
-            <li role="treeitem" aria-level="{{ physical_html_depth }}" aria-setsize="1" aria-posinset="1" aria-expanded="false" aria-selected="false">
-              <details>
-                <summary>{{ folder_summary_chain }}</summary>
-                <ul role="group">
-            {%- assign folder_summary_chain = "" -%}
-          {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
+      {%- assign loop_end = end_index | minus: 1 -%}
+      {%- for i in (start_index..loop_end) -%}
+        {%- assign folder_name = this_page_folders[i] -%}
+        {%- assign open_folders = open_folders | push: folder_name -%}
+        {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
+<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="false" aria-selected="false">
+<details>
+<summary>{{ folder_name }}</summary>
+<ul role="group">
     {%- endif -%}
 
     {%- comment %} Step D: Determine node display label (Front Matter Title vs Raw Filename) {% endcomment -%}
@@ -131,7 +117,7 @@ css: "/cra-portal/source/css/custom.css"
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
-    <li role="treeitem" aria-level="{{ leaf_level }}" aria-setsize="1" aria-posinset="1" aria-expanded="none" aria-selected="false">
+    <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
       <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
     </li>
   {%- endfor -%}
