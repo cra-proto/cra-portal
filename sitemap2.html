@@ -27,7 +27,7 @@ css: "/cra-portal/source/css/custom.css"
 <br>
 <br>
 <nav>
-<ul class="list-unstyled" role="tree" aria-labelledby="tree1">
+<ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
   {%- assign valid_pages = "" | split: "," -%}
   {%- for p in site.pages -%}
