@@ -90,10 +90,15 @@ details[open] {
 /* Remove border and reset the open list-style-type */
 details[open] > summary {
     border: none;
-    list-style-type: revert; /* Reverts to browser default (usually 'none' or 'disclosure-open' depending on layout) */
+    list-style-type: none; /* Reverts to browser default (usually 'none' or 'disclosure-open' depending on layout) */
 }
 
 /* Revert the forced list-item display back to standard summary behavior */
 summary {
-    display: revert !important; /* Matches the specificity and restores standard behavior */
+    display: block !important; /* Matches the specificity and restores standard behavior */
+}
+
+/* Remove the left padding from the details element */
+details {
+    padding-left: 0;
 }
