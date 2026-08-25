@@ -1,0 +1,88 @@
+.tree {
+  --spacing: 1.5rem;
+  --radius: 10px;
+}
+
+.tree li {
+  display: block;
+  position: relative;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+.tree ul {
+  margin-left: calc(var(--radius) - var(--spacing));
+  padding-left: 0;
+}
+
+.tree ul li {
+  line-height: 1.4em !important;
+  margin-bottom: 0.5em;
+  border-left: 2px solid #eaebed;
+}
+
+.tree ul li a {
+  padding-left: .3em !important;
+}
+
+.tree ul li:last-child {
+  border-color: transparent;
+}
+
+.tree ul li::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(var(--spacing) / -2);
+  left: -2px;
+  width: calc(var(--spacing) + 2px);
+  height: calc(var(--spacing) + 1px);
+  border: 2px solid #eaebed;
+  border-width: 0 0 2px 2px;
+}
+
+.tree span {
+  display: block;
+  cursor: pointer;
+}
+
+.tree span:focus {
+  outline: none;
+}
+
+.tree span:focus-visible {
+  outline: 1px dotted #000;
+}
+
+.tree li::after,
+.tree span::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(var(--spacing) / 2 - var(--radius));
+  left: calc(var(--spacing) - var(--radius) - 1px);
+  width: calc(2 * var(--radius));
+  height: calc(2 * var(--radius));
+  border-radius: 50%;
+  background: #eaebed;
+}
+
+.tree span::before {
+  z-index: 1;
+  background: #295376 url('/cra-portal/source/media/expand-collapse.svg') 0 0;
+}
+
+/* CSS to overwrite default WET CSS */ 
+
+/* Revert the forced list-item display back to standard span behavior */
+.tree span {
+  line-height: 1.2em;
+    display: block !important; /* Matches the specificity and restores standard behavior */
+}
+
+.tree.list-unstyled {
+    padding-left: 0;
+}
+
+.tree > span::before {
+  background-position: calc(-2 * var(--radius)) 0;
+}
