@@ -67,9 +67,33 @@
 
 .tree summary::before {
   z-index: 1;
-  background: #26374a url('source/media/expand-collapse.svg') 0 0;
+  background: #295376 url('source/media/expand-collapse.svg') 0 0;
 }
 
 .tree details[open] > summary::before {
   background-position: calc(-2 * var(--radius)) 0;
+}
+
+/* CSS to overwrite default WET CSS */ 
+
+/* Reset padding and borders for summary elements inside details */
+details summary {
+    padding: 0;
+    border: none;
+}
+
+/* Remove border from open details elements */
+details[open] {
+    border: none;
+}
+
+/* Remove border and reset the open list-style-type */
+details[open] > summary {
+    border: none;
+    list-style-type: revert; /* Reverts to browser default (usually 'none' or 'disclosure-open' depending on layout) */
+}
+
+/* Revert the forced list-item display back to standard summary behavior */
+summary {
+    display: revert !important; /* Matches the specificity and restores standard behavior */
 }
