@@ -15,6 +15,8 @@
 }
 
 .tree ul li {
+  line-height: 1.4em;
+  padding-left: 1em;
   border-left: 2px solid #ddd;
 }
 
@@ -95,6 +97,7 @@ details[open] > summary {
 
 /* Revert the forced list-item display back to standard summary behavior */
 summary {
+  line-height: 1.2em;
     display: block !important; /* Matches the specificity and restores standard behavior */
 }
 
