@@ -16,7 +16,8 @@
 
 .tree ul li {
   line-height: 1.4em;
-  padding-left: 1em;
+  padding-left: 2.2em;
+  margin-bottom: 0.5em;
   border-left: 2px solid #ddd;
 }
 
