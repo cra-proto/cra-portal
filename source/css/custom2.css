@@ -16,7 +16,7 @@
   padding-left: 0;
 }
 
-ul[role="tree"] li {
+.tree ul li {
   line-height: 1em !important;
   margin-top: 0.52em;
   margin-bottom: 0.52em;
