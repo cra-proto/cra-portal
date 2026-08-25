@@ -86,6 +86,10 @@ ul[role="tree"] li::before {
   background-position: calc(-2 * var(--radius)) 0;
 }
 
+[role="treeitem"].hover, [role="treeitem"] span:hover {
+  background-color: #eaebed;
+}
+/*
 [role="treeitem"][aria-expanded="false"] + [role="group"] {
   display: none;
 }
@@ -101,7 +105,4 @@ ul[role="tree"] li::before {
 [role="treeitem"][aria-expanded="true"] > ul {
   display: block;
 }
-
-[role="treeitem"].hover, [role="treeitem"] span:hover {
-  background-color: #eaebed;
-}
+*/
