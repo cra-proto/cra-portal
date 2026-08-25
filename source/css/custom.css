@@ -62,12 +62,12 @@
   width: calc(2 * var(--radius));
   height: calc(2 * var(--radius));
   border-radius: 50%;
-  background: #ddd;
+  background: #eaebed;
 }
 
 .tree summary::before {
   z-index: 1;
-  background: #696 url('source/media/expand-collapse.svg') 0 0;
+  background: #26374a url('source/media/expand-collapse.svg') 0 0;
 }
 
 .tree details[open] > summary::before {
