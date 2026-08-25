@@ -76,41 +76,41 @@
   background: #295376 url('/cra-portal/source/media/expand-collapse.svg') 0 0;
 }
 
-.tree details[open] > summary::before {
-  background-position: calc(-2 * var(--radius)) 0;
-}
-
 /* CSS to overwrite default WET CSS */ 
 
-/* Reset padding and borders for summary elements inside details */
-details summary {
-    padding: 0 0 0 2em;
-    border: none;
-}
-
-/* Remove border from open details elements */
-details[open] {
-    border: none;
-    padding-bottom: .3em !important;
-}
-
-/* Remove border and reset the open list-style-type */
-details[open] > summary {
-    border: none;
-    list-style-type: none; /* Reverts to browser default (usually 'none' or 'disclosure-open' depending on layout) */
+.tree.list-unstyled {
+    padding-left: 0;
 }
 
 /* Revert the forced list-item display back to standard summary behavior */
-summary {
+.tree summary {
   line-height: 1.2em;
     display: block !important; /* Matches the specificity and restores standard behavior */
 }
 
 /* Remove the left padding from the details element */
-details {
+.tree details {
     padding-left: 0;
 }
 
-.list-unstyled {
-    padding-left: 0;
+/* Reset padding and borders for summary elements inside details */
+.tree details summary {
+    padding: 0 0 0 2em;
+    border: none;
+}
+
+/* Remove border from open details elements */
+.tree details[open] {
+    border: none;
+    padding-bottom: .3em !important;
+}
+
+.tree details[open] > summary::before {
+  background-position: calc(-2 * var(--radius)) 0;
+}
+
+/* Remove border and reset the open list-style-type */
+.tree details[open] > summary {
+    border: none;
+    list-style-type: none; /* Reverts to browser default (usually 'none' or 'disclosure-open' depending on layout) */
 }
