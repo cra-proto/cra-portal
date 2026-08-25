@@ -1,7 +1,7 @@
 .tree {
   --spacing: 1.5rem;
   --radius: 10px;
-  --listitemcolor: #eaebed;  
+  --listitemcolor: #ccc;  
   --expandcolor: #295376;  
 }
 
@@ -11,27 +11,35 @@
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
 
-.tree ul {
+[role="treeitem"] ul {
   margin-left: calc(var(--radius) - var(--spacing));
   padding-left: 0;
 }
 
-.tree ul li {
+[role="treeitem"] li {
   line-height: 1em !important;
-  margin-top: 0.52em;
-  margin-bottom: 0.52em;
   border-left: 2px solid var(--listitemcolor);
 }
 
-ul[role="tree"] li a {
+ul[role="tree"] li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+[role="treeitem"] li a {
+  display: block;
+  padding-bottom: 0.5em;
+}
+
+[role="treeitem"] li a {
   padding-left: .35em !important;
 }
 
-ul[role="tree"] li:last-child {
+[role="treeitem"] li:last-child {
   border-color: transparent;
 }
 
-.tree ul li::before {
+[role="treeitem"] li::before {
   content: '';
   display: block;
   position: absolute;
@@ -43,20 +51,20 @@ ul[role="tree"] li:last-child {
   border-width: 0 0 2px 2px;
 }
 
-.tree span {
+[role="treeitem"] span {
   display: block;
   cursor: pointer;
 }
 
-.tree span:focus {
+[role="treeitem"] span:focus {
   outline: none;
 }
 
-.tree span:focus-visible {
+[role="treeitem"] span:focus-visible {
   outline: 1px dotted #000;
 }
 
-.tree li::after, .tree span::before {
+[role="treeitem"] li::after, [role="treeitem"] span::before {
   content: '';
   display: block;
   position: absolute;
@@ -91,15 +99,11 @@ ul[role="tree"] li:last-child {
     display: block !important; /* Matches the specificity and restores standard behavior */
 }
 
-.tree.list-unstyled {
-    padding-left: 0;
-}
-
 [role="treeitem"] > span::before {
   background-position: calc(-2 * var(--radius)) 0;
 }
 
-[role="treeitem"].hover, [role="treeitem"] span:hover {
+[role="treeitem"] li.hover, [role="treeitem"] li span:hover {
   background-color: #eaebed;
 }
 
