@@ -37,8 +37,9 @@ script:
   {%- assign valid_pages = "" | split: "," -%}
   {%- for p in site.pages -%}
     {%- if p.sitemap != false -%}
-      {%- assign first_char = p.url | slice: 0, 1 -%}
-      {%- if first_char == '/' -%}
+      {%- assign url_length = p.url | size -%}
+      {%- assign url_after_first_char = p.url | slice: 1, url_length -%}
+      {%- if url_after_first_char contains '/' -%}
         {%- assign valid_pages = valid_pages | push: p -%}
       {%- endif -%}
     {%- endif -%}
