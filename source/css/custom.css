@@ -67,7 +67,7 @@
 
 .tree summary::before {
   z-index: 1;
-  background: #295376 url('source/media/expand-collapse.svg') 0 0;
+  background: #295376 url('/cra-portal/source/media/expand-collapse.svg') 0 0;
 }
 
 .tree details[open] > summary::before {
