@@ -68,9 +68,19 @@ ul[role="tree"] li:last-child {
   background: var(--listitemcolor);
 }
 
+/* Base style: Shows the plus sign (left half of the SVG) */
 [role="treeitem"] span::before {
   z-index: 1;
   background: var(--expandcolor) url('/cra-portal/source/media/expand-collapse.svg') 0 0;
+}
+
+/* Expanded style: Shifts background left to show the minus sign (right half) */
+[role="treeitem"][aria-expanded="true"] span::before {
+  background-position: 20px;
+}
+
+[role="treeitem"][aria-expanded="false"] span::before {
+  background-position: 0px;
 }
 
 /* CSS to overwrite default WET CSS */ 
