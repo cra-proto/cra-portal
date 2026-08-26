@@ -145,10 +145,12 @@ ul[role="tree"] li {
         </ul>
     </div>
 </div>
+<!--
 <br>
 <button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
 <button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
 <br>
+-->
 <nav class="mrgn-tp-md">
 <ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
@@ -649,6 +651,7 @@ class Treeitem {
 }
 </script>
 <script>
+/*
 "use strict";
 
 window.addEventListener("load", () => {
@@ -695,4 +698,5 @@ window.addEventListener("load", () => {
     document.addEventListener("wet-boew-ready", bindButtons); 
   }
 });
+*/
 </script>
