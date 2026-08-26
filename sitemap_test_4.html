@@ -649,8 +649,8 @@ class Treeitem {
 }
 </script>
 <script>
-window.addEventListener("load", function () {
-  // 1. Find and initialize all trees on the page
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Initialize your trees
   var trees = document.querySelectorAll('[role="tree"]');
   var initializedTrees = [];
 
@@ -660,46 +660,26 @@ window.addEventListener("load", function () {
     initializedTrees.push(t);
   }
 
-  // 2. Wire up the Expand All Button
+  // 2. Add event listener to the Expand button safely
   var expandBtn = document.getElementById("btn-expand-all");
   if (expandBtn) {
     expandBtn.addEventListener("click", function (event) {
-      // Prevent any native form submission behavior or scrolling
-      event.preventDefault(); 
-      // Stop the click event from bleeding down into the tree element layers
-      event.stopPropagation(); 
-
-      // Trigger action across all detected trees
+      event.preventDefault();
+      event.stopPropagation();
       for (var j = 0; j < initializedTrees.length; j++) {
-        var currentTree = initializedTrees[j];
-        currentTree.expandAll();
-        
-        // Safety: Ensure keyboard navigation remains active by pointing to a valid node
-        if (currentTree.firstTreeitem) {
-          currentTree.setFocusToItem(currentTree.firstTreeitem);
-        }
+        initializedTrees[j].expandAll();
       }
     });
   }
 
-  // 3. Wire up the Collapse All Button
+  // 3. Add event listener to the Collapse button safely
   var collapseBtn = document.getElementById("btn-collapse-all");
   if (collapseBtn) {
     collapseBtn.addEventListener("click", function (event) {
-      // Prevent any native form submission behavior or scrolling
-      event.preventDefault(); 
-      // Stop the click event from bleeding down into the tree element layers
-      event.stopPropagation(); 
-
-      // Trigger action across all detected trees
+      event.preventDefault();
+      event.stopPropagation();
       for (var k = 0; k < initializedTrees.length; k++) {
-        var currentTree = initializedTrees[k];
-        currentTree.collapseAll();
-        
-        // Safety: Force focus to the top visible node since old focused items are hidden
-        if (currentTree.firstTreeitem) {
-          currentTree.setFocusToItem(currentTree.firstTreeitem);
-        }
+        initializedTrees[k].collapseAll();
       }
     });
   }
