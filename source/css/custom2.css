@@ -51,20 +51,20 @@ ul[role="tree"] li {
   border-width: 0 0 2px 2px;
 }
 
-[role="treeitem"] span {
+[role="treeitem"] span.tree-title {
   display: block;
   cursor: pointer;
 }
 
-[role="treeitem"] span:focus {
+[role="treeitem"] span.tree-title:focus {
   outline: none;
 }
 
-[role="treeitem"] span:focus-visible {
+[role="treeitem"] span.tree-title:focus-visible {
   outline: 1px dotted #000;
 }
 
-.tree li::after, .tree span::before {
+.tree li::after, .tree span.tree-title::before {
   content: '';
   display: block;
   position: absolute;
@@ -77,28 +77,28 @@ ul[role="tree"] li {
 }
 
 /* Base style: Shows the plus sign (left half of the SVG) */
-[role="treeitem"] span::before {
+[role="treeitem"] span.tree-title::before {
   z-index: 1;
   background: var(--expandcolor) url('/cra-portal/source/media/expand-collapse.svg') 0 0;
 }
 
 /* Expanded style: Shifts background left to show the minus sign (right half) */
-[role="treeitem"][aria-expanded="true"] span::before {
+[role="treeitem"][aria-expanded="true"] span.tree-title::before {
   background-position: 20px;
 }
 
-[role="treeitem"][aria-expanded="false"] span::before {
+[role="treeitem"][aria-expanded="false"] span.tree-title::before {
   background-position: 0px;
 }
 
 /* CSS to overwrite default WET CSS */ 
 /* Revert the forced list-item display back to standard span behavior */
-[role="treeitem"] span {
+[role="treeitem"] span.tree-title {
   line-height: 1.2em;
   display: block !important; /* Matches the specificity and restores standard behavior */
 }
 
-[role="treeitem"] > span::before {
+[role="treeitem"] > span.tree-title::before {
   background-position: calc(-2 * var(--radius)) 0;
 }
 
@@ -118,6 +118,6 @@ ul[role="tree"] li {
   display: block;
 }
 
-.tree li.hover, .tree li span:hover {
+.tree li.hover, .tree li span.tree-title:hover {
   background-color: #eaebed;
 }
