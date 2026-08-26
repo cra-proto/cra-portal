@@ -1,21 +1,18 @@
-<?xml version="1.0"?>
-<svg xmlns="http://w3.org" width="40" height="20" viewBox="0 0 40 20">
+<svg xmlns="http://w3.org" width="40" height="20" viewBox="0 0 40 20" class="folder-toggle">
   <style>
-    .folder-open { display: none; }
-    .folder-closed { display: block; }
-    .folder-toggle-btn:focus .folder-closed { display: none; }
-    .folder-toggle-btn:focus .folder-open { display: block; }
-    .folder-toggle-btn { cursor: pointer; outline: none; }
+    .folder-toggle .left-side { display: block; }
+    .folder-toggle .right-side { display: none; }
+    .folder-toggle:active .left-side,
+    .folder-toggle:hover .left-side { display: none; }
+    .folder-toggle:active .right-side,
+    .folder-toggle:hover .right-side { display: block; }
+    .folder-toggle { cursor: pointer; }
   </style>
-  <g class="folder-toggle-btn" tabindex="0" role="button" aria-label="Toggle folder state">
-    <g fill="#4A90E2">
-      <g class="folder-closed">
-        <path d="M2.5 16.5h15a1 1 0 0 0 1-1V8.5a1 1 0 0 0-1-1h-5.5a0.5 0 0 1-.4-.2l-.7-.9a1 1 0 0 0-.8-.4H2.5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1z"/>
-      </g>
-      <g class="folder-open">
-        <path d="M22.5 16.5h15a1 1 0 0 0 1-1V8.5a1 1 0 0 0-1-1h-5.5a0.5 0 0 1-.4-.2l-.7-.9a1 1 0 0 0-.8-.4H22.5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1z" opacity="0.5"/>
-        <path d="M21.5 9.5h17l-2 7h-13z"/>
-      </g>
+  <g fill="#4A90E2">
+    <path class="left-side" d="M2.5 16.5h15a1 1 0 0 0 1-1V8.5a1 1 0 0 0-1-1h-5.5a0.5 0 0 1-.4-.2l-.7-.9a1 1 0 0 0-.8-.4H2.5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1z"/>
+    <g class="right-side">
+      <path d="M22.5 16.5h15a1 1 0 0 0 1-1V8.5a1 1 0 0 0-1-1h-5.5a0.5 0 0 1-.4-.2l-.7-.9a1 1 0 0 0-.8-.4H22.5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1z" opacity="0.5"/>
+      <path d="M21.5 9.5h17l-2 7h-13z"/>
     </g>
   </g>
 </svg>
