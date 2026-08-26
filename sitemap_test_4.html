@@ -262,7 +262,7 @@ ul[role="tree"] li {
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a href="{{ p.url | relative_url }}" tabindex="-1" data-exit="false">{{ display_label | escape }}</a>
+      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false">{{ display_label | escape }}</a>
     </li>
 
     {%- if frenchExists == true -%}
