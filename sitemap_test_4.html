@@ -421,7 +421,6 @@ class Tree {
     }
   }
 
-  // --- NEW: Expand All Method ---
   expandAll() {
     for (let i = 0; i < this.treeitems.length; i++) {
       const ti = this.treeitems[i];
@@ -432,7 +431,6 @@ class Tree {
     this.updateVisibleTreeitems();
   }
 
-  // --- NEW: Collapse All Method ---
   collapseAll() {
     for (let i = 0; i < this.treeitems.length; i++) {
       const ti = this.treeitems[i];
@@ -441,10 +439,11 @@ class Tree {
       }
     }
     this.updateVisibleTreeitems();
-    this.setFocusToFirstItem(); // Prevents focus from getting trapped on a hidden item
+    this.setFocusToFirstItem();
   }
 
   updateVisibleTreeitems() {
+    // FIXED: Correctly targeted the first index element here
     if (this.treeitems.length > 0) {
       this.firstTreeitem = this.treeitems[0];
     }
