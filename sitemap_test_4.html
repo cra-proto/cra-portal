@@ -650,6 +650,7 @@ class Treeitem {
 </script>
 <script>
 window.addEventListener("load", function () {
+  // 1. Find and initialize all trees on the page
   var trees = document.querySelectorAll('[role="tree"]');
   var initializedTrees = [];
 
@@ -659,29 +660,47 @@ window.addEventListener("load", function () {
     initializedTrees.push(t);
   }
 
-  // Bind Expand All Button safely
+  // 2. Wire up the Expand All Button
   var expandBtn = document.getElementById("btn-expand-all");
   if (expandBtn) {
     expandBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      initializedTrees.forEach(function (treeInstance) {
-        treeInstance.expandAll();
-        // Shift focus back to the first item so keyboard navigation stays alive
-        treeInstance.setFocusToFirstItem();
-      });
+      // Prevent any native form submission behavior or scrolling
+      event.preventDefault(); 
+      // Stop the click event from bleeding down into the tree element layers
+      event.stopPropagation(); 
+
+      // Trigger action across all detected trees
+      for (var j = 0; j < initializedTrees.length; j++) {
+        var currentTree = initializedTrees[j];
+        currentTree.expandAll();
+        
+        // Safety: Ensure keyboard navigation remains active by pointing to a valid node
+        if (currentTree.firstTreeitem) {
+          currentTree.setFocusToItem(currentTree.firstTreeitem);
+        }
+      }
     });
   }
 
-  // Bind Collapse All Button safely
+  // 3. Wire up the Collapse All Button
   var collapseBtn = document.getElementById("btn-collapse-all");
   if (collapseBtn) {
     collapseBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      initializedTrees.forEach(function (treeInstance) {
-        treeInstance.collapseAll();
-        // Shifts focus safely back to the remaining top-level visible node
-        treeInstance.setFocusToFirstItem();
-      });
+      // Prevent any native form submission behavior or scrolling
+      event.preventDefault(); 
+      // Stop the click event from bleeding down into the tree element layers
+      event.stopPropagation(); 
+
+      // Trigger action across all detected trees
+      for (var k = 0; k < initializedTrees.length; k++) {
+        var currentTree = initializedTrees[k];
+        currentTree.collapseAll();
+        
+        // Safety: Force focus to the top visible node since old focused items are hidden
+        if (currentTree.firstTreeitem) {
+          currentTree.setFocusToItem(currentTree.firstTreeitem);
+        }
+      }
     });
   }
 });
