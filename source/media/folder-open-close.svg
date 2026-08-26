@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20">
-  <!-- BACKGROUND BOUNDING BOX (Ensures GitHub calculates the layout space) -->
+<svg xmlns="http://w3.org" width="40" height="20" viewBox="0 0 40 20">
+  <!-- Invisible container to force GitHub layout engines to calculate full dimensions -->
   <rect width="40" height="20" fill="none" />
 
-  <!-- CLOSED FOLDER (Left Canvas: Shifted away from edge boundaries) -->
+  <!-- CLOSED FOLDER (Left Side) -->
+  <!-- Back panel and tab -->
   <g fill="#295376">
     <path d="M 3 5 L 7 5 L 9 7 L 17 7 L 17 15 L 3 15 Z"/>
   </g>
+  <!-- Front flap layer -->
   <g fill="#1A3750">
     <path d="M 3 8 L 17 8 L 17 15 L 3 15 Z"/>
   </g>
 
-  <!-- OPEN FOLDER (Right Canvas: Shifted away from edge boundaries) -->
+  <!-- OPEN FOLDER (Right Side - No internal paper) -->
+  <!-- Shaded folder interior background -->
   <g fill="#112435">
     <path d="M 23 5 L 27 5 L 29 7 L 37 7 L 37 15 L 23 15 Z"/>
   </g>
-  <g fill="#FFFFFF">
-    <path d="M 25 4 L 34 4 L 34 11 L 25 11 Z"/>
-  </g>
-  <g fill="#B0BEC5">
-    <path d="M 27 6 H 32 V 7 H 27 Z M 27 9 H 31 V 10 H 27 Z"/>
-  </g>
+  <!-- Angled front flap creating the empty open look -->
   <g fill="#295376">
     <path d="M 22 9 L 38 9 L 36 16 L 24 16 Z"/>
   </g>
