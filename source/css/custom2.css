@@ -118,6 +118,6 @@ ul[role="tree"] li {
   display: block;
 }
 
-.tree li.hover, [role="treeitem"] li span:hover {
+.tree li.hover, .tree li span:hover {
   background-color: #eaebed;
 }
