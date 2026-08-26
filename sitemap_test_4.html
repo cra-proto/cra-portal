@@ -649,27 +649,38 @@ class Treeitem {
 }
 </script>
 <script>
-  // 2. Add event listener to the Expand button safely
-  var expandBtn = document.getElementById("btn-expand-all");
+window.addEventListener("load", () => {
+  const trees = document.querySelectorAll('[role="tree"]');
+  const treeInstances = [];
+
+  for (let i = 0; i < trees.length; i++) {
+    const t = new Tree(trees[i]);
+    t.init();
+    treeInstances.push(t);
+  }
+
+  // Safe element isolation using standard WET-BOEW ID selectors
+  const expandBtn = document.getElementById("btn-expand-all");
+  const collapseBtn = document.getElementById("btn-collapse-all");
+
   if (expandBtn) {
-    expandBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      for (var j = 0; j < initializedTrees.length; j++) {
-        initializedTrees[j].expandAll();
+    expandBtn.addEventListener("click", (event) => {
+      // Prevent WET global form or link handlers from hijacking the click
+      event.preventDefault(); 
+      for (let j = 0; j < treeInstances.length; j++) {
+        treeInstances[j].expandAll();
       }
     });
   }
 
-  // 3. Add event listener to the Collapse button safely
-  var collapseBtn = document.getElementById("btn-collapse-all");
   if (collapseBtn) {
-    collapseBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      for (var k = 0; k < initializedTrees.length; k++) {
-        initializedTrees[k].collapseAll();
+    collapseBtn.addEventListener("click", (event) => {
+      // Prevent WET global form or link handlers from hijacking the click
+      event.preventDefault(); 
+      for (let j = 0; j < treeInstances.length; j++) {
+        treeInstances[j].collapseAll();
       }
     });
   }
+});
 </script>
