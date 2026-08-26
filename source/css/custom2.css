@@ -64,7 +64,7 @@ ul[role="tree"] li {
   outline: 1px dotted #000;
 }
 
-[role="treeitem"] li::after, [role="treeitem"] span::before {
+.tree li::after, .tree span::before {
   content: '';
   display: block;
   position: absolute;
@@ -92,19 +92,14 @@ ul[role="tree"] li {
 }
 
 /* CSS to overwrite default WET CSS */ 
-
 /* Revert the forced list-item display back to standard span behavior */
 [role="treeitem"] span {
   line-height: 1.2em;
-    display: block !important; /* Matches the specificity and restores standard behavior */
+  display: block !important; /* Matches the specificity and restores standard behavior */
 }
 
 [role="treeitem"] > span::before {
   background-position: calc(-2 * var(--radius)) 0;
-}
-
-[role="treeitem"] li.hover, [role="treeitem"] li span:hover {
-  background-color: #eaebed;
 }
 
 [role="treeitem"][aria-expanded="false"] + [role="group"] {
@@ -121,4 +116,8 @@ ul[role="tree"] li {
 
 [role="treeitem"][aria-expanded="true"] > ul {
   display: block;
+}
+
+.tree li.hover, [role="treeitem"] li span:hover {
+  background-color: #eaebed;
 }
