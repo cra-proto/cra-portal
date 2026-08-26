@@ -121,7 +121,7 @@ script:
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
-    <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
+    <li role="treeitem" aria-level="{{ leaf_level }}" class="file-code" aria-selected="false">
       <a href="{{ p.url | relative_url }}">{{ display_label | escape }}</a>
     </li>
   {%- endfor -%}
