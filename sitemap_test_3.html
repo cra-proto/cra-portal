@@ -113,8 +113,8 @@ css:
         {%- assign folder_name = this_page_folders[i] -%}
         {%- assign open_folders = open_folders | push: folder_name -%}
         {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
-<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="false" aria-selected="false">
-<span>{{ folder_name }}</span>
+<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="false" aria-selected="false" class="tree-parent">
+<span class="tree-title">{{ folder_name }}</span>
 <ul role="group">
       {%- endfor -%}
     {%- endif -%}
@@ -130,9 +130,11 @@ css:
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
+
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
       <a href="{{ p.url | relative_url }}" tabindex="-1" data-exit="false">{{ display_label | escape }}</a>
     </li>
+
   {%- endfor -%}
 
   {%- comment %} Step F: Complete layout cycle by unwinding remaining tags accurately {% endcomment -%}
