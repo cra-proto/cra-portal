@@ -36,12 +36,15 @@ css:
       {%- assign first_four = p.url | slice: 0, 4 -%}
       {%- if first_four == "/en/" -%}
         {%- assign englishPages = englishPages | push: p -%}
-      {%- elif first_four == "/fr/" -%}
+      {%- elsif first_four == "/fr/" -%}
         {%- assign frenchPages = frenchPages | push: p -%}
       {%- endif -%}
       {%- assign valid_pages = valid_pages | push: p -%}
     {%- endif -%}
   {%- endfor -%}
+
+  {%- assign englishPages = englishPages | sort: "url" -%}
+  {%- assign frenchPages = frenchPages | sort: "url" -%}
 
   {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
   {%- assign sorted_pages = valid_pages | sort: "url" -%}
