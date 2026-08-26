@@ -651,37 +651,48 @@ class Treeitem {
 <script>
 "use strict";
 
-// Hook cleanly into WET-BOEW's framework lifecycle instead of native window load
-document.addEventListener("wb-ready.wb", function(event) {
+window.addEventListener("load", () => {
   const trees = document.querySelectorAll('[role="tree"]');
   const treeInstances = [];
 
+  // 1. Maintain your working initialization pattern
   for (let i = 0; i < trees.length; i++) {
     const t = new Tree(trees[i]);
     t.init();
     treeInstances.push(t);
   }
 
-  // Bind the global WET control buttons securely
-  const expandBtn = document.getElementById("btn-expand-all");
-  const collapseBtn = document.getElementById("btn-collapse-all");
+  // 2. Setup safe button binding execution
+  function bindButtons() {
+    const expandBtn = document.getElementById("btn-expand-all");
+    const collapseBtn = document.getElementById("btn-collapse-all");
 
-  if (expandBtn) {
-    expandBtn.addEventListener("click", function(e) {
-      e.preventDefault(); 
-      for (let j = 0; j < treeInstances.length; j++) {
-        treeInstances[j].expandAll();
-      }
-    });
+    if (expandBtn) {
+      expandBtn.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        for (let j = 0; j < treeInstances.length; j++) {
+          treeInstances[j].expandAll();
+        }
+      });
+    }
+
+    if (collapseBtn) {
+      collapseBtn.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        for (let j = 0; j < treeInstances.length; j++) {
+          treeInstances[j].collapseAll();
+        }
+      });
+    }
   }
 
-  if (collapseBtn) {
-    collapseBtn.addEventListener("click", function(e) {
-      e.preventDefault(); 
-      for (let j = 0; j < treeInstances.length; j++) {
-        treeInstances[j].collapseAll();
-      }
-    });
+  // 3. Check if WET framework state is already compiled, or listen for it
+  if (window.wb && window.wb.isReady) {
+    bindButtons();
+  } else {
+    document.addEventListener("wb-ready.wb", bindButtons);
+    // Hard fallback: if the custom event never fires, force bind 
+    document.addEventListener("wet-boew-ready", bindButtons); 
   }
 });
 </script>
