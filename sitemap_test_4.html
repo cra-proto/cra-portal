@@ -649,7 +649,10 @@ class Treeitem {
 }
 </script>
 <script>
-window.addEventListener("load", () => {
+"use strict";
+
+// Hook cleanly into WET-BOEW's framework lifecycle instead of native window load
+document.addEventListener("wb-ready.wb", function(event) {
   const trees = document.querySelectorAll('[role="tree"]');
   const treeInstances = [];
 
@@ -659,14 +662,13 @@ window.addEventListener("load", () => {
     treeInstances.push(t);
   }
 
-  // Safe element isolation using standard WET-BOEW ID selectors
+  // Bind the global WET control buttons securely
   const expandBtn = document.getElementById("btn-expand-all");
   const collapseBtn = document.getElementById("btn-collapse-all");
 
   if (expandBtn) {
-    expandBtn.addEventListener("click", (event) => {
-      // Prevent WET global form or link handlers from hijacking the click
-      event.preventDefault(); 
+    expandBtn.addEventListener("click", function(e) {
+      e.preventDefault(); 
       for (let j = 0; j < treeInstances.length; j++) {
         treeInstances[j].expandAll();
       }
@@ -674,9 +676,8 @@ window.addEventListener("load", () => {
   }
 
   if (collapseBtn) {
-    collapseBtn.addEventListener("click", (event) => {
-      // Prevent WET global form or link handlers from hijacking the click
-      event.preventDefault(); 
+    collapseBtn.addEventListener("click", function(e) {
+      e.preventDefault(); 
       for (let j = 0; j < treeInstances.length; j++) {
         treeInstances[j].collapseAll();
       }
