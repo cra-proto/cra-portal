@@ -649,17 +649,6 @@ class Treeitem {
 }
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 1. Initialize your trees
-  var trees = document.querySelectorAll('[role="tree"]');
-  var initializedTrees = [];
-
-  for (var i = 0; i < trees.length; i++) {
-    var t = new Tree(trees[i]);
-    t.init();
-    initializedTrees.push(t);
-  }
-
   // 2. Add event listener to the Expand button safely
   var expandBtn = document.getElementById("btn-expand-all");
   if (expandBtn) {
@@ -683,5 +672,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-});
 </script>
