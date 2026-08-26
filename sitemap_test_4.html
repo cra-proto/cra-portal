@@ -649,25 +649,40 @@ class Treeitem {
 }
 </script>
 <script>
-  /*
-  window.addEventListener("load", () => {
-  const trees = document.querySelectorAll('[role="tree"]');
-  
-  for (let i = 0; i < trees.length; i++) {
-    const t = new Tree(trees[i]);
+window.addEventListener("load", function () {
+  var trees = document.querySelectorAll('[role="tree"]');
+  var initializedTrees = [];
+
+  for (var i = 0; i < trees.length; i++) {
+    var t = new Tree(trees[i]);
     t.init();
+    initializedTrees.push(t);
+  }
 
-    // Wire up the buttons for the first tree instance
-    if (i === 0) {
-      document.getElementById("btn-expand-all")?.addEventListener("click", () => {
-        t.expandAll();
+  // Bind Expand All Button safely
+  var expandBtn = document.getElementById("btn-expand-all");
+  if (expandBtn) {
+    expandBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      initializedTrees.forEach(function (treeInstance) {
+        treeInstance.expandAll();
+        // Shift focus back to the first item so keyboard navigation stays alive
+        treeInstance.setFocusToFirstItem();
       });
+    });
+  }
 
-      document.getElementById("btn-collapse-all")?.addEventListener("click", () => {
-        t.collapseAll();
+  // Bind Collapse All Button safely
+  var collapseBtn = document.getElementById("btn-collapse-all");
+  if (collapseBtn) {
+    collapseBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      initializedTrees.forEach(function (treeInstance) {
+        treeInstance.collapseAll();
+        // Shifts focus safely back to the remaining top-level visible node
+        treeInstance.setFocusToFirstItem();
       });
-    }
+    });
   }
 });
-*/
 </script>
