@@ -11,6 +11,7 @@ share: false
 noFooterContextual: true
 noFooterCorporate: true
 noFooterMain: true
+systemPage: true
 ---
 <style>
 .tree {
@@ -152,21 +153,19 @@ ul[role="tree"] li {
   {%- assign frenchPages = "" | split: "," -%}
 
   {%- for p in site.pages -%}
-    {%- if p.sitemap != false -%}
-      {%- assign first_four = p.url | slice: 0, 4 -%}
-      {%- if first_four == "/en/" -%}
+    {%- if p.sitemap != false and p.systempage != true -%}
+      {%- if p.url contains "/en/" -%}
         {%- assign englishPages = englishPages | push: p -%}
-      {%- elsif first_four == "/fr/" -%}
+      {%- elsif p.url contains "/fr/" -%}
         {%- assign frenchPages = frenchPages | push: p -%}
       {%- endif -%}
       {%- assign valid_pages = valid_pages | push: p -%}
     {%- endif -%}
   {%- endfor -%}
 
+  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
   {%- assign englishPages = englishPages | sort: "url" -%}
   {%- assign frenchPages = frenchPages | sort: "url" -%}
-
-  {%- comment %} 2. Sort strictly by URL to keep directory hierarchies contiguous {% endcomment -%}
   {%- assign sorted_pages = valid_pages | sort: "url" -%}
   {%- assign open_folders = "" | split: "," -%}
   {%- assign physical_html_depth = 0 -%}
@@ -227,6 +226,14 @@ ul[role="tree"] li {
     {%- comment %} Step C: Open new sub-folders with unified HTML structural counting {% endcomment -%}
     {%- assign start_index = open_folders.size -%}
     {%- assign end_index = this_page_folders.size -%}
+
+    {%- assign pf = frenchPages | where: "url", p.altLangPage | first -%}
+    {%- if pf -%}
+      {%- assign frenchExists = true -%}
+    {%- else -%}
+      {%- assign frenchExists = false -%}
+    {%- endif -%}
+
     {%- if start_index < end_index -%}
       {%- assign loop_end = end_index | minus: 1 -%}
       {%- for i in (start_index..loop_end) -%}
@@ -250,13 +257,6 @@ ul[role="tree"] li {
 
     {%- comment %} Step E: Render the page link node safely inside the parent container {% endcomment -%}
     {%- assign leaf_level = physical_html_depth | plus: 1 -%}
-
-    {%- assign pf = frenchPages | where: "url", p.altLangPage | first -%}
-    {%- if pf -%}
-      {%- assign frenchExists = true -%}
-    {%- else -%}
-      {%- assign frenchExists = false -%}
-    {%- endif -%}
 
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
     {%- if frenchExists == true -%}
