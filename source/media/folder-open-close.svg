@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://w3.org" width="40" height="20" viewBox="0 0 40 20">
-  <!-- CLOSED FOLDER (Left Canvas: Coordinates 0 to 20) -->
-  <!-- Back panel and tab -->
-  <path fill="#295376" d="M2 5.5A1.5 1.5 0 0 1 3.5 4h3.6a1 1 0 0 1 .7.3l1.4 1.4a1 1 0 0 0 .7.3h6.6A1.5 1.5 0 0 1 18 7.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5v-10z"/>
-  <!-- Front cover flap (Darker shade for depth) -->
-  <path fill="#1A3750" d="M2 8.5A1.5 1.5 0 0 1 3.5 7h13A1.5 1.5 0 0 1 18 8.5v7a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5v-7z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20">
+  <!-- BACKGROUND BOUNDING BOX (Ensures GitHub calculates the layout space) -->
+  <rect width="40" height="20" fill="none" />
 
-  <!-- OPEN FOLDER (Right Canvas: Coordinates 20 to 40) -->
-  <!-- Back panel and tab -->
-  <path fill="#112435" d="M22 5.5a1.5 1.5 0 0 1 1.5-1.5h3.6a1 1 0 0 1 .7.3l1.4 1.4a1 1 0 0 0 .7.3h6.6A1.5 1.5 0 0 1 38 7.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 22 15.5v-10z"/>
-  <!-- Interior document page -->
-  <path fill="#FFFFFF" d="M24 5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v7h-11V5z"/>
-  <!-- Document paper lines -->
-  <path fill="#B0BEC5" d="M26 7h6v1h-6V7zm0 2h4v1h-4V9z"/>
-  <!-- Angled front flap -->
-  <path fill="#295376" d="M21.5 9.5a1 1 0 0 1 .9-.8h15.2a1 1 0 0 1 .9 1.2l-1.5 6.5a1.5 1.5 0 0 1-1.4 1.1h-11.2a1.5 1.5 0 0 1-1.4-1.2l-1.5-6.8z"/>
+  <!-- CLOSED FOLDER (Left Canvas: Shifted away from edge boundaries) -->
+  <g fill="#295376">
+    <path d="M 3 5 L 7 5 L 9 7 L 17 7 L 17 15 L 3 15 Z"/>
+  </g>
+  <g fill="#1A3750">
+    <path d="M 3 8 L 17 8 L 17 15 L 3 15 Z"/>
+  </g>
+
+  <!-- OPEN FOLDER (Right Canvas: Shifted away from edge boundaries) -->
+  <g fill="#112435">
+    <path d="M 23 5 L 27 5 L 29 7 L 37 7 L 37 15 L 23 15 Z"/>
+  </g>
+  <g fill="#FFFFFF">
+    <path d="M 25 4 L 34 4 L 34 11 L 25 11 Z"/>
+  </g>
+  <g fill="#B0BEC5">
+    <path d="M 27 6 H 32 V 7 H 27 Z M 27 9 H 31 V 10 H 27 Z"/>
+  </g>
+  <g fill="#295376">
+    <path d="M 22 9 L 38 9 L 36 16 L 24 16 Z"/>
+  </g>
 </svg>
