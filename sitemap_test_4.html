@@ -33,7 +33,7 @@ sitemapExclude: true
 }
 
 [role="treeitem"] li {
-  line-height: 1em !important;
+  line-height: 1.5em !important;
   border-left: 2px solid var(--listitemcolor);
 }
 
@@ -45,10 +45,7 @@ ul[role="tree"] li {
 [role="treeitem"] li a {
   display: block;
   padding-bottom: 0.5em;
-}
-
-[role="treeitem"] li a {
-  padding-left: .35em !important;
+/*  padding-left: .35em !important; */
 }
 
 [role="treeitem"] li:last-child {
@@ -68,8 +65,9 @@ ul[role="tree"] li {
 }
 
 [role="treeitem"] span.tree-title {
-  display: block;
+  display: block !important; /* Matches the specificity and restores standard behavior */
   cursor: pointer;
+  line-height: 1.2em;
 }
 
 [role="treeitem"] span.tree-title:focus {
@@ -109,11 +107,6 @@ ul[role="tree"] li {
 
 /* CSS to overwrite default WET CSS */ 
 /* Revert the forced list-item display back to standard span behavior */
-[role="treeitem"] span.tree-title {
-  line-height: 1.2em;
-  display: block !important; /* Matches the specificity and restores standard behavior */
-}
-
 [role="treeitem"] > span.tree-title::before {
   background-position: calc(-2 * var(--radius)) 0;
 }
