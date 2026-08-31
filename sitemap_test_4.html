@@ -1,11 +1,11 @@
 ---
 testBanner: false
-title: "Sitemap"
-dateModified: 2026-08-19
-dateIssued: 2025-08-19
+title: "Portal Repository"
+dateModified: 2026-08-26
+dateIssued: 2025-08-26
 nositesearch: true
 nomenu: true
-breadcrumbs: false
+breadcrumbs : false
 feedback: false
 share: false
 noFooterContextual: true
@@ -19,6 +19,14 @@ sitemapExclude: true
   --radius: 10px;
   --listitemcolor: #ccc;
   --expandcolor: #295376;
+}
+
+/* Clear default layout parameters */
+.tree, 
+.tree ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 .tree li {
@@ -40,6 +48,11 @@ li[role="treeitem"] ul {
 li[role="treeitem"] {
   line-height: 1.3em !important;
   border-left: 2px solid var(--listitemcolor);
+  cursor: pointer;
+}
+
+ul[role="tree"] > li[role="treeitem"] {
+  border-left-color: transparent;
 }
 
 li[role="treeitem"]:last-child {
@@ -59,21 +72,7 @@ li[role="treeitem"]::before {
   border-width: 0 0 2px 2px;
 }
 
-/* Leaf Node Icon (Original geometric CSS circle bullet) */
-.tree li::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: calc(var(--spacing) / 2 - var(--radius));
-  left: calc(var(--spacing) - var(--radius) - 1px);
-  width: calc(2 * var(--radius));
-  height: calc(2 * var(--radius));
-  border-radius: 50%;
-  background: var(--listitemcolor);
-  z-index: 3;
-}
-
-.tree li:has(> span.tree-title)::after {
+ul[role="tree"] > li[role="treeitem"]::before {
   display: none;
 }
 
@@ -109,6 +108,28 @@ li[role="treeitem"] a:visited {
   color: #551a8b;
 }
 
+li[role="treeitem"] span.tree-title,
+li[role="treeitem"] a {
+  pointer-events: none;
+}
+
+.tree li::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(var(--spacing) / 2 - var(--radius));
+  left: calc(var(--spacing) - var(--radius) - 1px);
+  width: calc(2 * var(--radius));
+  height: calc(2 * var(--radius));
+  border-radius: 50%;
+  background: var(--listitemcolor);
+  z-index: 3;
+}
+
+.tree li:has(> span.tree-title)::after {
+  display: none;
+}
+
 .tree li span.tree-title:hover {
   background-color: var(--expandcolor);
   color: #ffffff;
@@ -120,13 +141,13 @@ li[role="treeitem"] a:visited {
   color: #0000ee;
 }
 
-li[role="treeitem"] span.tree-title:focus,
-li[role="treeitem"] a:focus {
+[role="treeitem"] span.tree-title:focus,
+[role="treeitem"] li a:focus {
   outline: 0;
 }
 
-li[role="treeitem"] span.tree-title:focus-visible,
-li[role="treeitem"] a:focus-visible {
+[role="treeitem"] span.tree-title:focus-visible,
+[role="treeitem"] li a:focus-visible {
   outline: 1px dotted #000;
 }
 
@@ -175,13 +196,7 @@ li[role="treeitem"][aria-expanded="true"] > ul {
         </ul>
     </div>
 </div>
-<!--
-<br>
-<button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
-<button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
-<br>
--->
-<nav class="mrgn-tp-md">
+<h2 id="tree1">Sitemap (treeview)</h2>
 <ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
   {%- assign valid_pages = "" | split: "," -%}
@@ -318,7 +333,6 @@ li[role="treeitem"][aria-expanded="true"] > ul {
     {%- endfor -%}
   {%- endif -%}
 </ul>
-</nav>
 <script src="/core-prototype/source/scripts/treeview.js"></script>
 <script>
 /*
