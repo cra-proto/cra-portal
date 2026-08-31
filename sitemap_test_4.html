@@ -15,10 +15,10 @@ sitemapExclude: true
 ---
 <style>
 .tree {
-  --spacing: 2rem;
+  --spacing: 2.3rem;
   --radius: 10px;
-  --listitemcolor: #ccc;  
-  --expandcolor: #295376;  
+  --listitemcolor: #ccc;
+  --expandcolor: #295376;
 }
 
 .tree li {
@@ -27,31 +27,26 @@ sitemapExclude: true
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
 
+ul[role="tree"] li {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
 [role="treeitem"] ul {
   margin-left: calc(var(--radius) - var(--spacing));
   padding-left: 0;
 }
 
 [role="treeitem"] li {
-  line-height: 1.5em !important;
+  line-height: 1.3em !important;
   border-left: 2px solid var(--listitemcolor);
-}
-
-ul[role="tree"] li {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-[role="treeitem"] li a {
-  display: block;
-  padding-bottom: 0.3em;
-/*  padding-left: .35em !important; */
 }
 
 [role="treeitem"] li:last-child {
   border-color: transparent;
 }
 
+/* Tree Connecting Lines (L-shape) */
 [role="treeitem"] li::before {
   content: "";
   display: block;
@@ -64,21 +59,8 @@ ul[role="tree"] li {
   border-width: 0 0 2px 2px;
 }
 
-[role="treeitem"] span.tree-title {
-  display: block !important; /* Matches the specificity and restores standard behavior */
-  cursor: pointer;
-  line-height: 1.2em;
-}
-
-[role="treeitem"] span.tree-title:focus {
-  outline: none;
-}
-
-[role="treeitem"] span.tree-title:focus-visible {
-  outline: 1px dotted #000;
-}
-
-.tree li::after, .tree span.tree-title::before {
+/* Leaf Node Icon (Original geometric CSS circle bullet) */
+.tree li::after {
   content: "";
   display: block;
   position: absolute;
@@ -88,51 +70,101 @@ ul[role="tree"] li {
   height: calc(2 * var(--radius));
   border-radius: 50%;
   background: var(--listitemcolor);
+  z-index: 3; 
 }
 
-/* Base style: Shows the plus sign (left half of the SVG) */
-[role="treeitem"] span.tree-title::before {
-  z-index: 1;
-  background: var(--expandcolor) url("/core-prototype/source/media/expand-collapse.svg") 0 0;
-}
-
-/* Expanded style: Shifts background left to show the minus sign (right half) */
-[role="treeitem"][aria-expanded="true"] span.tree-title::before {
-  background-position: 20px;
-}
-
-[role="treeitem"][aria-expanded="false"] span.tree-title::before {
-  background-position: 0px;
-}
-
-/* CSS to overwrite default WET CSS */ 
-/* Revert the forced list-item display back to standard span behavior */
-[role="treeitem"] > span.tree-title::before {
-  background-position: calc(-2 * var(--radius)) 0;
-}
-
-[role="treeitem"][aria-expanded="false"] + [role="group"] {
+.tree li:has(> span.tree-title)::after {
   display: none;
 }
 
-[role="treeitem"][aria-expanded="true"] + [role="group"] {
-  display: block;
+[role="treeitem"] span.tree-title {
+  display: inline-flex !important;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1.2em;
+  white-space: nowrap;
+  margin-left: calc(-1 * (var(--spacing) - var(--radius) + 17px));
+  padding: 0.35em 0.6em 0.35em calc(var(--spacing) - var(--radius) + 12px); 
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
 }
 
+[role="treeitem"] li a {
+  display: inline-flex !important;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1.2em;
+  white-space: nowrap;
+  margin-left: calc(-1 * (var(--spacing) - var(--radius) - 15px));
+  padding: 0.35em 0.6em; 
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
+  text-decoration: underline;
+}
+
+[role="treeitem"] li a:visited {
+  color: #551a8b; 
+}
+
+.tree li span.tree-title:hover {
+  background-color: var(--expandcolor);
+  color: #ffffff;
+}
+
+.tree li a:hover {
+  background-color: #eaebed; 
+  color: #0000ee; 
+}
+
+[role="treeitem"] span.tree-title:focus,
+[role="treeitem"] li a:focus {
+  outline: 0;
+}
+
+[role="treeitem"] span.tree-title:focus-visible,
+[role="treeitem"] li a:focus-visible {
+  outline: 1px dotted #000;
+}
+
+/* --- FontAwesome Folder Icons --- */
+[role="treeitem"] > span.tree-title::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #26374a;
+  position: absolute;
+  left: calc(var(--spacing) - var(--radius) - 21px); 
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff; 
+  padding: 2px;
+  transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+/* Closed Folder State */
+[role="treeitem"][aria-expanded="false"] > span.tree-title::before {
+  content: "\f07b";
+}
+
+/* Open Folder State */
+[role="treeitem"][aria-expanded="true"] > span.tree-title::before {
+  content: "\f07c";
+}
+
+.tree li span.tree-title:hover::before {
+  background-color: var(--expandcolor);
+  color: #ffffff;
+}
+
+[role="treeitem"][aria-expanded="false"] + [role="group"], 
 [role="treeitem"][aria-expanded="false"] > ul {
   display: none;
 }
 
+[role="treeitem"][aria-expanded="true"] + [role="group"], 
 [role="treeitem"][aria-expanded="true"] > ul {
   display: block;
-}
-
-.tree li.hover, .tree li span.tree-title:hover {
-  background-color: #eaebed;
-}
-
-.tree-title {
-  font-weight: bold;
 }
 </style>
 <div class="mrgn-tp-md brdr-bttm">
@@ -243,7 +275,7 @@ ul[role="tree"] li {
         {%- assign folder_name = this_page_folders[i] -%}
         {%- assign open_folders = open_folders | push: folder_name -%}
         {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
-<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="false" aria-selected="false" class="tree-parent">
+<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="true" aria-selected="false" class="tree-parent" title="{{ p.title }}">
 <span class="tree-title">{{ folder_name }}</span>
 <ul role="group">
       {%- endfor -%}
