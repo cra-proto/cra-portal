@@ -313,7 +313,7 @@ li[role="treeitem"][aria-expanded="true"] > ul {
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false" title="{{ p.title }}">{{ display_label | escape }}</a>
+      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false"{%- if p.title != nil and p.title != "" -%} title="{{ p.title }}"{%- endif -%}>{{ display_label | escape }}</a>
     </li>
 
     {%- if frenchExists == true -%}
