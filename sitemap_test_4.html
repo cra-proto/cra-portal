@@ -70,7 +70,7 @@ ul[role="tree"] li {
   height: calc(2 * var(--radius));
   border-radius: 50%;
   background: var(--listitemcolor);
-  z-index: 3; 
+  z-index: 3;
 }
 
 .tree li:has(> span.tree-title)::after {
@@ -84,10 +84,11 @@ ul[role="tree"] li {
   line-height: 1.2em;
   white-space: nowrap;
   margin-left: calc(-1 * (var(--spacing) - var(--radius) + 17px));
-  padding: 0.35em 0.6em 0.35em calc(var(--spacing) - var(--radius) + 12px); 
+  padding: 0.35em 0.6em 0.35em calc(var(--spacing) - var(--radius) + 12px);
   border-radius: 4px;
   position: relative;
   z-index: 2;
+  font-weight: 501;
 }
 
 [role="treeitem"] li a {
@@ -97,7 +98,7 @@ ul[role="tree"] li {
   line-height: 1.2em;
   white-space: nowrap;
   margin-left: calc(-1 * (var(--spacing) - var(--radius) - 15px));
-  padding: 0.35em 0.6em; 
+  padding: 0.35em 0.6em;
   border-radius: 4px;
   position: relative;
   z-index: 2;
@@ -105,17 +106,18 @@ ul[role="tree"] li {
 }
 
 [role="treeitem"] li a:visited {
-  color: #551a8b; 
+  color: #551a8b;
 }
 
 .tree li span.tree-title:hover {
   background-color: var(--expandcolor);
   color: #ffffff;
+/*  font-weight: 500; */
 }
 
 .tree li a:hover {
-  background-color: #eaebed; 
-  color: #0000ee; 
+  background-color: #eaebed;
+  color: #0000ee;
 }
 
 [role="treeitem"] span.tree-title:focus,
@@ -134,12 +136,11 @@ ul[role="tree"] li {
   font-weight: 900;
   color: #26374a;
   position: absolute;
-  left: calc(var(--spacing) - var(--radius) - 21px); 
+  left: calc(var(--spacing) - var(--radius) - 21px);
   top: 50%;
   transform: translateY(-50%);
-  background-color: #fff; 
+  background-color: #fff;
   padding: 2px;
-  transition: color 0.1s ease, background-color 0.1s ease;
 }
 
 /* Closed Folder State */
