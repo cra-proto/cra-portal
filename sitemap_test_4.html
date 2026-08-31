@@ -32,22 +32,22 @@ ul[role="tree"] li {
   margin-bottom: 0.3em;
 }
 
-[role="treeitem"] ul {
+li[role="treeitem"] ul {
   margin-left: calc(var(--radius) - var(--spacing));
   padding-left: 0;
 }
 
-[role="treeitem"] li {
+li[role="treeitem"] {
   line-height: 1.3em !important;
   border-left: 2px solid var(--listitemcolor);
 }
 
-[role="treeitem"] li:last-child {
+li[role="treeitem"]:last-child {
   border-color: transparent;
 }
 
 /* Tree Connecting Lines (L-shape) */
-[role="treeitem"] li::before {
+li[role="treeitem"]::before {
   content: "";
   display: block;
   position: absolute;
@@ -77,21 +77,21 @@ ul[role="tree"] li {
   display: none;
 }
 
-[role="treeitem"] span.tree-title {
+li[role="treeitem"] span.tree-title {
   display: inline-flex !important;
   align-items: center;
   cursor: pointer;
   line-height: 1.2em;
   white-space: nowrap;
+  font-weight: 501;
   margin-left: calc(-1 * (var(--spacing) - var(--radius) + 17px));
   padding: 0.35em 0.6em 0.35em calc(var(--spacing) - var(--radius) + 12px);
   border-radius: 4px;
   position: relative;
   z-index: 2;
-  font-weight: 501;
 }
 
-[role="treeitem"] li a {
+li[role="treeitem"] a {
   display: inline-flex !important;
   align-items: center;
   cursor: pointer;
@@ -105,7 +105,7 @@ ul[role="tree"] li {
   text-decoration: underline;
 }
 
-[role="treeitem"] li a:visited {
+li[role="treeitem"] a:visited {
   color: #551a8b;
 }
 
@@ -120,18 +120,18 @@ ul[role="tree"] li {
   color: #0000ee;
 }
 
-[role="treeitem"] span.tree-title:focus,
-[role="treeitem"] li a:focus {
+li[role="treeitem"] span.tree-title:focus,
+li[role="treeitem"] a:focus {
   outline: 0;
 }
 
-[role="treeitem"] span.tree-title:focus-visible,
-[role="treeitem"] li a:focus-visible {
+li[role="treeitem"] span.tree-title:focus-visible,
+li[role="treeitem"] a:focus-visible {
   outline: 1px dotted #000;
 }
 
 /* --- FontAwesome Folder Icons --- */
-[role="treeitem"] > span.tree-title::before {
+li[role="treeitem"] > span.tree-title::before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   color: #26374a;
@@ -144,12 +144,12 @@ ul[role="tree"] li {
 }
 
 /* Closed Folder State */
-[role="treeitem"][aria-expanded="false"] > span.tree-title::before {
+li[role="treeitem"][aria-expanded="false"] > span.tree-title::before {
   content: "\f07b";
 }
 
 /* Open Folder State */
-[role="treeitem"][aria-expanded="true"] > span.tree-title::before {
+li[role="treeitem"][aria-expanded="true"] > span.tree-title::before {
   content: "\f07c";
 }
 
@@ -158,15 +158,16 @@ ul[role="tree"] li {
   color: #ffffff;
 }
 
-[role="treeitem"][aria-expanded="false"] + [role="group"], 
-[role="treeitem"][aria-expanded="false"] > ul {
+li[role="treeitem"][aria-expanded="false"] + [role="group"], 
+li[role="treeitem"][aria-expanded="false"] > ul {
   display: none;
 }
 
-[role="treeitem"][aria-expanded="true"] + [role="group"], 
-[role="treeitem"][aria-expanded="true"] > ul {
+li[role="treeitem"][aria-expanded="true"] + [role="group"], 
+li[role="treeitem"][aria-expanded="true"] > ul {
   display: block;
 }
+
 </style>
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
