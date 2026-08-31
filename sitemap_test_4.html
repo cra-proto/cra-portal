@@ -108,11 +108,6 @@ li[role="treeitem"] a:visited {
   color: #551a8b;
 }
 
-li[role="treeitem"] span.tree-title,
-li[role="treeitem"] a {
-  pointer-events: none;
-}
-
 .tree li::after {
   content: "";
   display: block;
@@ -160,7 +155,7 @@ li[role="treeitem"] > span.tree-title::before {
   left: calc(var(--spacing) - var(--radius) - 21px);
   top: 50%;
   transform: translateY(-50%);
-  background-color: #fff;
+  background-color: transparent; 
   padding: 2px;
 }
 
@@ -175,7 +170,7 @@ li[role="treeitem"][aria-expanded="true"] > span.tree-title::before {
 }
 
 .tree li span.tree-title:hover::before {
-  background-color: var(--expandcolor);
+  background-color: transparent;
   color: #ffffff;
 }
 
@@ -188,6 +183,7 @@ li[role="treeitem"][aria-expanded="true"] + [role="group"],
 li[role="treeitem"][aria-expanded="true"] > ul {
   display: block;
 }
+
 </style>
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
