@@ -291,7 +291,7 @@ li[role="treeitem"][aria-expanded="true"] > ul {
         {%- assign folder_name = this_page_folders[i] -%}
         {%- assign open_folders = open_folders | push: folder_name -%}
         {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
-<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="true" aria-selected="false" class="tree-parent" title="{{ p.title }}">
+<li role="treeitem" aria-level="{{ physical_html_depth }}" aria-expanded="true" aria-selected="false" class="tree-parent">
 <span class="tree-title">{{ folder_name }}</span>
 <ul role="group">
       {%- endfor -%}
@@ -313,7 +313,7 @@ li[role="treeitem"][aria-expanded="true"] > ul {
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false">{{ display_label | escape }}</a>
+      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false" title="{{ p.title }}">{{ display_label | escape }}</a>
     </li>
 
     {%- if frenchExists == true -%}
