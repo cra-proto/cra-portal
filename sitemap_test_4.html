@@ -192,6 +192,10 @@ li[role="treeitem"][aria-expanded="true"] > ul {
         </ul>
     </div>
 </div>
+<br>
+<button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
+<button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
+<br>
 <h2 id="tree1">Sitemap (treeview)</h2>
 <ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
@@ -330,53 +334,3 @@ li[role="treeitem"][aria-expanded="true"] > ul {
   {%- endif -%}
 </ul>
 <script src="/core-prototype/source/scripts/treeview.js"></script>
-<script>
-/*
-"use strict";
-
-window.addEventListener("load", () => {
-  const trees = document.querySelectorAll('[role="tree"]');
-  const treeInstances = [];
-
-  // 1. Maintain your working initialization pattern
-  for (let i = 0; i < trees.length; i++) {
-    const t = new Tree(trees[i]);
-    t.init();
-    treeInstances.push(t);
-  }
-
-  // 2. Setup safe button binding execution
-  function bindButtons() {
-    const expandBtn = document.getElementById("btn-expand-all");
-    const collapseBtn = document.getElementById("btn-collapse-all");
-
-    if (expandBtn) {
-      expandBtn.addEventListener("click", (e) => {
-        e.preventDefault(); 
-        for (let j = 0; j < treeInstances.length; j++) {
-          treeInstances[j].expandAll();
-        }
-      });
-    }
-
-    if (collapseBtn) {
-      collapseBtn.addEventListener("click", (e) => {
-        e.preventDefault(); 
-        for (let j = 0; j < treeInstances.length; j++) {
-          treeInstances[j].collapseAll();
-        }
-      });
-    }
-  }
-
-  // 3. Check if WET framework state is already compiled, or listen for it
-  if (window.wb && window.wb.isReady) {
-    bindButtons();
-  } else {
-    document.addEventListener("wb-ready.wb", bindButtons);
-    // Hard fallback: if the custom event never fires, force bind 
-    document.addEventListener("wet-boew-ready", bindButtons); 
-  }
-});
-*/
-</script>
