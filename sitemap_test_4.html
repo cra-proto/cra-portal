@@ -20,15 +20,16 @@ script:
 ---
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
-        <ul class="toc lst-spcd col-md-12">
-            <li class="col-md-4 col-sm-6"><a class="btn btn-primary" data-exit="false" href="https://github.com/{{ site.github.repository_name }}/gst-hst-business/tree/main">GitHub repository</a></li>
-        </ul>
+        <div class="col-md-12 mrgn-tp-sm mrgn-bttm-sm">
+            <ul class="toc lst-spcd list-unstyled">
+                <li><a class="btn btn-primary" target="_blank" data-exit="false" href="https://github.com/{{ site.github.repository_name }}/tree/main">GitHub repository</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 <br>
 <button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
 <button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
-<br>
 <h2 id="tree1">Sitemap (treeview)</h2>
 <div class="wb-filter">
 <section id="treeview">
@@ -148,14 +149,14 @@ script:
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
+      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false" lang="{{ page.lang }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
       <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
 
     {%- if frenchExists == true -%}
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
         <span class="label label-info">fr</span>
-      <a href="{{ pf.url }}" tabindex="-1" target="_blank" data-exit="false"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
+      <a href="{{ pf.url }}" tabindex="-1" target="_blank" data-exit="false" lang="{{ page.lang }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
       <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
     {%- endif -%}
