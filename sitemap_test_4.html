@@ -12,179 +12,12 @@ noFooterContextual: true
 noFooterCorporate: true
 noFooterMain: true
 sitemapExclude: true
+css:
+  - href: "https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+  - href: "/core-prototype/source/css/treeview.css"
+script:
+  - src: "/core-prototype/source/scripts/treeview.js"
 ---
-<style>
-.tree {
-  --spacing: 2.3rem;
-  --radius: 10px;
-  --listitemcolor: #ccc;
-  --expandcolor: #295376;
-}
-
-/* Clear default layout parameters */
-.tree, 
-.tree ul {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-.tree li {
-  display: block;
-  position: relative;
-  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
-}
-
-ul[role="tree"] li {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-}
-
-li[role="treeitem"] ul {
-  margin-left: calc(var(--radius) - var(--spacing));
-  padding-left: 0;
-}
-
-li[role="treeitem"] {
-  line-height: 1.3em !important;
-  border-left: 2px solid var(--listitemcolor);
-  cursor: pointer;
-}
-
-ul[role="tree"] > li[role="treeitem"] {
-  border-left-color: transparent;
-}
-
-li[role="treeitem"]:last-child {
-  border-color: transparent;
-}
-
-/* Tree Connecting Lines (L-shape) */
-li[role="treeitem"]::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: calc(var(--spacing) / -2);
-  left: -2px;
-  width: calc(var(--spacing) + 2px);
-  height: calc(var(--spacing) + 1px);
-  border: 2px solid var(--listitemcolor);
-  border-width: 0 0 2px 2px;
-}
-
-ul[role="tree"] > li[role="treeitem"]::before {
-  display: none;
-}
-
-li[role="treeitem"] span.tree-title {
-  display: inline-flex !important;
-  align-items: center;
-  cursor: pointer;
-  line-height: 1.2em;
-  white-space: nowrap;
-  font-weight: 501;
-  margin-left: calc(-1 * (var(--spacing) - var(--radius) + 17px));
-  padding: 0.35em 0.6em 0.35em calc(var(--spacing) - var(--radius) + 12px);
-  border-radius: 4px;
-  position: relative;
-  z-index: 2;
-}
-
-li[role="treeitem"] a {
-  display: inline-flex !important;
-  align-items: center;
-  cursor: pointer;
-  line-height: 1.2em;
-  white-space: nowrap;
-  margin-left: calc(-1 * (var(--spacing) - var(--radius) - 15px));
-  padding: 0.35em 0.6em;
-  border-radius: 4px;
-  position: relative;
-  z-index: 2;
-  text-decoration: underline;
-}
-
-li[role="treeitem"] a:visited {
-  color: #551a8b;
-}
-
-.tree li::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: calc(var(--spacing) / 2 - var(--radius));
-  left: calc(var(--spacing) - var(--radius) - 1px);
-  width: calc(2 * var(--radius));
-  height: calc(2 * var(--radius));
-  border-radius: 50%;
-  background: var(--listitemcolor);
-  z-index: 3;
-}
-
-.tree li:has(> span.tree-title)::after {
-  display: none;
-}
-
-.tree li span.tree-title:hover {
-  background-color: var(--expandcolor);
-  color: #ffffff;
-/*  font-weight: 500; */
-}
-
-.tree li a:hover {
-  background-color: #eaebed;
-  color: #0000ee;
-}
-
-[role="treeitem"] span.tree-title:focus,
-[role="treeitem"] li a:focus {
-  outline: 0;
-}
-
-[role="treeitem"] span.tree-title:focus-visible,
-[role="treeitem"] li a:focus-visible {
-  outline: 1px dotted #000;
-}
-
-/* --- FontAwesome Folder Icons --- */
-li[role="treeitem"] > span.tree-title::before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: #26374a;
-  position: absolute;
-  left: calc(var(--spacing) - var(--radius) - 21px);
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent; 
-  padding: 2px;
-}
-
-/* Closed Folder State */
-li[role="treeitem"][aria-expanded="false"] > span.tree-title::before {
-  content: "\f07b";
-}
-
-/* Open Folder State */
-li[role="treeitem"][aria-expanded="true"] > span.tree-title::before {
-  content: "\f07c";
-}
-
-.tree li span.tree-title:hover::before {
-  background-color: transparent;
-  color: #ffffff;
-}
-
-li[role="treeitem"][aria-expanded="false"] + [role="group"], 
-li[role="treeitem"][aria-expanded="false"] > ul {
-  display: none;
-}
-
-li[role="treeitem"][aria-expanded="true"] + [role="group"], 
-li[role="treeitem"][aria-expanded="true"] > ul {
-  display: block;
-}
-
-</style>
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
         <ul class="toc lst-spcd col-md-12">
@@ -197,7 +30,7 @@ li[role="treeitem"][aria-expanded="true"] > ul {
 <button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
 <br>
 <h2 id="tree1">Sitemap (treeview)</h2>
-<ul class="list-unstyled tree" role="tree" aria-labelledby="tree1">
+<ul class="list-unstyled tree wb-treeview" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
   {%- assign valid_pages = "" | split: "," -%}
   {%- assign englishPages = "" | split: "," -%}
@@ -333,4 +166,3 @@ li[role="treeitem"][aria-expanded="true"] > ul {
     {%- endfor -%}
   {%- endif -%}
 </ul>
-<script src="/core-prototype/source/scripts/treeview.js"></script>
