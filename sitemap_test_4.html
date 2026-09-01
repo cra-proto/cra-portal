@@ -149,15 +149,15 @@ script:
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a tabindex="-1" target="_blank" class="pagelink" data-exit="false" lang="{{ page.lang }}" href="{{ p.url | relative_url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
-      <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
+      <a tabindex="-1" target="_blank" class="page-link" data-exit="false" lang="{{ page.lang }}" href="{{ p.url | relative_url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
+      <span class="page-title wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
 
     {%- if frenchExists == true -%}
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
         <span class="label label-info">fr</span>
-      <a tabindex="-1" target="_blank" class="pagelink" data-exit="false" lang="{{ page.lang }}" href="{{ pf.url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
-      <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
+      <a tabindex="-1" target="_blank" class="page-link" data-exit="false" lang="{{ page.lang }}" href="{{ pf.url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
+      <span class="page-title wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
     {%- endif -%}
 
