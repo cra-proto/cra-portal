@@ -149,14 +149,14 @@ script:
     {%- if frenchExists == true -%}
         <span class="label label-info">en</span>
     {%- endif -%}
-      <a href="{{ p.url | relative_url }}" tabindex="-1" target="_blank" data-exit="false" lang="{{ page.lang }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
+      <a tabindex="-1" target="_blank" class="pagelink" data-exit="false" lang="{{ page.lang }}" href="{{ p.url | relative_url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>
       <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
 
     {%- if frenchExists == true -%}
     <li role="treeitem" aria-level="{{ leaf_level }}" aria-selected="false">
         <span class="label label-info">fr</span>
-      <a href="{{ pf.url }}" tabindex="-1" target="_blank" data-exit="false" lang="{{ page.lang }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
+      <a tabindex="-1" target="_blank" class="pagelink" data-exit="false" lang="{{ page.lang }}" href="{{ pf.url }}"{%- if p.title != nil and p.title != "" -%} title="{{ p.title | escape }}"{%- endif -%}>{{ pf.title }}</a>
       <span class="wb-inv" aria-hidden="true">{{ p.title }}</span>
     </li>
     {%- endif -%}
