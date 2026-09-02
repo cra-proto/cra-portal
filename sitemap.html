@@ -37,20 +37,6 @@ sitemapExclude: true
 {% assign sitePages = site.pages | sort: "url" %}
 
 
-<hr>
-{% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" %}
-{% assign parsed_paths = site.pages | map: "path" %}
-{% assign unique_static_pages = valid_pages | where_exp: "item", "parsed_paths contains item.path == false" %}
-
-{% for sp in sitePages %}
-<p>
-<span class="label label-primary">path</span> [{{ sp.path }}]
-<br>
-<span class="label label-primary">modified_time</span> [{{ sp.modified_time }}]
-</p>
-{% endfor %}
-<hr>
-
 {% assign current_path = "" %}
 {% assign top_path_arr = "[]" %}
 {% for p in sitePages %}
@@ -81,6 +67,18 @@ sitemapExclude: true
 {% endfor %}
 </ul>
 
+<hr>
+{% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" %}
+{% assign parsed_paths = site.pages | map: "path" %}
+{% assign unique_static_pages = valid_pages | where_exp: "item", "parsed_paths contains item.path == false" %}
+
+{% for sp in unique_static_pages %}
+<p>
+<span class="label label-primary">path</span> [{{ sp.path }}]
+<br>
+<span class="label label-primary">modified_time</span> [{{ sp.modified_time | date: "%Y-%m-%d" }}]
+</p>
+{% endfor %}
 <hr>
 
 <!--
