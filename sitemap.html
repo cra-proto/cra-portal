@@ -70,14 +70,16 @@ sitemapExclude: true
 <hr>
 {% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" %}
 {% assign parsed_paths = site.pages | map: "path" %}
-{% assign unique_static_pages = valid_pages | where_exp: "item", "unless parsed_paths contains item.path" %}
 
-{% for sp in unique_static_pages %}
-<p>
-<span class="label label-primary">path</span> [{{ sp.path }}]
-<br>
-<span class="label label-primary">modified_time</span> [{{ sp.modified_time | date: "%Y-%m-%d" }}]
-</p>
+{% comment %} Loop through valid pages and output only those not in parsed_paths {% endcomment %}
+{% for sp in valid_pages %}
+  {% unless parsed_paths contains sp.path %}
+    <p>
+      <span class="label label-primary">path</span> [{{ sp.path }}]
+      <br>
+      <span class="label label-primary">modified_time</span> [{{ sp.modified_time | date: "%Y-%m-%d" }}]
+    </p>
+  {% endunless %}
 {% endfor %}
 <hr>
 
