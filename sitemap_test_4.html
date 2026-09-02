@@ -178,7 +178,7 @@ script:
 </section>
 </div>
 {% assign static_html = site.static_files | where_exp: "item", "item.extname == '.html'" %}
-{% assign parsed_html = site.pages | where_exp: "item", "item.extname == '.html'" %}
+{% assign parsed_html = site.pages | where_exp: "item", "item.name contains '.html'" %}
 {% assign all_html_pages = static_html | concat: parsed_html | sort: "path" %}
 {% if all_html_pages.size > 0 %}
 <hr>
@@ -191,7 +191,7 @@ script:
   {% assign page_title = item.title | default: item.path %}
 
   {% comment %} Determine the origin type using array lookup {% endcomment %}
-  {% if parsed_html contains item %}
+  {% if item.title or item.url %}
     {% assign origin_label = "site.pages" %}
   {% else %}
     {% assign origin_label = "site.static_files" %}
