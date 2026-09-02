@@ -177,3 +177,21 @@ script:
 </ul>
 </section>
 </div>
+
+<h2 class="mrgn-tp-md">Non-Front Matter pages</h2>
+<div class="wb-filter">
+<section>
+<ul class="list-unstyled">
+{% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" | sort: "path" %}
+{% assign parsed_paths = site.pages | map: "path" %}
+
+{% for sp in valid_pages %}
+  {% unless parsed_paths contains sp.path %}
+    <li aria-selected="false">
+      <a tabindex="-1" target="_blank" data-exit="false" href="{{ sp.path }}">{{ sp.path }}</a>
+    </li>
+  {% endunless %}
+{% endfor %}
+</ul>
+</section>
+</div>
