@@ -70,7 +70,7 @@ sitemapExclude: true
 <hr>
 {% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" %}
 {% assign parsed_paths = site.pages | map: "path" %}
-{% assign unique_static_pages = valid_pages | where_exp: "item", "parsed_paths contains item.path == false" %}
+{% assign unique_static_pages = valid_pages | where_exp: "item", "unless parsed_paths contains item.path" %}
 
 {% for sp in unique_static_pages %}
 <p>
