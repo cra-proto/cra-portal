@@ -177,22 +177,29 @@ script:
 </ul>
 </section>
 </div>
+{% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" | sort: "path" %}
+{% assign parsed_paths = site.pages | map: "path" %}
+{% assign has_unique_pages = false %}
+{% for sp in valid_pages %}
+  {% unless parsed_paths contains sp.path %}
+    {% assign has_unique_pages = true %}
+  {% endunless %}
+{% endfor %}
+{% if has_unique_pages %}
 <hr>
 <br>
-<h2 class="mrgn-tp-md">Non-Front Matter pages</h2>
+<h2 class="mrgn-tp-md">Non FrontMatter pages</h2>
 <div class="wb-filter">
 <section>
 <ul>
-{% assign valid_pages = site.static_files | where_exp: "item", "item.extname == '.html'" | sort: "path" %}
-{% assign parsed_paths = site.pages | map: "path" %}
-
 {% for sp in valid_pages %}
   {% unless parsed_paths contains sp.path %}
-    <li aria-selected="false">
-      <a tabindex="-1" target="_blank" data-exit="false" href="{{ site.url }}{{ site.github.baseurl }}/{{ sp.path }}">{{ sp.path }}</a>
-    </li>{{ site.github.repository_url }}
+    <li>
+      <a target="_blank" data-exit="false" href="{{ sp.path | relative_url }}">{{ sp.path }}</a>
+    </li>
   {% endunless %}
 {% endfor %}
 </ul>
 </section>
 </div>
+{% endif %}
