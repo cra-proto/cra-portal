@@ -30,11 +30,12 @@ script:
         </div>
     </div>
 </div>
-<br>
-<button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
-<button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
-<h2 id="tree1">Sitemap (treeview)</h2>
+<h2 class="mrgn-tp-md" id="tree1">Sitemap (treeview)</h2>
 <div class="wb-filter">
+<div class="mrgn-tp-lg mrgn-bttm-md">
+    <button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
+    <button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
+</div>
 <section id="treeview">
 <ul class="list-unstyled tree wb-treeview" role="tree" aria-labelledby="tree1">
   {%- comment %} 1. Filter out pages marked sitemap: false, but retain pages without titles {% endcomment -%}
