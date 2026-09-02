@@ -43,7 +43,7 @@ script:
   {%- assign englishPages = "" | split: "," -%}
   {%- assign frenchPages = "" | split: "," -%}
 
-  {%- for p in site.pages -%}
+  {%- for p in site.html_pages -%}
     {%- if p.sitemap != false and p.sitemapExclude != true -%}
       {%- if p.url contains "/en/" -%}
         {%- assign englishPages = englishPages | push: p -%}
