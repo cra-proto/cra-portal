@@ -61,7 +61,7 @@ script:
     {%- assign path_string_list = target_path -%}
   {%- else -%}
     {%- assign path_string_list = path_string_list | append: "||" | append: target_path -%}
-  {%- endif -%
+  {%- endif -%}
 {%- endfor -%}
 
 {%- assign sorted_paths = path_string_list | split: "||" | sort -%}
