@@ -42,22 +42,53 @@ script:
 {%- assign parsed_html = site.pages | where_exp: "item", "item.name contains '.html'" -%}
 {%- assign all_html_pages = static_html | concat: parsed_html -%}
 
-{%- assign sorted_html_pages = all_html_pages | sort: "url" -%}
+{%- assign path_string_list = "" -%}
+{%- for p in all_html_pages -%}
+  {%- if p.sitemap == false or p.sitemapExclude == true -%}{%- continue -%}{%- endif -%}
+  
+  {%- if p.url -%}
+    {%- assign target_path = p.url -%}
+  {%- else -%}
+    {%- assign target_path = p.path -%}
+  {%- endif -%}
+  
+  {%- assign first_char = target_path | slice: 0 -%}
+  {%- if first_char != "/" -%}
+    {%- assign target_path = target_path | prepend: "/" -%}
+  {%- endif -%}
+  
+  {%- if path_string_list == "" -%}
+    {%- assign path_string_list = target_path -%}
+  {%- else -%}
+    {%- assign path_string_list = path_string_list | append: "||" | append: target_path -%}
+  {%- endif -%
+{%- endfor -%}
+
+{%- assign sorted_paths = path_string_list | split: "||" | sort -%}
 
 {%- assign open_folders = "" | split: "," -%}
 {%- assign physical_html_depth = 0 -%}
 
-{%- for p in sorted_html_pages -%}
-  {%- if p.sitemap == false or p.sitemapExclude == true -%}{%- continue -%}{%- endif -%}
+{%- for active_path in sorted_paths -%}
+  {%- assign p = nil -%}
+  {%- for item in all_html_pages -%}
+    {%- if item.url == active_path or item.path == active_path -%}
+      {%- assign p = item -%}
+      {%- break -%}
+    {%- else -%}
+      {%- assign clean_item_path = item.path -%}
+      {%- assign check_char = clean_item_path | slice: 0 -%}
+      {%- if check_char != "/" -%}{%- assign clean_item_path = clean_item_path | prepend: "/" -%}{%- endif -%}
+      {%- if clean_item_path == active_path -%}
+        {%- assign p = item -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
 
-  {%- if p.url -%}
-    {%- assign current_raw_path = p.url -%}
-  {%- else -%}
-    {%- assign current_raw_path = p.path -%}
-  {%- endif -%}
+  {%- if p == nil -%}{%- continue -%}{%- endif -%}
 
-  {%- assign url_parts = current_raw_path | split: "/" -%}
-
+  {%- assign url_parts = active_path | split: "/" -%}
   {%- assign parts_size = url_parts.size -%}
   {%- assign filename = url_parts | last -%}
   {%- assign target_folder_depth = parts_size | minus: 2 -%}
