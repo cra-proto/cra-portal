@@ -39,11 +39,14 @@ script:
 <section id="treeview">
 <ul class="list-unstyled wb-treeview" role="tree" aria-labelledby="tree1">
 {%- assign static_html = site.static_files | where_exp: "item", "item.extname == '.html'" -%}
-{%- assign parsed_html = site.pages | where_exp: "item", "item.name contains '.html'" -%}
-{%- assign all_html_pages = static_html | concat: parsed_html -%}
+
+{%- assign pages_html = site.pages | where_exp: "item", "item.name contains '.html'" -%}
+{%- assign pages_md   = site.pages | where_exp: "item", "item.name contains '.md'" -%}
+
+{%- assign all_pages = static_html | concat: pages_html | concat: pages_md -%}
 
 {%- assign path_string_list = "" -%}
-{%- for p in all_html_pages -%}
+{%- for p in all_pages -%}
   {%- if p.sitemap == false or p.sitemapExclude == true -%}{%- continue -%}{%- endif -%}
   
   {%- if p.url -%}
@@ -71,7 +74,7 @@ script:
 
 {%- for active_path in sorted_paths -%}
   {%- assign p = nil -%}
-  {%- for item in all_html_pages -%}
+  {%- for item in all_pages -%}
     {%- if item.url == active_path or item.path == active_path -%}
       {%- assign p = item -%}
       {%- break -%}
