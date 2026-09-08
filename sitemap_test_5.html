@@ -18,7 +18,7 @@ css:
     crossorigin: "anonymous"
   - href: "/core-prototype/source/css/treeview.css"
 script:
-  - src: "/core-prototype/source/scripts/treeview.js"
+  - src: "/core-prototype/source/scripts/wb-treeview.js"
 ---
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
@@ -168,7 +168,7 @@ script:
   </li>
     {%- else -%}
   <li role="treeitem" aria-selected="false" aria-level="{{ leaf_level }}" class="tv-li-static">
-      <span class="label label-default mrgn-rght-md">static</span>
+      <span class="label label-default tv-type mrgn-rght-md">static</span>
       <a tabindex="-1" target="_blank" class="tv-page-link" data-exit="false" href="{{ p.path | relative_url }}">{{ display_label | escape }}</a>
   </li>
     {%- endif -%}
