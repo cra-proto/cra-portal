@@ -40,21 +40,23 @@ script:
 <ul class="list-unstyled wb-treeview" role="tree" aria-labelledby="tree1">
 {%- assign static_html = site.static_files | where_exp: "item", "item.extname == '.html'" -%}
 {%- assign parsed_html = site.pages | where_exp: "item", "item.name contains '.html'" -%}
-{%- assign all_html_pages = static_html | concat: parsed_html | sort: "path" -%}
+{%- assign all_html_pages = static_html | concat: parsed_html -%}
+
+{%- assign sorted_html_pages = all_html_pages | sort: "url" -%}
 
 {%- assign open_folders = "" | split: "," -%}
 {%- assign physical_html_depth = 0 -%}
 
-{%- for p in all_html_pages -%}
-  {%- if p.sitemap == false or p.sitemapExclude == true -%}
-  {%- continue -%}
-  {%- endif -%}
+{%- for p in sorted_html_pages -%}
+  {%- if p.sitemap == false or p.sitemapExclude == true -%}{%- continue -%}{%- endif -%}
 
   {%- if p.url -%}
-    {%- assign url_parts = p.url | split: "/" -%}
+    {%- assign current_raw_path = p.url -%}
   {%- else -%}
-    {%- assign url_parts = p.path | split: "/" -%}
+    {%- assign current_raw_path = p.path -%}
   {%- endif -%}
+
+  {%- assign url_parts = current_raw_path | split: "/" -%}
 
   {%- assign parts_size = url_parts.size -%}
   {%- assign filename = url_parts | last -%}
