@@ -87,7 +87,12 @@ script:
     {%- endif -%}
   {%- endfor -%}
   {%- if p == nil -%}{%- continue -%}{%- endif -%}
-  {%- assign url_parts = active_path | split: "/" -%}
+  {%- assign current_loop_path = active_path -%}
+  {%- assign last_char = current_loop_path | slice: -1 -%}
+  {%- if last_char == "/" -%}
+    {%- assign current_loop_path = current_loop_path | append: "index.html" -%}
+  {%- endif -%}
+  {%- assign url_parts = current_loop_path | split: "/" -%}
   {%- assign parts_size = url_parts.size -%}
   {%- assign filename = url_parts | last -%}
   {%- assign target_folder_depth = parts_size | minus: 2 -%}
@@ -142,21 +147,27 @@ script:
       {%- assign folder_name = this_page_folders[i] -%}
       {%- assign open_folders = open_folders | push: folder_name -%}
       {%- assign physical_html_depth = physical_html_depth | plus: 1 -%}
-      <li role="treeitem" aria-expanded="true" aria-selected="false" class="tv-parent" aria-level="{{ physical_html_depth }}">
-        <span class="tv-title">{{ folder_name }}</span>
-        <ul role="group">{{ crlf }}
+    <li role="treeitem" aria-expanded="true" aria-selected="false" class="tv-parent" aria-level="{{ physical_html_depth }}">
+      <span class="tv-title">{{ folder_name }}</span>
+      <ul role="group">{{ crlf }}
     {%- endfor -%}
   {%- endif -%}
   {%- assign display_label = filename -%}
-  {%- if filename == nil or filename == "" -%}
-    {%- assign display_label = "index.html" -%}
-  {%- endif -%}
   {%- assign leaf_level = physical_html_depth | plus: 1 -%}
-    {%- if p.url -%}
-  <li role="treeitem" aria-selected="false" aria-level="{{ leaf_level }}" class="tv-li-dynamic"><a tabindex="-1" target="_blank" class="tv-page-link" data-exit="false" lang="{{ page.lang | default: 'en' }}" href="{{ p.url | relative_url }}"{%- if p.title -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>{%- if p.title -%}<span class="tv-page-title wb-inv" aria-hidden="true">{{ p.title | escape }}</span>{%- endif -%}</li>{{ crlf }}
-    {%- else -%}
-  <li role="treeitem" aria-selected="false" aria-level="{{ leaf_level }}" class="tv-li-static"><span class="label label-default tv-type mrgn-rght-md">static</span><a tabindex="-1" target="_blank" class="tv-page-link" data-exit="false" href="{{ p.path | relative_url }}">{{ display_label | escape }}</a></li>{{ crlf }}
-    {%- endif -%}
+  {%- if is_trailing_slash and p == nil -%}
+    {%- assign original_slash_path = active_path | replace: "index.html", "" -%}
+    {%- for item in all_pages -%}
+      {%- if item.url == original_slash_path or item.path == original_slash_path -%}
+        {%- assign p = item -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if p.url -%}
+        <li role="treeitem" aria-selected="false" aria-level="{{ leaf_level }}" class="tv-li-dynamic"><a tabindex="-1" target="_blank" class="tv-page-link" data-exit="false" lang="{{ page.lang | default: 'en' }}" href="{{ p.url | relative_url }}"{%- if p.title -%} title="{{ p.title | escape }}"{%- endif -%}>{{ display_label | escape }}</a>{%- if p.title -%}<span class="tv-page-title wb-inv" aria-hidden="true">{{ p.title | escape }}</span>{%- endif -%}</li>{{ crlf }}
+  {%- else -%}
+        <li role="treeitem" aria-selected="false" aria-level="{{ leaf_level }}" class="tv-li-static"><span class="label label-default tv-type mrgn-rght-md">static</span><a tabindex="-1" target="_blank" class="tv-page-link" data-exit="false" href="{{ p.path | relative_url }}">{{ display_label | escape }}</a></li>{{ crlf }}
+  {%- endif -%}
 {%- endfor -%}
 {%- if physical_html_depth > 0 -%}
   {%- for i in (1..physical_html_depth) -%}
