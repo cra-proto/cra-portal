@@ -23,7 +23,7 @@ script:
 <div class="mrgn-tp-md brdr-bttm">
     <div class="row">
         <div class="col-md-12 mrgn-tp-sm mrgn-bttm-sm">
-            <ul class="toc lst-spcd list-unstyled">
+            <ul class="list-inline">
                 <li><a class="btn btn-primary" target="_blank" data-exit="false" href="{{ site.github.repository_url }}/tree/main">GitHub repository</a></li>
                 <li><a class="btn btn-default" target="_blank" data-exit="false" href="{{ site.url }}/core-prototype/resources/tools/">Developer options</a></li>
             </ul>
@@ -33,8 +33,10 @@ script:
 <h2 class="mrgn-tp-md" id="tree1">Sitemap (treeview)</h2>
 <div class="wb-filter">
 <div class="mrgn-tp-lg mrgn-bttm-md">
-    <button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button>
-    <button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button>
+    <ul class="list-inline">
+        <li><button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button></li>
+        <li><button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button></li>
+    </ul>
 </div>
 <section id="treeview">
 {% include sitemap.liquid %}
