@@ -33,12 +33,20 @@ script:
 <h2 class="mrgn-tp-md" id="tree1">Sitemap (treeview)</h2>
 <div class="wb-filter">
     <div class="mrgn-tp-lg mrgn-bttm-md">
-        <ul class="btn-toolbar list-inline mrgn-bttm-sm" role="toolbar">
-            <li><button id="btn-expand-all" type="button" class="btn btn-default">Expand All</button></li>
-            <li><button id="btn-collapse-all" type="button" class="btn btn-default">Collapse All</button></li>
-        </ul>
+        <fieldset class="gc-chckbxrdio">
+            <div class="form-inline">
+                <button id="btn-expand-all" type="button" class="btn btn-default mrgn-rght-sm">Expand All</button>
+                <button id="btn-collapse-all" type="button" class="btn btn-default mrgn-rght-md">Collapse All</button>
+                <div class="checkbox mrgn-tp-0 mrgn-bttm-0 wb-inv">
+                    <input type="checkbox" id="showAction">
+                    <label for="showAction">Show AEM action</label>
+                </div>
+            </div>
+        </fieldset>
     </div>
     <section id="treeview">
-        {% include sitemap.liquid %}
+        <ul class="list-unstyled wb-treeview" role="tree" aria-labelledby="tree1">
+            {% include sitemap.liquid %}
+        </ul>
     </section>
 </div>
