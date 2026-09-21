@@ -3,7 +3,6 @@
 {%- assign static_html = site.static_files | where_exp: "item", "item.extname == '.html'" -%}
 
 {%- assign pages_html = site.pages | where_exp: "item", "item.path.size >= 5" | where_exp: "item", "item.path slice: -5, 5 == '.html'" -%}
-
 {%- assign pages_md = site.pages | where_exp: "item", "item.path.size >= 3" | where_exp: "item", "item.path slice: -3, 3 == '.md'" -%}
 
 {%- if include.section and include.section != "" -%}
