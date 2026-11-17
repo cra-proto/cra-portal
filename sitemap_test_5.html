@@ -31,6 +31,7 @@ script:
     </div>
 </div>
 <h2 class="mrgn-tp-md" id="tree_header">Sitemap (treeview)</h2>
+<p>All links will open in a new tab</p>
 <div class="wb-filter">
     <div class="mrgn-tp-lg mrgn-bttm-md">
         <fieldset class="gc-chckbxrdio">
@@ -47,11 +48,14 @@ script:
     <section id="treeview">
         {%- comment -%}
 
-        - tree_id     [String] : The unique DOM element ID applied to the root <ul> tree layout. Necessary to identify where the "Expand All" and "Collapse All" buttons apply. (Required)
-        - tree_label  [String] : The target DOM element ID containing the text label/header applied to the aria-labelledby. (Required)
+        - tree_id     [String] : The unique ID attribute applied to the root <ul> tree layout. Necessary to identify where the "Expand All" and "Collapse All" buttons apply. (Required)
+        - tree_label  [String] : The target ID attribute containing the text label/header applied to the aria-labelledby. (Required)
         - extensions  [String] : Have the sitemap generate with all standard Jekyll pages and any static files that match these extensions (comma-separated, e.g., ".html, .pdf"). If this parameter is omitted (nil), all non Jekyll files are excluded by default. But if explicitly set to "", "*", or ".*", than all file extensions are permitted. (Optional)
-        - section     [String] : Limits the sitemap generation to only these folders/paths (comma-separated, e.g., "en, fr"). If omitted or empty, the sitemap is generated for all folders in the repository. (Optional)
+        - include_path   [String] : Limits the sitemap generation to only these folders/paths (comma-separated, e.g., "en, fr"). If omitted or empty, the sitemap is generated for all folders in the repository. (Optional)
+        - exclude_filepath [String] : Excludes the listed paths or files (comma-separated, e.g., "robots.txt, /en/home.html") from being shown on the sitemap. (Optional)
         - show_labels [Boolean] : (Default: true) Toggles whether labels (e.g., "static") are shown before some links. (Optional)
+
+        "sitemapExclude: true" in the FrontMatter section of any page will hide that page from displaying on the sitemap.
 
         {%- endcomment -%}
 
