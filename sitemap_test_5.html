@@ -48,17 +48,17 @@ script:
     <section id="treeview">
         {%- comment -%}
 
-        - tree_id     [String] : The unique ID attribute applied to the root <ul> tree layout. Necessary to identify where the "Expand All" and "Collapse All" buttons apply. (Required)
-        - tree_label  [String] : The target ID attribute containing the text label/header applied to the aria-labelledby. (Required)
-        - extensions  [String] : Have the sitemap generate with all standard Jekyll pages and any static files that match these extensions (comma-separated, e.g., ".html, .pdf"). If this parameter is omitted (nil), all non Jekyll files are excluded by default. But if explicitly set to "", "*", or ".*", than all file extensions are permitted. (Optional)
-        - include_path   [String] : Limits the sitemap generation to only these folders/paths (comma-separated, e.g., "en, fr"). If omitted or empty, the sitemap is generated for all folders in the repository. (Optional)
-        - exclude_filepath [String] : Excludes the listed paths or files (comma-separated, e.g., "robots.txt, /en/home.html") from being shown on the sitemap. (Optional)
-        - show_labels [Boolean] : (Default: true) Toggles whether labels (e.g., "static") are shown before some links. (Optional)
+        - tree_id           [String] : The unique ID attribute applied to the root <ul> tree layout. Necessary to identify where the "Expand All" and "Collapse All" buttons apply. (Required)
+        - tree_label        [String] : The target ID attribute containing the text label/header applied to the aria-labelledby. (Required)
+        - extensions        [String] : Have the sitemap generate with all standard Jekyll pages and any static files that match these extensions (comma-separated, e.g., ".html, .pdf"). If this parameter is omitted (nil), all non Jekyll files are excluded by default. But if explicitly set to "", "*", or ".*", than all file extensions are permitted. (Optional)
+        - include_path      [String] : Limits the sitemap generation to only these folders/paths (comma-separated, e.g., "en, fr"). If omitted or empty, the sitemap is generated for all folders in the repository. (Optional)
+        - exclude_filepath  [String] : Excludes the listed folders/paths or files (comma-separated, e.g., "robots.txt, /en/home.html") from being shown on the sitemap. (Optional)
+        - show_labels       [Boolean] : (Default: true) Toggles whether labels (e.g., "static") are shown before some links. (Optional)
 
         "sitemapExclude: true" in the FrontMatter section of any page will hide that page from displaying on the sitemap.
 
         {%- endcomment -%}
 
-        {% include sitemap.liquid tree_id="tree1" tree_label="tree_header" extensions=".html, .pdf"  %}
+        {% include sitemap.liquid tree_id="tree1" tree_label="tree_header" extensions=".html, .pdf" %}
     </section>
 </div>
