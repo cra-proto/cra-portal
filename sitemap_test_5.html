@@ -59,6 +59,6 @@ script:
 
         {%- endcomment -%}
 
-        {% include sitemap.liquid tree_id="tree1" tree_label="tree_header" extensions=".html, .pdf" %}
+        {% include sitemap.liquid tree_id="tree1" tree_label="tree_header" extensions=".html, .pdf" exclude_filepath="/robot.txt" %}
     </section>
 </div>
